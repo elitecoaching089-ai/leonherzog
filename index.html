@@ -9,1295 +9,943 @@
 :root {
   --gold: #fbd061;
   --gold-dark: #c8920a;
-  --gold-subtle: rgba(251,208,97,0.12);
   --dark: #0a0a0a;
-  --dark-2: #0f0f0f;
-  --dark-3: #161616;
-  --dark-4: #1e1e1e;
-  --dark-5: #252525;
-  --white: #ffffff;
-  --muted: #666;
-  --muted-light: #999;
-  --radius: 12px;
-  --radius-sm: 8px;
+  --dark-2: #0e0e0e;
+  --dark-3: #151515;
+  --dark-4: #1c1c1c;
+  --dark-5: #242424;
+  --white: #fff;
+  --muted: #5a5a5a;
+  --muted-l: #8a8a8a;
+  --r: 16px;
+  --r-sm: 10px;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--dark);
+  color:var(--white);
+  font-family:'Inter',sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  letter-spacing:-0.03em;
+  overflow-x:hidden;
+}
+img{display:block;}
 
-body {
-  background: var(--dark);
-  color: var(--white);
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  letter-spacing: -0.025em;
-  overflow-x: hidden;
-}
-
-/* ── PROGRESS BAR ── */
-#progress-bar {
-  position: fixed;
-  top: 0; left: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--gold), var(--gold-dark));
-  width: 0%;
-  z-index: 9999;
-  transition: width 0.1s linear;
-  border-radius: 0 2px 2px 0;
-}
-
-/* ── POPUP ── */
-#popup-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.88);
-  z-index: 9000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  backdrop-filter: blur(10px);
-}
-#popup-overlay.active { display: flex; animation: fadeOverlay 0.3s ease; }
-@keyframes fadeOverlay { from { opacity:0; } to { opacity:1; } }
-
-.popup-box {
-  background: var(--dark-3);
-  border: 1px solid rgba(251,208,97,0.2);
-  border-radius: var(--radius);
-  max-width: 460px;
-  width: 100%;
-  padding: 48px 40px;
-  position: relative;
-  animation: slideUp 0.4s cubic-bezier(0.34,1.56,0.64,1);
-  overflow: hidden;
-}
-.popup-box::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--gold), var(--gold-dark));
-}
-@keyframes slideUp {
-  from { opacity:0; transform: translateY(40px) scale(0.95); }
-  to   { opacity:1; transform: translateY(0) scale(1); }
+/* ═══════════════════════════════
+   PROGRESS BAR
+═══════════════════════════════ */
+#pgbar{
+  position:fixed;top:0;left:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-dark));
+  width:0%;z-index:9999;
+  border-radius:0 2px 2px 0;
+  transition:width .1s linear;
 }
 
-.popup-lock { font-size: 2.2rem; display: block; margin-bottom: 16px; animation: pulse 2s ease infinite; }
-@keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.1);} }
+/* ═══════════════════════════════
+   POPUP
+═══════════════════════════════ */
+#pop{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.9);
+  z-index:9000;
+  display:none;align-items:center;justify-content:center;
+  padding:20px;
+  backdrop-filter:blur(14px);
+}
+#pop.on{display:flex;animation:fadeOv .3s ease;}
+@keyframes fadeOv{from{opacity:0;}to{opacity:1;}}
 
-.popup-eyebrow {
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 700;
-  margin-bottom: 10px;
+.pbox{
+  background:var(--dark-3);
+  border:1px solid rgba(251,208,97,.22);
+  border-radius:var(--r);
+  max-width:460px;width:100%;
+  padding:48px 40px;
+  position:relative;overflow:hidden;
+  animation:pUp .4s cubic-bezier(.34,1.56,.64,1);
 }
-.popup-title {
-  font-size: 1.5rem;
-  font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.04em;
-  margin-bottom: 10px;
+@keyframes pUp{from{opacity:0;transform:translateY(40px) scale(.94);}to{opacity:1;transform:translateY(0) scale(1);}}
+.pbox::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-dark));
 }
-.popup-title em { color: var(--gold); font-style: normal; }
-.popup-sub {
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin-bottom: 28px;
-  line-height: 1.55;
-}
-.popup-field {
-  width: 100%;
-  background: var(--dark-5);
-  border: 1px solid #2a2a2a;
-  border-radius: var(--radius-sm);
-  color: var(--white);
-  padding: 14px 16px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  letter-spacing: -0.02em;
-  margin-bottom: 10px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-.popup-field:focus { border-color: var(--gold); }
-.popup-field::placeholder { color: #333; }
-
-.btn-unlock {
-  width: 100%;
-  background: var(--gold);
-  color: #000;
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
-  font-size: 0.95rem;
-  letter-spacing: -0.02em;
-  padding: 17px;
-  border: none;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: background 0.2s, transform 0.1s;
-}
-.btn-unlock::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
-  transform: translateX(-100%);
-  animation: shimmer 2s ease infinite;
-}
-@keyframes shimmer { 0%{transform:translateX(-100%);} 60%,100%{transform:translateX(100%);} }
-.btn-unlock:hover { background: #f0c040; transform: translateY(-1px); }
-.popup-fine { font-size: 0.7rem; color: #333; text-align: center; margin-top: 12px; }
-
-/* ── NAV ── */
-nav {
-  position: sticky;
-  top: 0; z-index: 100;
-  padding: 0 40px;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(10,10,10,0.96);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+.pbox::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 80% 50% at 50% -5%,rgba(251,208,97,.06) 0%,transparent 70%);
 }
 
-.nav-logo-wrap {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.plock{font-size:2.4rem;display:block;margin-bottom:14px;animation:lp 2s ease infinite;position:relative;z-index:1;}
+@keyframes lp{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
+
+.peye{
+  font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;margin-bottom:10px;
+  display:block;position:relative;z-index:1;
 }
-.nav-logo-img {
-  width: 38px;
-  height: 38px;
-  object-fit: contain;
+.ptitle{
+  font-size:1.5rem;font-weight:800;line-height:1.2;
+  letter-spacing:-.04em;margin-bottom:10px;
+  position:relative;z-index:1;
 }
-.nav-name {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-}
-.nav-name-main {
-  font-size: 1rem;
-  font-weight: 800;
-  color: var(--white);
-  letter-spacing: -0.03em;
-}
-.nav-name-sub {
-  font-size: 0.62rem;
-  color: var(--gold);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.ptitle em{color:var(--gold);font-style:normal;}
+.psub{
+  font-size:.85rem;color:var(--muted-l);
+  margin-bottom:26px;line-height:1.55;
+  position:relative;z-index:1;
 }
 
-.nav-btn {
-  background: var(--gold);
-  color: #000;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: -0.01em;
-  padding: 10px 22px;
-  border: none;
-  border-radius: 100px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  transition: background 0.2s, transform 0.1s;
-  white-space: nowrap;
+.pfield{
+  width:100%;background:var(--dark-5);
+  border:1px solid #2a2a2a;border-radius:var(--r-sm);
+  color:var(--white);padding:14px 16px;
+  font-family:'Inter',sans-serif;font-size:.88rem;letter-spacing:-.02em;
+  margin-bottom:10px;outline:none;transition:border-color .2s;
+  position:relative;z-index:1;
 }
-.nav-btn:hover { background: #f0c040; transform: translateY(-1px); }
+.pfield:focus{border-color:var(--gold);}
+.pfield::placeholder{color:#2e2e2e;}
 
-@media (max-width: 640px) {
-  nav { padding: 0 16px; }
-  .nav-name-main { font-size: 0.85rem; }
+.punlock{
+  width:100%;background:var(--gold);color:#000;
+  font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;
+  letter-spacing:-.02em;padding:17px;border:none;border-radius:var(--r-sm);
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:background .2s,transform .1s;z-index:1;
 }
-
-/* ── HERO ── */
-.hero {
-  padding: 80px 20px 0;
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
+.punlock::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);
+  transform:translateX(-100%);
+  animation:shim 1.8s ease infinite;
 }
-@media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; padding: 60px 20px 0; gap: 40px; }
+@keyframes shim{0%{transform:translateX(-100%);}60%,100%{transform:translateX(100%);}}
+.punlock:hover{background:#f0c040;transform:translateY(-1px);}
+.pfine{font-size:.7rem;color:#222;text-align:center;margin-top:10px;position:relative;z-index:1;}
+
+/* ═══════════════════════════════
+   NAV
+═══════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:68px;padding:0 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(10,10,10,.96);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
-
-.hero-left {}
-
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 700;
-  border: 1px solid rgba(251,208,97,0.25);
-  padding: 6px 14px;
-  border-radius: 100px;
-  margin-bottom: 24px;
+.nav-l{display:flex;align-items:center;gap:14px;}
+.nav-logo{
+  width:42px;height:42px;object-fit:contain;border-radius:8px;
+  flex-shrink:0;
 }
-.hero-eyebrow::before { content: '🏛️'; font-size: 0.8rem; }
-
-.hero h1 {
-  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
-  font-weight: 900;
-  line-height: 1.05;
-  letter-spacing: -0.05em;
-  margin-bottom: 20px;
+.nav-txt{display:flex;flex-direction:column;line-height:1.2;}
+.nav-name{
+  font-size:1.05rem;font-weight:800;color:var(--white);
+  letter-spacing:-.035em;
 }
-.hero h1 em { color: var(--gold); font-style: normal; }
+.nav-sub{
+  font-size:.58rem;color:var(--gold);font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+}
+.nav-cta{
+  background:var(--gold);color:#000;
+  font-family:'Inter',sans-serif;font-weight:700;font-size:.8rem;
+  padding:11px 24px;border:none;border-radius:100px;cursor:pointer;
+  text-decoration:none;transition:background .2s,transform .1s;
+  white-space:nowrap;
+}
+.nav-cta:hover{background:#f0c040;transform:translateY(-1px);}
 
-.hero-sub {
-  font-size: 1.05rem;
-  color: var(--muted-light);
-  line-height: 1.65;
-  margin-bottom: 36px;
-  max-width: 480px;
+@media(max-width:640px){
+  nav{padding:0 18px;}
+  .nav-name{font-size:.9rem;}
+  .nav-sub{display:none;}
 }
 
-.hero-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 36px;
-}
-.hero-pill {
-  font-size: 0.76rem;
-  font-weight: 600;
-  color: var(--muted-light);
-  border: 1px solid #2a2a2a;
-  padding: 6px 14px;
-  border-radius: 100px;
-  letter-spacing: -0.01em;
-}
-.hero-pill.gold {
-  color: var(--gold);
-  border-color: rgba(251,208,97,0.25);
+/* ═══════════════════════════════
+   HERO – FULL BLEED like Fabian
+═══════════════════════════════ */
+.hero{
+  position:relative;
+  min-height:100vh;
+  padding-top:68px; /* nav height */
+  overflow:hidden;
+  display:flex;align-items:center;
 }
 
-/* ── HERO IMAGE (right side) ── */
-.hero-right {
-  position: relative;
+/* Full-bleed bg image */
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+}
+.hero-bg img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:top right;
+  display:block;
+}
+/* Gradient overlay: dark on left, fades right like Fabian */
+.hero-bg::after{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to right, rgba(10,10,10,1) 0%, rgba(10,10,10,.88) 40%, rgba(10,10,10,.3) 70%, rgba(10,10,10,.05) 100%),
+    linear-gradient(to top, rgba(10,10,10,.8) 0%, transparent 50%);
 }
 
-.hero-img-wrap {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  aspect-ratio: 3/4;
-  max-height: 600px;
-}
-.hero-img-wrap img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-}
-.hero-img-wrap::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 40%;
-  background: linear-gradient(to top, var(--dark) 0%, transparent 100%);
+/* Warm ambient glow behind image area */
+.hero-glow{
+  position:absolute;
+  right:-100px;top:50%;transform:translateY(-50%);
+  width:700px;height:700px;
+  background:radial-gradient(circle, rgba(140,80,20,.25) 0%, transparent 70%);
+  z-index:1;pointer-events:none;
 }
 
-.hero-img-badge {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
-  z-index: 2;
-  background: rgba(10,10,10,0.85);
-  border: 1px solid rgba(251,208,97,0.25);
-  border-radius: var(--radius);
-  padding: 14px 18px;
-  backdrop-filter: blur(12px);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.hero-img-badge-icon { font-size: 1.4rem; flex-shrink: 0; }
-.hero-img-badge-text { font-size: 0.8rem; color: var(--muted-light); line-height: 1.4; }
-.hero-img-badge-text strong { color: var(--white); font-weight: 700; display: block; }
-
-/* ── OPT-IN BOX ── */
-.optin-wrap {
-  background: var(--dark-3);
-  border: 1px solid rgba(251,208,97,0.18);
-  border-radius: var(--radius);
-  padding: 32px;
-  position: relative;
-  overflow: hidden;
-}
-.optin-wrap::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--gold), var(--gold-dark));
-}
-.optin-label {
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-.optin-title {
-  font-size: 1.05rem;
-  font-weight: 800;
-  margin-bottom: 20px;
-  letter-spacing: -0.03em;
-  line-height: 1.3;
-}
-.optin-field {
-  width: 100%;
-  background: var(--dark-5);
-  border: 1px solid #2a2a2a;
-  border-radius: var(--radius-sm);
-  color: var(--white);
-  padding: 13px 16px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.88rem;
-  letter-spacing: -0.02em;
-  margin-bottom: 10px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-.optin-field:focus { border-color: var(--gold); }
-.optin-field::placeholder { color: #333; }
-.optin-btn {
-  width: 100%;
-  background: var(--gold);
-  color: #000;
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
-  font-size: 0.92rem;
-  padding: 15px;
-  border: none;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: background 0.2s;
-  letter-spacing: -0.02em;
-}
-.optin-btn:hover { background: #f0c040; }
-.optin-fine { font-size: 0.7rem; color: #333; text-align: center; margin-top: 10px; }
-
-/* ── HERO BOTTOM SPACER ── */
-.hero-spacer { height: 80px; }
-
-/* ── VIDEO SECTION ── */
-.video-section {
-  background: var(--dark-2);
-  border-top: 1px solid rgba(255,255,255,0.05);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  padding: 60px 20px;
-}
-.container { max-width: 960px; margin: 0 auto; }
-.container-sm { max-width: 720px; margin: 0 auto; }
-
-.video-gate {
-  width: 100%;
-  aspect-ratio: 16/9;
-  background: #000;
-  border: 1px solid rgba(251,208,97,0.2);
-  border-radius: var(--radius);
-  position: relative;
-  cursor: pointer;
-  overflow: hidden;
-}
-.video-gate-overlay {
-  position: absolute; inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
-}
-.play-btn {
-  width: 76px; height: 76px;
-  background: var(--gold);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s, background 0.2s;
-  animation: pulsePlay 2.5s ease infinite;
-}
-@keyframes pulsePlay {
-  0%,100% { box-shadow: 0 0 0 0 rgba(251,208,97,0.4); }
-  50%      { box-shadow: 0 0 0 20px rgba(251,208,97,0); }
-}
-.video-gate:hover .play-btn { transform: scale(1.08); background: #f0c040; }
-.play-btn svg { margin-left: 5px; }
-.video-gate-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: rgba(255,255,255,0.8);
-  background: rgba(0,0,0,0.5);
-  padding: 8px 18px;
-  border-radius: 100px;
-  letter-spacing: -0.01em;
+.hero-content{
+  position:relative;z-index:2;
+  max-width:1140px;margin:0 auto;
+  padding:80px 48px 100px;
+  width:100%;
 }
 
-.video-real {
-  display: none;
-  width: 100%;
-  aspect-ratio: 16/9;
-  background: #000;
-  border: 1px solid rgba(251,208,97,0.2);
-  border-radius: var(--radius);
-  overflow: hidden;
-  position: relative;
-}
-.video-real iframe {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  border: none;
+.hero-eye{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;
+  border:1px solid rgba(251,208,97,.28);
+  padding:7px 16px;border-radius:100px;
+  margin-bottom:28px;
 }
 
-.video-caption {
-  text-align: center;
-  margin-top: 18px;
-  font-size: 0.85rem;
-  color: var(--muted);
+.hero h1{
+  font-size:clamp(2.8rem,6vw,5rem);
+  font-weight:900;
+  line-height:1.04;
+  letter-spacing:-.05em;
+  max-width:680px;
+  margin-bottom:24px;
 }
-.video-caption strong { color: var(--white); font-weight: 600; }
+.hero h1 em{color:var(--gold);font-style:normal;}
 
-/* CTA box below video */
-.video-cta-box {
-  margin-top: 36px;
-  padding: 36px 40px;
-  background: var(--dark-3);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: var(--radius);
-  border-top: 2px solid var(--gold);
-  text-align: center;
-}
-.video-cta-box h3 {
-  font-size: 1.25rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  margin-bottom: 8px;
-}
-.video-cta-box p {
-  font-size: 0.87rem;
-  color: var(--muted);
-  margin-bottom: 22px;
+.hero-sub{
+  font-size:1.08rem;color:rgba(255,255,255,.55);
+  line-height:1.65;max-width:500px;margin-bottom:36px;
+  font-weight:400;
 }
 
-/* ── TRANSFORMATION SECTION ── */
-.transformation-section {
-  padding: 80px 20px;
-  background: var(--dark);
+/* Checkmark list like Fabian */
+.hero-checks{
+  display:flex;flex-direction:column;gap:12px;
+  margin-bottom:40px;
+}
+.hero-check{
+  display:flex;align-items:center;gap:12px;
+  font-size:.95rem;color:rgba(255,255,255,.8);
+  font-weight:500;
+}
+.hck{
+  width:22px;height:22px;
+  background:var(--gold);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  font-size:.65rem;font-weight:900;color:#000;
 }
 
-.section-label {
-  font-size: 0.63rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 700;
-  margin-bottom: 10px;
-  display: block;
-}
-.section-title {
-  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-  font-weight: 800;
-  line-height: 1.12;
-  letter-spacing: -0.04em;
-  margin-bottom: 16px;
-}
-.section-title em { color: var(--gold); font-style: normal; }
-.section-sub {
-  font-size: 0.95rem;
-  color: var(--muted-light);
-  max-width: 540px;
-  line-height: 1.65;
-  margin-bottom: 48px;
+.hero-cta-row{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  margin-bottom:20px;
 }
 
-.transformation-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  max-width: 700px;
+.btn-hero{
+  background:var(--gold);color:#000;
+  font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;
+  padding:17px 40px;border:none;border-radius:100px;
+  cursor:pointer;text-decoration:none;
+  transition:background .2s,transform .1s;
+  display:inline-block;letter-spacing:-.02em;
+  position:relative;overflow:hidden;
 }
-@media (max-width: 600px) { .transformation-grid { grid-template-columns: 1fr; } }
+.btn-hero::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+  transform:translateX(-100%);animation:shim 2.2s ease infinite;
+}
+.btn-hero:hover{background:#f0c040;transform:translateY(-2px);}
 
-.transform-card {
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid rgba(251,208,97,0.15);
-  position: relative;
+.hero-note{
+  font-size:.75rem;color:var(--muted);
+  letter-spacing:.01em;
 }
-.transform-card img {
-  width: 100%;
-  aspect-ratio: 3/4;
-  object-fit: cover;
-  object-position: top;
-  display: block;
-}
-.transform-badge {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
-  padding: 20px 16px 16px;
-}
-.transform-badge-label {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  display: block;
-  margin-bottom: 3px;
-}
-.transform-badge-val {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--white);
-}
-.transform-card.after .transform-badge-val { color: var(--gold); }
-.transform-card.after { border-color: rgba(251,208,97,0.4); }
 
-/* ── STATS BAR ── */
-.stats-bar {
-  background: var(--gold);
-  padding: 28px 20px;
+@media(max-width:768px){
+  .hero-content{padding:60px 20px 80px;}
+  .hero h1{font-size:clamp(2.2rem,8vw,3.2rem);}
 }
-.stats-inner {
-  max-width: 960px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 20px;
-  text-align: center;
-}
-@media (max-width: 600px) { .stats-inner { grid-template-columns: repeat(2,1fr); } }
-.stat-num { font-size: 2.2rem; font-weight: 900; color: #000; letter-spacing: -0.05em; display: block; line-height: 1; margin-bottom: 4px; }
-.stat-label { font-size: 0.7rem; font-weight: 600; color: rgba(0,0,0,0.5); }
 
-/* ── WHY CARDS ── */
-.why-section { padding: 80px 20px; background: var(--dark-2); border-top: 1px solid rgba(255,255,255,0.04); }
+/* ═══════════════════════════════
+   VIDEO SECTION
+═══════════════════════════════ */
+.vid-wrap{
+  background:var(--dark-2);
+  border-top:1px solid rgba(255,255,255,.05);
+  padding:72px 20px;
+}
+.ctr{max-width:960px;margin:0 auto;}
+.ctr-sm{max-width:720px;margin:0 auto;}
 
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 12px;
+.vgate{
+  width:100%;aspect-ratio:16/9;
+  background:#000;
+  border:2px solid rgba(251,208,97,.2);
+  border-radius:var(--r);
+  position:relative;cursor:pointer;overflow:hidden;
+  transition:border-color .25s,box-shadow .25s;
 }
-.why-card {
-  background: var(--dark-3);
-  padding: 28px 24px;
-  border-radius: var(--radius);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-top: 2px solid var(--gold);
-  transition: border-color 0.2s;
+.vgate:hover{
+  border-color:rgba(251,208,97,.5);
+  box-shadow:0 0 40px rgba(251,208,97,.08);
 }
-.why-card:hover { border-color: rgba(251,208,97,0.8); }
-.why-num { font-size: 0.6rem; font-weight: 700; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 14px; display: block; }
-.why-card h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.03em; }
-.why-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+.vgate-ov{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.55) 100%);
+}
+.play{
+  width:84px;height:84px;background:var(--gold);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .2s,background .2s;
+  animation:playP 2.8s ease infinite;
+}
+@keyframes playP{
+  0%,100%{box-shadow:0 0 0 0 rgba(251,208,97,.35);}
+  50%{box-shadow:0 0 0 24px rgba(251,208,97,0);}
+}
+.vgate:hover .play{transform:scale(1.1);background:#f0c040;}
+.play svg{margin-left:6px;}
+.vgate-lbl{
+  font-size:.86rem;font-weight:600;
+  color:rgba(255,255,255,.85);
+  background:rgba(0,0,0,.55);
+  padding:9px 22px;border-radius:100px;
+  letter-spacing:-.01em;
+}
 
-/* ── CTA BAND ── */
-.cta-band {
-  background: var(--dark-3);
-  border-top: 1px solid rgba(255,255,255,0.05);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  padding: 60px 20px;
-  text-align: center;
+.vreal{
+  display:none;width:100%;aspect-ratio:16/9;
+  background:#000;
+  border:2px solid rgba(251,208,97,.2);
+  border-radius:var(--r);overflow:hidden;position:relative;
 }
-.cta-band h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.04em; margin-bottom: 10px; }
-.cta-band h2 em { color: var(--gold); font-style: normal; }
-.cta-band p { font-size: 0.9rem; color: var(--muted); margin-bottom: 28px; }
+.vreal iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
 
-.btn-gold-lg {
-  display: inline-block;
-  background: var(--gold);
-  color: #000;
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
-  font-size: 0.95rem;
-  letter-spacing: -0.02em;
-  padding: 18px 44px;
-  border-radius: 100px;
-  text-decoration: none;
-  transition: background 0.2s, transform 0.1s;
-}
-.btn-gold-lg:hover { background: #f0c040; transform: translateY(-2px); }
+.vcap{text-align:center;margin-top:16px;font-size:.85rem;color:var(--muted);}
+.vcap strong{color:var(--white);font-weight:600;}
 
-.btn-gold-sm {
-  display: inline-block;
-  background: var(--gold);
-  color: #000;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 0.83rem;
-  letter-spacing: -0.01em;
-  padding: 13px 30px;
-  border-radius: 100px;
-  text-decoration: none;
-  transition: background 0.2s;
+/* ═══════════════════════════════
+   SECTION BASE
+═══════════════════════════════ */
+.slbl{
+  font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;margin-bottom:10px;display:block;
 }
-.btn-gold-sm:hover { background: #f0c040; }
+.stitle{
+  font-size:clamp(1.7rem,3.5vw,2.5rem);
+  font-weight:800;line-height:1.1;letter-spacing:-.04em;
+  margin-bottom:16px;
+}
+.stitle em{color:var(--gold);font-style:normal;}
+.ssub{
+  font-size:.95rem;color:var(--muted-l);
+  max-width:540px;line-height:1.65;margin-bottom:48px;
+}
 
-/* ── TESTIMONIALS ── */
-.testi-section { padding: 80px 20px; background: var(--dark); }
+/* ═══════════════════════════════
+   WHY CARDS (under video)
+═══════════════════════════════ */
+.why-wrap{
+  padding:72px 20px;
+  background:var(--dark);
+  border-top:1px solid rgba(255,255,255,.04);
+}
+.why-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:12px;
+}
+.wcard{
+  background:var(--dark-3);padding:28px 24px;
+  border-radius:var(--r);
+  border:1px solid rgba(255,255,255,.05);
+  border-top:2px solid var(--gold);
+  transition:border-color .2s,transform .2s;
+}
+.wcard:hover{border-color:rgba(251,208,97,.7);transform:translateY(-3px);}
+.wnum{font-size:.6rem;font-weight:700;color:var(--gold);letter-spacing:.1em;margin-bottom:12px;display:block;}
+.wcard h3{font-size:.92rem;font-weight:700;margin-bottom:8px;letter-spacing:-.03em;}
+.wcard p{font-size:.8rem;color:var(--muted);line-height:1.55;}
 
-.video-testi-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 16px;
-  margin-top: 48px;
+/* ═══════════════════════════════
+   VIDEO CTA BOX
+═══════════════════════════════ */
+.vcta{
+  margin-top:40px;padding:36px 40px;
+  background:var(--dark-3);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:var(--r);border-top:2px solid var(--gold);
+  text-align:center;
 }
-.video-testi-card {
-  background: var(--dark-3);
-  border: 2px solid rgba(251,208,97,0.2);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: border-color 0.2s;
-}
-.video-testi-card:hover { border-color: rgba(251,208,97,0.5); }
-.video-testi-frame {
-  width: 100%;
-  aspect-ratio: 16/9;
-  background: #000;
-  position: relative;
-}
-.video-testi-frame iframe {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  border: none;
-}
-.video-testi-info { padding: 14px 18px; }
-.video-testi-name { font-size: 0.82rem; font-weight: 700; color: var(--gold); margin-bottom: 3px; }
-.video-testi-role { font-size: 0.73rem; color: var(--muted); }
+.vcta h3{font-size:1.3rem;font-weight:800;letter-spacing:-.04em;margin-bottom:8px;}
+.vcta p{font-size:.87rem;color:var(--muted);margin-bottom:22px;}
 
-.review-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 12px;
-  margin-top: 32px;
+/* ═══════════════════════════════
+   STATS BAR
+═══════════════════════════════ */
+.sbar{background:var(--gold);padding:28px 20px;}
+.sbar-in{
+  max-width:960px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;
 }
-.review-img {
-  width: 100%;
-  display: block;
-  border: 2px solid rgba(251,208,97,0.2);
-  border-radius: var(--radius);
-  transition: border-color 0.2s;
-}
-.review-img:hover { border-color: rgba(251,208,97,0.5); }
-.review-stacked { display: flex; flex-direction: column; gap: 12px; }
+@media(max-width:600px){.sbar-in{grid-template-columns:repeat(2,1fr);}}
+.sn{font-size:2.3rem;font-weight:900;color:#000;letter-spacing:-.05em;display:block;line-height:1;margin-bottom:3px;}
+.sl{font-size:.7rem;font-weight:600;color:rgba(0,0,0,.5);}
 
-/* ── FAQ ── */
-.faq-section { background: var(--dark-2); border-top: 1px solid rgba(255,255,255,0.04); padding: 80px 20px; }
-.faq-list { margin-top: 48px; }
-.faq-item {
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.faq-btn {
-  width: 100%;
-  background: none; border: none;
-  color: var(--white);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.95rem; font-weight: 600;
-  letter-spacing: -0.03em;
-  text-align: left;
-  padding: 20px 0;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  transition: color 0.2s;
-}
-.faq-btn:hover { color: var(--gold); }
-.faq-arrow { flex-shrink: 0; color: var(--gold); transition: transform 0.3s; font-size: 0.9rem; }
-.faq-item.open .faq-arrow { transform: rotate(180deg); }
-.faq-body { overflow: hidden; max-height: 0; transition: max-height 0.4s ease; }
-.faq-item.open .faq-body { max-height: 500px; }
-.faq-body p { font-size: 0.88rem; color: var(--muted-light); line-height: 1.7; padding-bottom: 22px; }
-.faq-body p strong { color: var(--white); font-weight: 600; }
+/* ═══════════════════════════════
+   TRANSFORMATION
+═══════════════════════════════ */
+.tfm-wrap{padding:80px 20px;background:var(--dark-2);border-top:1px solid rgba(255,255,255,.04);}
+.tfm-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:680px;}
+@media(max-width:600px){.tfm-grid{grid-template-columns:1fr;}}
 
-/* ── FINAL CTA ── */
-.final-cta {
-  padding: 100px 20px;
-  text-align: center;
-  background: var(--dark);
-  position: relative; overflow: hidden;
+.tcard{
+  border-radius:var(--r);overflow:hidden;position:relative;
+  border:2px solid rgba(251,208,97,.12);
+  transition:border-color .25s,transform .25s;
 }
-.final-cta::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(251,208,97,0.05) 0%, transparent 70%);
-  pointer-events: none;
+.tcard:hover{border-color:rgba(251,208,97,.45);transform:translateY(-3px);}
+.tcard img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top center;}
+.tcard.after{border-color:rgba(251,208,97,.4);}
+.tbadge{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(0,0,0,.92) 0%,transparent 100%);
+  padding:24px 16px 16px;
 }
-.final-cta h2 {
-  font-size: clamp(1.9rem, 4.5vw, 3rem);
-  font-weight: 900;
-  letter-spacing: -0.05em;
-  line-height: 1.08;
-  max-width: 620px;
-  margin: 0 auto 18px;
-}
-.final-cta h2 em { color: var(--gold); font-style: normal; }
-.final-cta p { font-size: 0.92rem; color: var(--muted-light); max-width: 480px; margin: 0 auto 36px; line-height: 1.65; }
-.cta-sub {
-  margin-top: 20px;
-  font-size: 0.76rem;
-  color: #333;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.cta-sub span { color: var(--gold); }
+.tlbl{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-l);display:block;margin-bottom:3px;}
+.tval{font-size:.88rem;font-weight:700;color:var(--white);}
+.tcard.after .tval{color:var(--gold);}
 
-/* ── FOOTER ── */
-footer {
-  background: #060606;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  padding: 40px 20px;
-  text-align: center;
+/* ═══════════════════════════════
+   CTA BAND
+═══════════════════════════════ */
+.ctaband{
+  background:var(--dark-3);
+  border-top:1px solid rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  padding:68px 20px;text-align:center;
 }
-.footer-logo-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 12px;
+.ctaband h2{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:800;letter-spacing:-.04em;margin-bottom:10px;}
+.ctaband h2 em{color:var(--gold);font-style:normal;}
+.ctaband p{font-size:.9rem;color:var(--muted);margin-bottom:28px;line-height:1.6;}
+
+/* ═══════════════════════════════
+   BUTTONS
+═══════════════════════════════ */
+.blg{
+  display:inline-block;background:var(--gold);color:#000;
+  font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;
+  letter-spacing:-.02em;padding:17px 44px;border-radius:100px;
+  text-decoration:none;transition:background .2s,transform .1s;
 }
-.footer-logo-img { width: 32px; height: 32px; object-fit: contain; }
-.footer-name { font-size: 0.85rem; font-weight: 800; color: var(--white); letter-spacing: -0.02em; }
-.footer-brand { font-size: 0.68rem; color: var(--gold); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
-footer p { font-size: 0.72rem; color: #2a2a2a; margin-top: 4px; }
-footer a { color: #444; text-decoration: none; transition: color 0.2s; }
-footer a:hover { color: var(--gold); }
-.footer-links { display: flex; gap: 20px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
-
-/* ── SCROLL REVEAL ── */
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
-.reveal.on { opacity: 1; transform: translateY(0); }
-
-/* ── OFFER ITEMS ── */
-.offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 48px; }
-@media (max-width: 600px) { .offer-grid { grid-template-columns: 1fr; } }
-
-.offer-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 20px;
-  background: var(--dark-3);
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(255,255,255,0.05);
+.blg:hover{background:#f0c040;transform:translateY(-2px);}
+.bsm{
+  display:inline-block;background:var(--gold);color:#000;
+  font-family:'Inter',sans-serif;font-weight:700;font-size:.83rem;
+  padding:13px 30px;border-radius:100px;text-decoration:none;
+  transition:background .2s;
 }
-.offer-check {
-  flex-shrink: 0;
-  width: 24px; height: 24px;
-  background: var(--gold);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  font-weight: 900;
-  color: #000;
-  margin-top: 1px;
-}
-.offer-item h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.02em; }
-.offer-item p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+.bsm:hover{background:#f0c040;}
 
-@media (max-width: 640px) {
-  .hero { padding: 50px 16px 0; }
-  .popup-box { padding: 32px 22px; }
+/* ═══════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════ */
+.tsti-wrap{padding:80px 20px;background:var(--dark);}
+.vtgrid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:16px;margin-top:48px;
+}
+.vtcard{
+  background:var(--dark-3);
+  border:2px solid rgba(251,208,97,.18);
+  border-radius:var(--r);overflow:hidden;
+  transition:border-color .25s,transform .25s;
+}
+.vtcard:hover{border-color:rgba(251,208,97,.5);transform:translateY(-3px);}
+.vtframe{width:100%;aspect-ratio:16/9;background:#000;position:relative;}
+.vtframe iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+.vtinfo{padding:14px 18px;}
+.vtname{font-size:.82rem;font-weight:700;color:var(--gold);margin-bottom:3px;}
+.vtrole{font-size:.73rem;color:var(--muted);}
+
+.rev-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:12px;margin-top:28px;
+}
+.rimg{
+  width:100%;display:block;
+  border:2px solid rgba(251,208,97,.18);
+  border-radius:var(--r);
+  transition:border-color .2s,transform .2s;
+}
+.rimg:hover{border-color:rgba(251,208,97,.5);transform:translateY(-2px);}
+.rstack{display:flex;flex-direction:column;gap:12px;}
+
+/* ═══════════════════════════════
+   OFFER
+═══════════════════════════════ */
+.offer-wrap{padding:80px 20px;background:var(--dark-2);border-top:1px solid rgba(255,255,255,.04);}
+.ogrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:40px;}
+@media(max-width:600px){.ogrid{grid-template-columns:1fr;}}
+.oitem{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:20px;background:var(--dark-3);
+  border-radius:var(--r-sm);
+  border:1px solid rgba(255,255,255,.05);
+  transition:border-color .2s;
+}
+.oitem:hover{border-color:rgba(251,208,97,.18);}
+.och{
+  flex-shrink:0;width:24px;height:24px;background:var(--gold);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:900;color:#000;margin-top:1px;
+}
+.oitem h4{font-size:.88rem;font-weight:700;margin-bottom:4px;letter-spacing:-.02em;}
+.oitem p{font-size:.8rem;color:var(--muted);line-height:1.5;}
+
+/* ═══════════════════════════════
+   FAQ
+═══════════════════════════════ */
+.faq-wrap{background:var(--dark);border-top:1px solid rgba(255,255,255,.04);padding:80px 20px;}
+.flist{margin-top:44px;}
+.fitem{border-bottom:1px solid rgba(255,255,255,.06);}
+.fbtn{
+  width:100%;background:none;border:none;color:var(--white);
+  font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;
+  letter-spacing:-.03em;text-align:left;padding:20px 0;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  transition:color .2s;
+}
+.fbtn:hover{color:var(--gold);}
+.farr{flex-shrink:0;color:var(--gold);transition:transform .3s;font-size:.9rem;}
+.fitem.open .farr{transform:rotate(180deg);}
+.fbody{overflow:hidden;max-height:0;transition:max-height .4s ease;}
+.fitem.open .fbody{max-height:600px;}
+.fbody p{font-size:.88rem;color:var(--muted-l);line-height:1.7;padding-bottom:22px;}
+.fbody p strong{color:var(--white);font-weight:600;}
+
+/* ═══════════════════════════════
+   FINAL CTA
+═══════════════════════════════ */
+.fcta{
+  padding:100px 20px;text-align:center;
+  background:var(--dark);position:relative;overflow:hidden;
+}
+.fcta::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(251,208,97,.05) 0%,transparent 70%);
+  pointer-events:none;
+}
+.fcta h2{
+  font-size:clamp(2rem,4.5vw,3.1rem);font-weight:900;
+  letter-spacing:-.05em;line-height:1.07;
+  max-width:640px;margin:0 auto 18px;
+}
+.fcta h2 em{color:var(--gold);font-style:normal;}
+.fcta p{font-size:.92rem;color:var(--muted-l);max-width:480px;margin:0 auto 36px;line-height:1.65;}
+.ctasub{
+  margin-top:20px;font-size:.76rem;color:#282828;
+  display:flex;align-items:center;justify-content:center;
+  gap:16px;flex-wrap:wrap;
+}
+.ctasub span{color:var(--gold);}
+
+/* ═══════════════════════════════
+   FOOTER
+═══════════════════════════════ */
+footer{
+  background:#060606;border-top:1px solid rgba(255,255,255,.04);
+  padding:44px 20px;text-align:center;
+}
+.frow{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px;}
+.flogo{width:34px;height:34px;object-fit:contain;border-radius:6px;}
+.fn{font-size:.92rem;font-weight:800;color:var(--white);letter-spacing:-.02em;}
+.fb{font-size:.6rem;color:var(--gold);font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+footer p{font-size:.72rem;color:#242424;margin-top:4px;}
+footer a{color:#383838;text-decoration:none;transition:color .2s;}
+footer a:hover{color:var(--gold);}
+.flinks{display:flex;gap:20px;justify-content:center;margin-top:14px;flex-wrap:wrap;}
+
+/* ═══════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════ */
+.rev{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
+.rev.on{opacity:1;transform:translateY(0);}
+
+/* Mobile tweaks */
+@media(max-width:640px){
+  .pbox{padding:32px 22px;}
+  .vcta{padding:28px 20px;}
+  .hero-content{padding:60px 20px 80px;}
 }
 </style>
 </head>
 <body>
 
 <!-- PROGRESS BAR -->
-<div id="progress-bar"></div>
+<div id="pgbar"></div>
 
-<!-- POPUP -->
-<div id="popup-overlay">
-  <div class="popup-box">
-    <span class="popup-lock">🔒</span>
-    <p class="popup-eyebrow">Kostenloses Video freischalten</p>
-    <h2 class="popup-title">Trag dich ein und<br><em>schau das Video kostenlos</em></h2>
-    <p class="popup-sub">In wenigen Sekunden hast du Zugang – der 6-Schritte-Prozess der Unternehmer in 20 Wochen transformiert.</p>
-    <input class="popup-field" type="text" id="p-name" placeholder="Dein Vorname" autocomplete="given-name">
-    <input class="popup-field" type="email" id="p-email" placeholder="Deine E-Mail-Adresse" autocomplete="email">
-    <input class="popup-field" type="text" id="p-ig" placeholder="Dein Instagram Handle (@...)">
-    <button class="btn-unlock" onclick="unlockVideo()">🔓 Jetzt Video freischalten →</button>
-    <p class="popup-fine">Kein Spam. Keine Verpflichtung. Jederzeit abmeldbar.</p>
+<!-- ═══ POPUP ═══ -->
+<div id="pop">
+  <div class="pbox">
+    <span class="plock">🔒</span>
+    <span class="peye">Kostenloses Video freischalten</span>
+    <h2 class="ptitle">Trag dich ein –<br><em>schau das Video kostenlos</em></h2>
+    <p class="psub">In Sekunden hast du Zugang. Der 6-Schritte-Prozess der Unternehmer in 20 Wochen transformiert.</p>
+    <input class="pfield" type="text" id="pn" placeholder="Dein Vorname" autocomplete="given-name">
+    <input class="pfield" type="email" id="pe" placeholder="Deine E-Mail-Adresse" autocomplete="email">
+    <input class="pfield" type="text" id="pig" placeholder="Dein Instagram Handle (@...)">
+    <button class="punlock" onclick="unlock()">🔓 Jetzt freischalten →</button>
+    <p class="pfine">Kein Spam. Keine Verpflichtung. Jederzeit abmeldbar.</p>
   </div>
 </div>
 
-<!-- NAV -->
+<!-- ═══ NAV ═══ -->
 <nav>
-  <div class="nav-logo-wrap">
-    <img class="nav-logo-img" src="/mnt/user-data/uploads/IMG_7558.jpg" alt="OPC Logo" onerror="this.style.display='none'">
-    <div class="nav-name">
-      <span class="nav-name-main">Leon Herzog</span>
-      <span class="nav-name-sub">Olympus Performance Coaching</span>
+  <div class="nav-l">
+    <img class="nav-logo" src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/81a15c265628433e8aa47040c314dcd6/original/IMG_7558.jpg" alt="OPC Logo">
+    <div class="nav-txt">
+      <span class="nav-name">Leon Herzog</span>
+      <span class="nav-sub">Olympus Performance Coaching</span>
     </div>
   </div>
-  <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="nav-btn">Kostenloses Gespräch →</a>
+  <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="nav-cta">Kostenloses Gespräch →</a>
 </nav>
 
-<!-- ── HERO ── -->
-<div class="hero">
-  <div class="hero-left reveal">
-    <span class="hero-eyebrow">Olympus Performance Coaching</span>
+<!-- ═══ HERO – FULL BLEED ═══ -->
+<section class="hero">
+  <!-- BG IMAGE -->
+  <div class="hero-bg">
+    <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/6505c66f205141659070346e7b0dba26/original/C5A52D56-2554-4660-B5EC-3FAAF9D1D85B-2.png" alt="Leon Herzog">
+  </div>
+  <!-- Warm glow -->
+  <div class="hero-glow"></div>
+
+  <!-- CONTENT -->
+  <div class="hero-content">
+    <div class="hero-eye">🏛️ Olympus Performance Coaching</div>
+
     <h1>So wirst du in<br>20 Wochen zum<br><em>griechischen Gott</em></h1>
-    <p class="hero-sub">In den nächsten Minuten zeige ich dir genau wie vielbeschäftigte Unternehmer und Selbstständige in 5 Monaten Muskeln aufbauen und definieren – ohne Zeit zu verlieren und mehr Fokus zu gewinnen.</p>
-    <div class="hero-pills">
-      <span class="hero-pill gold">Ohne Zeit zu verlieren</span>
-      <span class="hero-pill gold">Mehr Fokus</span>
-      <span class="hero-pill">Ohne Extremdiäten</span>
-      <span class="hero-pill gold">Ergebnis-Garantie</span>
+
+    <p class="hero-sub">
+      In den nächsten Minuten zeige ich dir genau wie vielbeschäftigte Unternehmer
+      und Selbstständige in 5 Monaten Muskeln aufbauen und definieren.
+    </p>
+
+    <div class="hero-checks">
+      <div class="hero-check"><div class="hck">✓</div><span>Ohne Zeit zu verlieren</span></div>
+      <div class="hero-check"><div class="hck">✓</div><span>Mehr Fokus im Business</span></div>
+      <div class="hero-check"><div class="hck">✓</div><span>Ohne Extremdiäten</span></div>
     </div>
-    <!-- OPT-IN direkt im Hero -->
-    <div class="optin-wrap">
-      <p class="optin-label">Jetzt kostenlosen Zugang sichern</p>
-      <p class="optin-title">Trag dich ein – schau das Video gratis</p>
-      <input class="optin-field" type="text" id="h-name" placeholder="Dein Vorname" autocomplete="given-name">
-      <input class="optin-field" type="email" id="h-email" placeholder="Deine E-Mail-Adresse" autocomplete="email">
-      <input class="optin-field" type="text" id="h-ig" placeholder="Dein Instagram Handle (@...)">
-      <button class="optin-btn" onclick="heroUnlock()">Jetzt Video freischalten →</button>
-      <p class="optin-fine">Kein Spam. Keine Verpflichtung.</p>
+
+    <div class="hero-cta-row">
+      <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="btn-hero">Kostenloses Gespräch buchen →</a>
     </div>
+    <p class="hero-note">Kostenlos & unverbindlich · Begrenzte Plätze verfügbar</p>
   </div>
+</section>
 
-  <div class="hero-right reveal">
-    <div class="hero-img-wrap">
-      <img src="/mnt/user-data/uploads/C5A52D56-2554-4660-B5EC-3FAAF9D1D85B__2_.PNG" alt="Leon Herzog am Laptop">
-      <div class="hero-img-badge">
-        <span class="hero-img-badge-icon">🏛️</span>
-        <div class="hero-img-badge-text">
-          <strong>Leon Herzog</strong>
-          Performance Coach · @leonherzog.de
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- ═══ VIDEO ═══ -->
+<div class="vid-wrap">
+  <div class="ctr rev">
 
-<div class="hero-spacer"></div>
-
-<!-- ── VIDEO SECTION ── -->
-<div class="video-section">
-  <div class="container reveal">
-    <div class="video-gate" id="video-gate" onclick="triggerPopup()">
-      <div class="video-gate-overlay">
-        <div class="play-btn">
+    <!-- GATE -->
+    <div class="vgate" id="vgate" onclick="trigPop()">
+      <div class="vgate-ov">
+        <div class="play">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="#000"><polygon points="6,4 20,12 6,20"/></svg>
         </div>
-        <div class="video-gate-label">Klick zum Freischalten – 100% kostenlos</div>
+        <div class="vgate-lbl">Klick zum Freischalten – 100% kostenlos</div>
       </div>
     </div>
-    <div class="video-real" id="video-real">
-      <!-- DEIN VSL HIER: ersetze LNn2aQe1fpE durch deine Video-ID -->
+
+    <!-- REAL VIDEO -->
+    <div class="vreal" id="vreal">
+      <!-- DEIN VSL ID HIER EINTRAGEN -->
       <iframe src="https://www.youtube.com/embed/LNn2aQe1fpE?rel=0&modestbranding=1" allowfullscreen></iframe>
     </div>
-    <p class="video-caption">Schau das Video vollständig – am Ende weißt du genau wie du <strong>shredded wirst.</strong></p>
 
-    <div class="video-cta-box">
+    <p class="vcap">Schau das Video vollständig – am Ende weißt du genau wie du <strong>shredded wirst.</strong></p>
+
+    <!-- WHY CARDS directly under video -->
+    <div style="margin-top:52px">
+      <span class="slbl">Was du bekommst</span>
+      <h2 class="stitle">Das steckt in <em>diesem Video</em></h2>
+      <div class="why-grid">
+        <div class="wcard"><span class="wnum">01</span><h3>Der exakte Prozess</h3><p>Step-by-Step wie du als Unternehmer deinen Körper in 5 Monaten transformierst – ohne Zeitverlust.</p></div>
+        <div class="wcard"><span class="wnum">02</span><h3>Das bewährte System</h3><p>Derselbe Prozess den ich selbst und meine Kunden täglich nutzen. Keine Theorie – erprobte Mathematik.</p></div>
+        <div class="wcard"><span class="wnum">03</span><h3>Neue Perspektive</h3><p>Warum dein Körper kein Hindernis für dein Business ist – sondern sein wichtigstes Tool.</p></div>
+        <div class="wcard"><span class="wnum">04</span><h3>Dein nächster Schritt</h3><p>Am Ende weißt du exakt was du morgen tun musst. Kein Overthinking. Kein Rumprobieren.</p></div>
+      </div>
+    </div>
+
+    <!-- CTA box -->
+    <div class="vcta">
       <h3>Bereit für deinen ersten Schritt?</h3>
       <p>Buch dir jetzt dein kostenloses Analysegespräch – kein Druck, kein Pitch, nur Klarheit.</p>
-      <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="btn-gold-lg">Kostenloses Analysegespräch buchen →</a>
-      <p style="font-size:0.73rem;color:#2a2a2a;margin-top:10px">Kostenlos & unverbindlich · Begrenzte Plätze</p>
+      <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="blg">Kostenloses Analysegespräch buchen →</a>
+      <p style="font-size:.73rem;color:#1e1e1e;margin-top:10px">Kostenlos & unverbindlich · Begrenzte Plätze</p>
     </div>
   </div>
 </div>
 
-<!-- ── STATS ── -->
-<div class="stats-bar reveal">
-  <div class="stats-inner">
-    <div><span class="stat-num">5</span><span class="stat-label">Monate Transformation</span></div>
-    <div><span class="stat-num">1:1</span><span class="stat-label">Persönliche Betreuung</span></div>
-    <div><span class="stat-num">20</span><span class="stat-label">Wochen zum Traumkörper</span></div>
-    <div><span class="stat-num">100%</span><span class="stat-label">Ergebnis-Garantie</span></div>
+<!-- ═══ STATS ═══ -->
+<div class="sbar rev">
+  <div class="sbar-in">
+    <div><span class="sn">5</span><span class="sl">Monate Transformation</span></div>
+    <div><span class="sn">1:1</span><span class="sl">Persönliche Betreuung</span></div>
+    <div><span class="sn">20</span><span class="sl">Wochen zum Traumkörper</span></div>
+    <div><span class="sn">100%</span><span class="sl">Ergebnis-Garantie</span></div>
   </div>
 </div>
 
-<!-- ── TRANSFORMATION ── -->
-<div class="transformation-section">
-  <div class="container reveal">
-    <span class="section-label">Meine Transformation</span>
-    <h2 class="section-title">Von hier – <em>nach hier.</em></h2>
-    <p class="section-sub">4 Jahre Home Workouts als Start. Heute coache ich Unternehmer zum griechischen Gott. Das System funktioniert – weil ich es selbst durchlaufen habe.</p>
-    <div class="transformation-grid">
-      <div class="transform-card before">
-        <img src="/mnt/user-data/uploads/IMG_7859.jpg" alt="Leon vorher">
-        <div class="transform-badge">
-          <span class="transform-badge-label">Vorher</span>
-          <span class="transform-badge-val">Vor dem System</span>
+<!-- ═══ TRANSFORMATION ═══ -->
+<div class="tfm-wrap">
+  <div class="ctr rev">
+    <span class="slbl">Meine Transformation</span>
+    <h2 class="stitle">Von hier – <em>nach hier.</em></h2>
+    <p class="ssub">4 Jahre Home Workouts als Ausgangspunkt. Heute coache ich Unternehmer zur Topform. Das System funktioniert – weil ich es selbst durchlaufen habe.</p>
+    <div class="tfm-grid">
+      <div class="tcard before">
+        <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/2d1d38a72d364f909a2fbac31b042cbc/original/IMG_7859.jpg" alt="Leon vorher">
+        <div class="tbadge">
+          <span class="tlbl">Vorher · 4 Jahre Home Workouts</span>
+          <span class="tval">Vor dem System</span>
         </div>
       </div>
-      <div class="transform-card after">
-        <img src="/mnt/user-data/uploads/IMG_5717__2_.jpg" alt="Leon jetzt">
-        <div class="transform-badge">
-          <span class="transform-badge-label">Jetzt</span>
-          <span class="transform-badge-val">Nach dem System ✓</span>
+      <div class="tcard after">
+        <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/8d6f68762b9e4eaea5ba8b45f1a2cd78/original/IMG_5717-2.jpg" alt="Leon jetzt">
+        <div class="tbadge">
+          <span class="tlbl">Jetzt · Olympus System</span>
+          <span class="tval">Nach dem System ✓</span>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ── WHY WATCH ── -->
-<div class="why-section">
-  <div class="container reveal">
-    <span class="section-label">Was du bekommst</span>
-    <h2 class="section-title">Das steckt in <em>diesem Video</em></h2>
-    <div class="why-grid">
-      <div class="why-card">
-        <span class="why-num">01</span>
-        <h3>Der exakte Prozess</h3>
-        <p>Step-by-Step wie du als Unternehmer oder Vielbeschäftigter deinen Körper in 5 Monaten transformierst – ohne Zeitverlust.</p>
-      </div>
-      <div class="why-card">
-        <span class="why-num">02</span>
-        <h3>Das bewährte System</h3>
-        <p>Derselbe Prozess den ich selbst und meine Kunden täglich nutzen. Keine Theorie – erprobte Mathematik.</p>
-      </div>
-      <div class="why-card">
-        <span class="why-num">03</span>
-        <h3>Neue Perspektive</h3>
-        <p>Warum dein Körper kein Hindernis für dein Business ist – sondern sein wichtigstes Tool.</p>
-      </div>
-      <div class="why-card">
-        <span class="why-num">04</span>
-        <h3>Dein nächster Schritt</h3>
-        <p>Am Ende weißt du exakt was du morgen tun musst. Kein Overthinking. Kein Rumprobieren mehr.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ── CTA BAND 1 ── -->
-<div class="cta-band reveal">
+<!-- ═══ CTA BAND ═══ -->
+<div class="ctaband rev">
   <h2>Bereit deinen Körper auf das Level<br><em>deines Erfolgs zu bringen?</em></h2>
   <p>Das Gespräch ist kostenlos, unverbindlich und dauert 20–30 Minuten.<br>Du gehst mit klaren Antworten raus – egal ob wir zusammenarbeiten oder nicht.</p>
-  <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="btn-gold-lg">Kostenloses Analysegespräch buchen →</a>
+  <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="blg">Kostenloses Analysegespräch buchen →</a>
 </div>
 
-<!-- ── TESTIMONIALS ── -->
-<div class="testi-section">
-  <div class="container reveal">
-    <span class="section-label">Kunden Ergebnisse</span>
-    <h2 class="section-title">Was meine Kunden <em>sagen & erreichen</em></h2>
+<!-- ═══ TESTIMONIALS ═══ -->
+<div class="tsti-wrap">
+  <div class="ctr rev">
+    <span class="slbl">Kunden Ergebnisse</span>
+    <h2 class="stitle">Was meine Kunden <em>sagen & erreichen</em></h2>
 
-    <div class="video-testi-grid">
-      <div class="video-testi-card">
-        <div class="video-testi-frame">
-          <iframe src="https://www.youtube.com/embed/LNn2aQe1fpE?rel=0&modestbranding=1" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="vtgrid">
+      <div class="vtcard">
+        <div class="vtframe">
+          <iframe src="https://www.youtube.com/embed/LNn2aQe1fpE?rel=0&modestbranding=1" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
         </div>
-        <div class="video-testi-info">
-          <p class="video-testi-name">Kunden-Testimonial #1</p>
-          <p class="video-testi-role">Transformation & Ergebnis</p>
-        </div>
+        <div class="vtinfo"><p class="vtname">Kunden-Testimonial #1</p><p class="vtrole">Transformation & Ergebnis</p></div>
       </div>
-      <div class="video-testi-card">
-        <div class="video-testi-frame">
-          <iframe src="https://www.youtube.com/embed/mX118bB1HzU?rel=0&modestbranding=1" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="vtcard">
+        <div class="vtframe">
+          <iframe src="https://www.youtube.com/embed/mX118bB1HzU?rel=0&modestbranding=1" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
         </div>
-        <div class="video-testi-info">
-          <p class="video-testi-name">Kunden-Testimonial #2</p>
-          <p class="video-testi-role">Ergebnis nach 5 Monaten</p>
-        </div>
+        <div class="vtinfo"><p class="vtname">Kunden-Testimonial #2</p><p class="vtrole">Ergebnis nach 5 Monaten</p></div>
       </div>
     </div>
 
-    <div class="review-grid" style="margin-top:32px">
-      <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/cace214a509246efbb4ace72771a6891/original/IMG_8071.jpg" class="review-img" alt="Bewertung">
-      <div class="review-stacked">
-        <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/7794211dec4841da8cd8a5bbe08c3d5e/original/IMG_8072.jpg" class="review-img" alt="Bewertung">
-        <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/26d4c87831ce4ff8a5532e02eb1b3ee3/original/IMG_8073.jpg" class="review-img" alt="Bewertung">
+    <div class="rev-grid">
+      <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/cace214a509246efbb4ace72771a6891/original/IMG_8071.jpg" class="rimg" alt="Bewertung">
+      <div class="rstack">
+        <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/7794211dec4841da8cd8a5bbe08c3d5e/original/IMG_8072.jpg" class="rimg" alt="Bewertung">
+        <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/26d4c87831ce4ff8a5532e02eb1b3ee3/original/IMG_8073.jpg" class="rimg" alt="Bewertung">
       </div>
-      <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/b8ca5c795ea84fe8897a367150992127/original/IMG_8074.jpg" class="review-img" alt="Bewertung">
+      <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/b8ca5c795ea84fe8897a367150992127/original/IMG_8074.jpg" class="rimg" alt="Bewertung">
     </div>
 
-    <div style="text-align:center;margin-top:40px" class="reveal">
-      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:14px">Diese Ergebnisse sind das System. Keine Ausnahmen.</p>
-      <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="btn-gold-sm">Kostenloses Gespräch buchen →</a>
+    <div style="text-align:center;margin-top:40px" class="rev">
+      <p style="font-size:.83rem;color:var(--muted);margin-bottom:14px">Diese Ergebnisse sind das System. Keine Ausnahmen.</p>
+      <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="bsm">Kostenloses Gespräch buchen →</a>
     </div>
   </div>
 </div>
 
-<!-- ── ANGEBOT ── -->
-<div style="padding:80px 20px;background:var(--dark-2);border-top:1px solid rgba(255,255,255,0.04)">
-  <div class="container reveal">
-    <span class="section-label">Das Angebot</span>
-    <h2 class="section-title">Wenn wir zusammenarbeiten,<br><em>bekommst du:</em></h2>
-    <div class="offer-grid">
-      <div class="offer-item">
-        <div class="offer-check">✓</div>
-        <div>
-          <h4>Täglicher 1:1 WhatsApp-Zugang</h4>
-          <p>Du schreibst mir direkt – kein Team, kein Bot. Ich bin für dich da und antworte so schnell es geht.</p>
-        </div>
-      </div>
-      <div class="offer-item">
-        <div class="offer-check">✓</div>
-        <div>
-          <h4>Wöchentliche 1:1 Coaching Calls</h4>
-          <p>Progress Check, klare Aufgaben, Anpassungen wenn nötig. Du weißt immer genau wo du stehst.</p>
-        </div>
-      </div>
-      <div class="offer-item">
-        <div class="offer-check">✓</div>
-        <div>
-          <h4>Individuelles System für deinen Alltag</h4>
-          <p>Kein generischer Plan – ein System das exakt auf deinen Kalender und dein Ziel abgestimmt ist.</p>
-        </div>
-      </div>
-      <div class="offer-item">
-        <div class="offer-check">✓</div>
-        <div>
-          <h4>Executive Nutrition Playbook</h4>
-          <p>Restaurant, Reisen, stressige Tage – du weißt immer was du bestellst und bleibst auf Kurs.</p>
-        </div>
-      </div>
-      <div class="offer-item">
-        <div class="offer-check">✓</div>
-        <div>
-          <h4>Tracking Sheets & Dashboards</h4>
-          <p>Alles messbar. Fortschritt schwarz auf weiß. Du siehst jeden Schritt nach vorne.</p>
-        </div>
-      </div>
-      <div class="offer-item">
-        <div class="offer-check">✓</div>
-        <div>
-          <h4>5-Monats-Ergebnis-Garantie</h4>
-          <p>Keine sichtbare Transformation nach 5 Monaten? Wir arbeiten kostenlos weiter bis du sie erreichst.</p>
-        </div>
-      </div>
+<!-- ═══ ANGEBOT ═══ -->
+<div class="offer-wrap">
+  <div class="ctr rev">
+    <span class="slbl">Das Angebot</span>
+    <h2 class="stitle">Wenn wir zusammenarbeiten,<br><em>bekommst du:</em></h2>
+    <div class="ogrid">
+      <div class="oitem"><div class="och">✓</div><div><h4>Täglicher 1:1 WhatsApp-Zugang</h4><p>Du schreibst mir direkt – kein Team, kein Bot. Ich bin da und antworte so schnell es geht.</p></div></div>
+      <div class="oitem"><div class="och">✓</div><div><h4>Wöchentliche 1:1 Coaching Calls</h4><p>Progress Check, klare Aufgaben, Anpassungen. Du weißt immer wo du stehst.</p></div></div>
+      <div class="oitem"><div class="och">✓</div><div><h4>Individuelles System für deinen Alltag</h4><p>Exakt auf deinen Kalender und dein Ziel abgestimmt. Kein generischer Plan.</p></div></div>
+      <div class="oitem"><div class="och">✓</div><div><h4>Executive Nutrition Playbook</h4><p>Restaurant, Reisen, stressige Tage – du weißt immer was du bestellst.</p></div></div>
+      <div class="oitem"><div class="och">✓</div><div><h4>Tracking Sheets & Dashboards</h4><p>Alles messbar. Fortschritt schwarz auf weiß. Jeder Schritt sichtbar.</p></div></div>
+      <div class="oitem"><div class="och">✓</div><div><h4>5-Monats-Ergebnis-Garantie</h4><p>Keine sichtbare Transformation? Wir arbeiten kostenlos weiter bis du sie erreichst.</p></div></div>
     </div>
   </div>
 </div>
 
-<!-- ── FAQ ── -->
-<div class="faq-section">
-  <div class="container-sm reveal">
-    <span class="section-label">Häufige Fragen</span>
-    <h2 class="section-title">Deine <em>Fragen</em> – beantwortet</h2>
+<!-- ═══ FAQ ═══ -->
+<div class="faq-wrap">
+  <div class="ctr-sm rev">
+    <span class="slbl">Häufige Fragen</span>
+    <h2 class="stitle">Deine <em>Fragen</em> – beantwortet</h2>
 
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          Schaffe ich das wirklich neben meinem Business?
-          <span class="faq-arrow">↓</span>
-        </button>
-        <div class="faq-body">
-          <p>Ja – und genau dafür ist das System gebaut. <strong>Speziell für Unternehmer und Vielbeschäftigte mit 8–16 Stunden Workload.</strong> Ernährung die sich in deinen Alltag einfügt statt ihn zu kontrollieren. Wer das System befolgt spart Zeit – weil er aufhört herumzuprobieren.</p>
-        </div>
+    <div class="flist">
+
+      <div class="fitem">
+        <button class="fbtn" onclick="fq(this)">Schaffe ich das wirklich neben meinem Business?<span class="farr">↓</span></button>
+        <div class="fbody"><p><strong>Speziell für Unternehmer und Vielbeschäftigte mit 8–16 Stunden Workload gebaut.</strong> Ernährung die sich in deinen Alltag einfügt. Wer das System befolgt spart Zeit – weil er aufhört herumzuprobieren.</p></div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          Ist das wieder nur ein Plan wie alle anderen?
-          <span class="faq-arrow">↓</span>
-        </button>
-        <div class="faq-body">
-          <p>Nein. Standard-Fitnessprogramme sind nicht für Unternehmer gebaut. Dieses System wird <strong>exakt auf deinen Kalender, dein Ziel und deinen Körpertyp abgestimmt</strong>. Dazu bekommst du täglichen 1:1 Support direkt von mir – kein Team, kein Bot, keine Automation in der Kundenbetreuung.</p>
-        </div>
+      <div class="fitem">
+        <button class="fbtn" onclick="fq(this)">Ist das wieder nur ein Plan wie alle anderen?<span class="farr">↓</span></button>
+        <div class="fbody"><p>Nein. Dieses System wird <strong>exakt auf deinen Kalender, dein Ziel und deinen Körpertyp abgestimmt</strong>. Täglicher 1:1 Support direkt von mir – kein Team, kein Bot, keine Automation.</p></div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          Wie schnell sehe ich Ergebnisse?
-          <span class="faq-arrow">↓</span>
-        </button>
-        <div class="faq-body">
-          <p>Meine Kunden berichten bereits <strong>nach 2 Wochen von deutlich mehr Fokus und Energie</strong>. Erste sichtbare Veränderungen am Körper nach 4–6 Wochen. Nach 5 Monaten wirst du dich nicht mehr wiedererkennen. Mathematik = messbares Ergebnis.</p>
-        </div>
+      <div class="fitem">
+        <button class="fbtn" onclick="fq(this)">Wie schnell sehe ich Ergebnisse?<span class="farr">↓</span></button>
+        <div class="fbody"><p>Meine Kunden berichten bereits <strong>nach 2 Wochen von deutlich mehr Fokus und Energie</strong>. Erste sichtbare Körperveränderungen nach 4–6 Wochen. Nach 5 Monaten wirst du dich nicht mehr wiedererkennen. Mathematik = messbares Ergebnis.</p></div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          Was kostet das Coaching?
-          <span class="faq-arrow">↓</span>
-        </button>
-        <div class="faq-body">
-          <p>Die Investition besprechen wir im kostenlosen Analysegespräch – weil jede Situation individuell ist. <strong>Das Gespräch ist komplett kostenlos und unverbindlich.</strong> Buche es einfach.</p>
-        </div>
+      <div class="fitem">
+        <button class="fbtn" onclick="fq(this)">Was kostet das Coaching?<span class="farr">↓</span></button>
+        <div class="fbody"><p>Die Investition besprechen wir im kostenlosen Analysegespräch. <strong>Das Gespräch ist komplett kostenlos und unverbindlich.</strong></p></div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          Gibt es eine Garantie?
-          <span class="faq-arrow">↓</span>
-        </button>
-        <div class="faq-body">
-          <p>Ja. Wenn du nach 5 Monaten keine klar sichtbare Transformation erreicht hast, <strong>arbeiten wir kostenlos weiter</strong> bis du sie erreichst. Voraussetzung: Du setzt das System um.</p>
-        </div>
+      <div class="fitem">
+        <button class="fbtn" onclick="fq(this)">Gibt es eine Garantie?<span class="farr">↓</span></button>
+        <div class="fbody"><p>Ja. Wenn du nach 5 Monaten keine klar sichtbare Transformation erreicht hast, <strong>arbeiten wir kostenlos weiter</strong> bis du sie erreichst. Voraussetzung: Du setzt das System um.</p></div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          Brauche ich ein Gym oder besonderes Equipment?
-          <span class="faq-arrow">↓</span>
-        </button>
-        <div class="faq-body">
-          <p>Nein. Ich baue dir ein System das zu deiner Situation passt – egal ob Gym, zuhause, Hotelzimmer oder Park. <strong>Keine Ausreden mehr.</strong></p>
-        </div>
+      <div class="fitem">
+        <button class="fbtn" onclick="fq(this)">Brauche ich ein Gym oder Equipment?<span class="farr">↓</span></button>
+        <div class="fbody"><p>Nein. Ich baue dir ein System das zu deiner Situation passt – Gym, zuhause, Hotel oder Park. <strong>Keine Ausreden mehr.</strong></p></div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          Was passiert im kostenlosen Erstgespräch?
-          <span class="faq-arrow">↓</span>
-        </button>
-        <div class="faq-body">
-          <p>In 20–30 Minuten schauen wir gemeinsam wo du stehst, was dein schnellster Weg zum Ziel ist – und welche Probleme und Struggles dich bisher aufgehalten haben. Ich sage dir dann konkret wie mein Fahrplan für dich aussehen würde. Kein Druck. Kein Pitch. <strong>Du weißt danach deutlich mehr was du jetzt umsetzen musst – egal ob wir zusammenarbeiten oder nicht.</strong></p>
-        </div>
+      <div class="fitem">
+        <button class="fbtn" onclick="fq(this)">Was passiert im kostenlosen Erstgespräch?<span class="farr">↓</span></button>
+        <div class="fbody"><p>Wir schauen wo du stehst, was dich bisher aufgehalten hat und was dein schnellster Weg zum Ziel ist. Ich sage dir dann konkret wie mein Fahrplan für dich aussehen würde. <strong>Du gehst mit klaren Antworten raus – egal ob wir zusammenarbeiten oder nicht.</strong></p></div>
       </div>
 
-      <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">
-          Warum Leon und nicht ein anderer Coach?
-          <span class="faq-arrow">↓</span>
-        </button>
-        <div class="faq-body">
-          <p>Weil 99,9% der Coaches nicht das bieten können was ich dir biete. Meine Plätze sind bewusst begrenzt – das gibt mir die Möglichkeit, dir eine echte Rund-um-Betreuung zu geben. Bei den meisten Coaches bekommst du einen Plan, vielleicht noch ein paar Calls – aber am Ende bist du trotzdem auf dich allein gestellt.<br><br>
-          <strong>Wenn du mit mir schreibst, schreibst du mit mir – nicht mit einem Bot.</strong> Ich automatisiere nichts in der Kundenbetreuung. Die meisten Coaches machen Fitness kompliziert, damit du von ihnen abhängig bleibst. Mein Ziel ist es, dir beizubringen wie du langfristig eigenständig in Topform bleibst.<br><br>
-          Dazu kommt: Viele Coaches zeigen sich mit T-Shirt weil sie darunter nicht shredded sind. Ich lebe was ich lehre – dauerhaft, nicht nur im Sommer.<br><br>
-          Und ich weiß was es bedeutet, 16 Stunden am Tag zu arbeiten. Ich habe das selbst durchlebt. <strong>Ich weiß genau was dir hilft – und genau darauf bin ich spezialisiert.</strong></p>
-        </div>
+      <div class="fitem">
+        <button class="fbtn" onclick="fq(this)">Warum Leon und nicht ein anderer Coach?<span class="farr">↓</span></button>
+        <div class="fbody"><p>Weil 99,9% der Coaches nicht das bieten können was ich dir biete. Meine Plätze sind bewusst begrenzt – das gibt mir die Möglichkeit, dir echte Rund-um-Betreuung zu geben.<br><br><strong>Wenn du mit mir schreibst, schreibst du mit mir – nicht mit einem Bot.</strong> Ich automatisiere nichts in der Kundenbetreuung. Mein Ziel: du lernst das System so gut, dass du langfristig eigenständig in Topform bleibst.<br><br>Ich weiß was es bedeutet, 16 Stunden am Tag zu arbeiten. Ich lebe was ich lehre – dauerhaft, nicht nur im Sommer. <strong>Genau darauf bin ich spezialisiert.</strong></p></div>
       </div>
+
     </div>
 
     <div style="text-align:center;margin-top:44px">
-      <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="btn-gold-lg">Kostenloses Analysegespräch buchen →</a>
+      <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="blg">Kostenloses Analysegespräch buchen →</a>
     </div>
   </div>
 </div>
 
-<!-- ── FINAL CTA ── -->
-<div class="final-cta reveal">
+<!-- ═══ FINAL CTA ═══ -->
+<div class="fcta rev">
   <h2>Du hast dir das letztes Jahr<br><em>schon vorgenommen.</em></h2>
-  <p>Jedes Jahr dasselbe Spiel. Januar Motivation. Februar aufgehört. Mai Panik wegen Sommer. Winter gewartet. Und du stehst noch am gleichen Punkt.<br><br>Jetzt ist der richtige Zeitpunkt. Nicht nächsten Montag.</p>
-  <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="btn-gold-lg">Kostenloses Analysegespräch buchen →</a>
-  <div class="cta-sub">
-    <span>✓</span> Kostenlos &amp; unverbindlich &nbsp;
+  <p>Jedes Jahr dasselbe Spiel. Januar Motivation. Februar aufgehört. Mai Panik wegen Sommer. Winter gewartet. Du stehst noch am gleichen Punkt.<br><br>Jetzt ist der richtige Zeitpunkt. Nicht nächsten Montag.</p>
+  <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="blg">Kostenloses Analysegespräch buchen →</a>
+  <div class="ctasub">
+    <span>✓</span> Kostenlos & unverbindlich &nbsp;
     <span>✓</span> 5-Monats-Ergebnis-Garantie &nbsp;
     <span>✓</span> Begrenzte Plätze
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- ═══ FOOTER ═══ -->
 <footer>
-  <div class="footer-logo-row">
-    <img class="footer-logo-img" src="/mnt/user-data/uploads/IMG_7558.jpg" alt="OPC" onerror="this.style.display='none'">
+  <div class="frow">
+    <img class="flogo" src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/81a15c265628433e8aa47040c314dcd6/original/IMG_7558.jpg" alt="OPC">
     <div>
-      <div class="footer-name">Leon Herzog</div>
-      <div class="footer-brand">Olympus Performance Coaching</div>
+      <div class="fn">Leon Herzog</div>
+      <div class="fb">Olympus Performance Coaching</div>
     </div>
   </div>
   <p><a href="https://instagram.com/leonherzog.de" target="_blank">@leonherzog.de</a></p>
-  <div class="footer-links">
+  <div class="flinks">
     <a href="https://versteckmich.de/elite_coaching/impressum" target="_blank">Impressum</a>
     <a href="https://versteckmich.de/elite_coaching/datenschutz" target="_blank">Datenschutz</a>
   </div>
-  <p style="margin-top:16px">© 2025 Leon Herzog · Alle Rechte vorbehalten</p>
+  <p style="margin-top:14px">© 2025 Leon Herzog · Alle Rechte vorbehalten</p>
 </footer>
 
 <script>
-// ── PROGRESS BAR ──
-window.addEventListener('scroll', () => {
-  const scrollTop = window.scrollY;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-  document.getElementById('progress-bar').style.width = progress + '%';
+/* PROGRESS */
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('pgbar').style.width=(h>0?s/h*100:0)+'%';
 });
 
-// ── POPUP ──
-function triggerPopup() {
-  if (localStorage.getItem('opc_unlocked') === '1') { showVideo(); return; }
-  document.getElementById('popup-overlay').classList.add('active');
+/* POPUP */
+function trigPop(){
+  if(localStorage.getItem('opc')==='1'){showV();return;}
+  document.getElementById('pop').classList.add('on');
 }
-
-function unlockVideo() {
-  const name  = document.getElementById('p-name').value.trim();
-  const email = document.getElementById('p-email').value.trim();
-  if (!name)  { shakeField('p-name'); return; }
-  if (!email || !email.includes('@')) { shakeField('p-email'); return; }
-  localStorage.setItem('opc_unlocked', '1');
-  document.getElementById('popup-overlay').classList.remove('active');
-  showVideo();
+function unlock(){
+  const n=document.getElementById('pn').value.trim();
+  const e=document.getElementById('pe').value.trim();
+  if(!n){sh('pn');return;}
+  if(!e||!e.includes('@')){sh('pe');return;}
+  localStorage.setItem('opc','1');
+  document.getElementById('pop').classList.remove('on');
+  showV();
 }
-
-function heroUnlock() {
-  const name  = document.getElementById('h-name').value.trim();
-  const email = document.getElementById('h-email').value.trim();
-  if (!name)  { shakeField('h-name'); return; }
-  if (!email || !email.includes('@')) { shakeField('h-email'); return; }
-  localStorage.setItem('opc_unlocked', '1');
-  document.getElementById('video-gate').scrollIntoView({ behavior: 'smooth', block: 'center' });
-  setTimeout(showVideo, 500);
+function showV(){
+  document.getElementById('vgate').style.display='none';
+  const vr=document.getElementById('vreal');
+  vr.style.display='block';
+  vr.scrollIntoView({behavior:'smooth',block:'center'});
 }
-
-function showVideo() {
-  document.getElementById('video-gate').style.display = 'none';
-  const vr = document.getElementById('video-real');
-  vr.style.display = 'block';
-  vr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+function sh(id){
+  const el=document.getElementById(id);
+  el.style.borderColor='#ff4444';
+  el.style.animation='shake .3s ease';
+  setTimeout(()=>{el.style.borderColor='#2a2a2a';el.style.animation='';},1500);
 }
-
-function shakeField(id) {
-  const el = document.getElementById(id);
-  el.style.borderColor = '#ff4444';
-  el.style.animation = 'shake 0.3s ease';
-  setTimeout(() => { el.style.borderColor = '#2a2a2a'; el.style.animation = ''; }, 1500);
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  if (localStorage.getItem('opc_unlocked') === '1') {
-    document.getElementById('video-gate').style.display = 'none';
-    document.getElementById('video-real').style.display = 'block';
+window.addEventListener('DOMContentLoaded',()=>{
+  if(localStorage.getItem('opc')==='1'){
+    document.getElementById('vgate').style.display='none';
+    document.getElementById('vreal').style.display='block';
   }
 });
 
-// ── FAQ ──
-function toggleFaq(btn) {
-  const item = btn.closest('.faq-item');
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-  if (!isOpen) item.classList.add('open');
+/* FAQ */
+function fq(btn){
+  const it=btn.closest('.fitem'),op=it.classList.contains('open');
+  document.querySelectorAll('.fitem').forEach(i=>i.classList.remove('open'));
+  if(!op)it.classList.add('open');
 }
 
-// ── SCROLL REVEAL ──
-const ro = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('on'); ro.unobserve(e.target); }
-  });
-}, { threshold: 0.07 });
-document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+/* REVEAL */
+const ro=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');ro.unobserve(x.target);}});
+},{threshold:.07});
+document.querySelectorAll('.rev').forEach(el=>ro.observe(el));
 </script>
 
 <style>
-@keyframes shake {
-  0%,100%{transform:translateX(0);}
-  25%{transform:translateX(-6px);}
-  75%{transform:translateX(6px);}
-}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
 </style>
 </body>
 </html>

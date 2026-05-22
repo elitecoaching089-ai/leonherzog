@@ -826,125 +826,55 @@ footer a:hover{color:var(--gold);}
         <button class="fbtn" onclick="fq(this)">Wie schnell sehe ich Ergebnisse?<span class="farr">↓</span></button>
         <div class="fbody"><p>Meine Kunden berichten bereits <strong>nach 2 Wochen von deutlich mehr Fokus und Energie</strong>. Erste sichtbare Körperveränderungen nach 4–6 Wochen. Nach 5 Monaten wirst du dich nicht mehr wiedererkennen. Mathematik = messbares Ergebnis.</p></div>
       </div>
-
-      <div class="fitem">
-        <button class="fbtn" onclick="fq(this)">Was kostet das Coaching?<span class="farr">↓</span></button>
-        <div class="fbody"><p>Die Investition besprechen wir im kostenlosen Analysegespräch. <strong>Das Gespräch ist komplett kostenlos und unverbindlich.</strong></p></div>
-      </div>
-
-      <div class="fitem">
-        <button class="fbtn" onclick="fq(this)">Gibt es eine Garantie?<span class="farr">↓</span></button>
-        <div class="fbody"><p>Ja. Wenn du nach 5 Monaten keine klar sichtbare Transformation erreicht hast, <strong>arbeiten wir kostenlos weiter</strong> bis du sie erreichst. Voraussetzung: Du setzt das System um.</p></div>
-      </div>
-
-      <div class="fitem">
-        <button class="fbtn" onclick="fq(this)">Brauche ich ein Gym oder Equipment?<span class="farr">↓</span></button>
-        <div class="fbody"><p>Nein. Ich baue dir ein System das zu deiner Situation passt – Gym, zuhause, Hotel oder Park. <strong>Keine Ausreden mehr.</strong></p></div>
-      </div>
-
-      <div class="fitem">
-        <button class="fbtn" onclick="fq(this)">Was passiert im kostenlosen Erstgespräch?<span class="farr">↓</span></button>
-        <div class="fbody"><p>Wir schauen wo du stehst, was dich bisher aufgehalten hat und was dein schnellster Weg zum Ziel ist. Ich sage dir dann konkret wie mein Fahrplan für dich aussehen würde. <strong>Du gehst mit klaren Antworten raus – egal ob wir zusammenarbeiten oder nicht.</strong></p></div>
-      </div>
-
-      <div class="fitem">
-        <button class="fbtn" onclick="fq(this)">Warum Leon und nicht ein anderer Coach?<span class="farr">↓</span></button>
-        <div class="fbody"><p>Weil 99,9% der Coaches nicht das bieten können was ich dir biete. Meine Plätze sind bewusst begrenzt – das gibt mir die Möglichkeit, dir echte Rund-um-Betreuung zu geben.<br><br><strong>Wenn du mit mir schreibst, schreibst du mit mir – nicht mit einem Bot.</strong> Ich automatisiere nichts in der Kundenbetreuung. Mein Ziel: du lernst das System so gut, dass du langfristig eigenständig in Topform bleibst.<br><br>Ich weiß was es bedeutet, 16 Stunden am Tag zu arbeiten. Ich lebe was ich lehre – dauerhaft, nicht nur im Sommer. <strong>Genau darauf bin ich spezialisiert.</strong></p></div>
-      </div>
-
-    </div>
-
-    <div style="text-align:center;margin-top:44px">
-      <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="blg">Kostenloses Analysegespräch buchen →</a>
     </div>
   </div>
 </div>
-
-<!-- ═══ FINAL CTA ═══ -->
-<div class="fcta rev">
-  <h2>Du hast dir das letztes Jahr<br><em>schon vorgenommen.</em></h2>
-  <p>Jedes Jahr dasselbe Spiel. Januar Motivation. Februar aufgehört. Mai Panik wegen Sommer. Winter gewartet. Du stehst noch am gleichen Punkt.<br><br>Jetzt ist der richtige Zeitpunkt. Nicht nächsten Montag.</p>
-  <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="blg">Kostenloses Analysegespräch buchen →</a>
-  <div class="ctasub">
-    <span>✓</span> Kostenlos & unverbindlich &nbsp;
-    <span>✓</span> 5-Monats-Ergebnis-Garantie &nbsp;
-    <span>✓</span> Begrenzte Plätze
-  </div>
-</div>
-
-<!-- ═══ FOOTER ═══ -->
-<footer>
-  <div class="frow">
-    <img class="flogo" src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/81a15c265628433e8aa47040c314dcd6/original/IMG_7558.jpg" alt="OPC">
-    <div>
-      <div class="fn">Leon Herzog</div>
-      <div class="fb">Olympus Performance Coaching</div>
-    </div>
-  </div>
-  <p><a href="https://instagram.com/leonherzog.de" target="_blank">@leonherzog.de</a></p>
-  <div class="flinks">
-    <a href="https://versteckmich.de/elite_coaching/impressum" target="_blank">Impressum</a>
-    <a href="https://versteckmich.de/elite_coaching/datenschutz" target="_blank">Datenschutz</a>
-  </div>
-  <p style="margin-top:14px">© 2025 Leon Herzog · Alle Rechte vorbehalten</p>
-</footer>
 
 <script>
-/* PROGRESS */
-window.addEventListener('scroll',()=>{
-  const s=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight;
-  document.getElementById('pgbar').style.width=(h>0?s/h*100:0)+'%';
-});
-
-/* POPUP */
-function trigPop(){
-  if(localStorage.getItem('opc')==='1'){showV();return;}
+function trigPop() {
   document.getElementById('pop').classList.add('on');
 }
-function unlock(){
-  const n=document.getElementById('pn').value.trim();
-  const e=document.getElementById('pe').value.trim();
-  if(!n){sh('pn');return;}
-  if(!e||!e.includes('@')){sh('pe');return;}
-  localStorage.setItem('opc','1');
-  document.getElementById('pop').classList.remove('on');
-  showV();
-}
-function showV(){
-  document.getElementById('vgate').style.display='none';
-  const vr=document.getElementById('vreal');
-  vr.style.display='block';
-  vr.scrollIntoView({behavior:'smooth',block:'center'});
-}
-function sh(id){
-  const el=document.getElementById(id);
-  el.style.borderColor='#ff4444';
-  el.style.animation='shake .3s ease';
-  setTimeout(()=>{el.style.borderColor='#2a2a2a';el.style.animation='';},1500);
-}
-window.addEventListener('DOMContentLoaded',()=>{
-  if(localStorage.getItem('opc')==='1'){
-    document.getElementById('vgate').style.display='none';
-    document.getElementById('vreal').style.display='block';
+
+function unlock() {
+  var name = document.getElementById('pn').value;
+  var email = document.getElementById('pe').value;
+  var instagram = document.getElementById('pig').value;
+
+  if(!name || !email) {
+    alert('Bitte trage mindestens deinen Namen und deine E-Mail-Adresse ein.');
+    return;
   }
-});
 
-/* FAQ */
-function fq(btn){
-  const it=btn.closest('.fitem'),op=it.classList.contains('open');
-  document.querySelectorAll('.fitem').forEach(i=>i.classList.remove('open'));
-  if(!op)it.classList.add('open');
+  // Sende Daten an Make Webhook
+  fetch('https://hook.eu1.make.com/3xdgchkks6m62o1arg1y8ch0c7o03dfc', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      vorname: name,
+      email: email,
+      instagram: instagram
+    })
+  }).then(function() {
+    // Nach erfolgreichem Senden Video freischalten
+    document.getElementById('pop').classList.remove('on');
+    document.getElementById('vgate').style.display = 'none';
+    document.getElementById('vreal').style.display = 'block';
+  }).catch(function(err) {
+    console.error(err);
+    // Falls ein Netzwerkfehler auftritt, trotzdem freischalten, um den Nutzer nicht zu blockieren
+    document.getElementById('pop').classList.remove('on');
+    document.getElementById('vgate').style.display = 'none';
+    document.getElementById('vreal').style.display = 'block';
+  });
 }
 
-/* REVEAL */
-const ro=new IntersectionObserver(e=>{
-  e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');ro.unobserve(x.target);}});
-},{threshold:.07});
-document.querySelectorAll('.rev').forEach(el=>ro.observe(el));
+function fq(btn) {
+  var item = btn.parentElement;
+  item.classList.toggle('open');
+}
 </script>
 
-<style>
-@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
-</style>
 </body>
 </html>

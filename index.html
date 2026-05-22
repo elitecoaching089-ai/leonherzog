@@ -898,7 +898,7 @@ window.addEventListener('scroll',()=>{
 
 /* POPUP */
 function trigPop(){
-  if(localStorage.getItem('opc')==='1'){showV();return;}
+  if(sessionStorage.getItem('opc')==='1'){showV();return;}
   document.getElementById('pop').classList.add('on');
 }
 // ── DEINE MAKE.COM WEBHOOK URL HIER EINTRAGEN ──
@@ -911,7 +911,7 @@ function unlock(){
   const ig = document.getElementById('pig').value.trim();
   if(!n){sh('pn');return;}
   if(!e||!e.includes('@')){sh('pe');return;}
-  localStorage.setItem('opc','1');
+  sessionStorage.setItem('opc','1');
 
   // Daten an Make.com senden (Webhook → Google Sheets / Notion)
   if(WEBHOOK_URL && WEBHOOK_URL !== 'DEINE_MAKE_WEBHOOK_URL_HIER'){
@@ -944,7 +944,9 @@ function sh(id){
   setTimeout(()=>{el.style.borderColor='#2a2a2a';el.style.animation='';},1500);
 }
 window.addEventListener('DOMContentLoaded',()=>{
-  if(localStorage.getItem('opc')==='1'){
+  // Popup zeigen wenn noch nicht eingetragen in dieser Session
+  // Wir nutzen sessionStorage statt localStorage – Popup kommt bei jedem neuen Tab/Fenster
+  if(sessionStorage.getItem('opc')==='1'){
     document.getElementById('vgate').style.display='none';
     document.getElementById('vreal').style.display='block';
   }

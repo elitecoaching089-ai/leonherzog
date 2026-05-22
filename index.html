@@ -184,16 +184,17 @@ nav{
 .hero-bg img{
   width:100%;height:100%;
   object-fit:cover;
-  object-position:top right;
+  /* Wider image: Leon with laptop sits right-center, show him clearly */
+  object-position:right center;
   display:block;
 }
-/* Gradient overlay: dark on left, fades right like Fabian */
+/* Gradient: left side fully dark for text, right fades out to show Leon */
 .hero-bg::after{
   content:'';
   position:absolute;inset:0;
   background:
-    linear-gradient(to right, rgba(10,10,10,1) 0%, rgba(10,10,10,.88) 40%, rgba(10,10,10,.3) 70%, rgba(10,10,10,.05) 100%),
-    linear-gradient(to top, rgba(10,10,10,.8) 0%, transparent 50%);
+    linear-gradient(to right, rgba(10,10,10,1) 0%, rgba(10,10,10,.95) 30%, rgba(10,10,10,.6) 50%, rgba(10,10,10,.1) 75%, rgba(10,10,10,0) 100%),
+    linear-gradient(to top, rgba(10,10,10,.6) 0%, transparent 40%);
 }
 
 /* Warm ambient glow behind image area */
@@ -637,7 +638,7 @@ footer a:hover{color:var(--gold);}
 <section class="hero">
   <!-- BG IMAGE -->
   <div class="hero-bg">
-    <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/6505c66f205141659070346e7b0dba26/original/C5A52D56-2554-4660-B5EC-3FAAF9D1D85B-2.png" alt="Leon Herzog">
+    <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/9060258a06a744319fb49a377f64454b/original/JPEG-Bild-476B-8FAC-F6-0.jpeg" alt="Leon Herzog">
   </div>
   <!-- Warm glow -->
   <div class="hero-glow"></div>
@@ -658,11 +659,6 @@ footer a:hover{color:var(--gold);}
       <div class="hero-check"><div class="hck">✓</div><span>Mehr Fokus im Business</span></div>
       <div class="hero-check"><div class="hck">✓</div><span>Ohne Extremdiäten</span></div>
     </div>
-
-    <div class="hero-cta-row">
-      <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="btn-hero">Kostenloses Gespräch buchen →</a>
-    </div>
-    <p class="hero-note">Kostenlos & unverbindlich · Begrenzte Plätze verfügbar</p>
   </div>
 </section>
 
@@ -672,6 +668,9 @@ footer a:hover{color:var(--gold);}
 
     <!-- GATE -->
     <div class="vgate" id="vgate" onclick="trigPop()">
+      <!-- Thumbnail -->
+      <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/00b9be8329cb4b8e9f73db06aa70a79c/original/IMG_8272.jpg"
+           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7;display:block;" alt="VSL Thumbnail">
       <div class="vgate-ov">
         <div class="play">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="#000"><polygon points="6,4 20,12 6,20"/></svg>
@@ -683,7 +682,7 @@ footer a:hover{color:var(--gold);}
     <!-- REAL VIDEO -->
     <div class="vreal" id="vreal">
       <!-- DEIN VSL ID HIER EINTRAGEN -->
-      <iframe src="https://www.youtube.com/embed/LNn2aQe1fpE?rel=0&modestbranding=1" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/02nBwqE5i3M?rel=0&modestbranding=1" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
     </div>
 
     <p class="vcap">Schau das Video vollständig – am Ende weißt du genau wie du <strong>shredded wirst.</strong></p>

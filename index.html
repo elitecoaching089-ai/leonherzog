@@ -914,18 +914,25 @@ function unlock(){
   sessionStorage.setItem('opc','1');
 
   // Daten an Make.com senden (Webhook → Google Sheets / Notion)
-  if(WEBHOOK_URL && WEBHOOK_URL !== 'DEINE_MAKE_WEBHOOK_URL_HIER'){
-    fetch(WEBHOOK_URL, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        vorname:   n,
-        email:     e,
-        instagram: ig || '–',
-        datum:     new Date().toLocaleString('de-DE', {timeZone:'Europe/Berlin'}),
-        quelle:    document.referrer || 'Direkt'
-      })
-    }).catch(()=>{}); // Fehler still ignorieren – User merkt nichts
+fetch(WEBHOOK_URL, {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json'
+},
+body: JSON.stringify({
+vorname: n,
+email: e,
+instagram: ig || '',
+datum: new Date().toLocaleString('de-DE'),
+quelle: document.referrer || 'Direkt'
+})
+})
+.then(response => {
+console.log('Erfolgreich gesendet');
+})
+.catch(error => {
+console.error('Fehler:', error);
+}); // Fehler still ignorieren – User merkt nichts
   }
 
   document.getElementById('pop').classList.remove('on');

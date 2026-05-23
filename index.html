@@ -905,25 +905,28 @@ function trigPop(){
 // Anleitung: make.com → Neues Szenario → Webhooks → Custom Webhook → URL kopieren
 const WEBHOOK_URL = 'https://hook.eu1.make.com/3xdgchkks6m62o1arg1y8ch0c7o03dfc';
 
-fetch(WEBHOOK_URL, {
-method: 'POST',
-headers: {
-'Content-Type': 'application/json'
-},
-body: JSON.stringify({
-vorname: n,
-email: e,
-instagram: ig || '',
-datum: new Date().toLocaleString('de-DE'),
-quelle: document.referrer || 'Direkt'
-})
-})
-.then(response => {
-console.log('Erfolgreich gesendet');
-})
-.catch(error => {
-console.error('Fehler:', error);
-});
+function unlock(){
+  const n  = document.getElementById('pn').value.trim();
+  const e  = document.getElementById('pe').value.trim();
+  const ig = document.getElementById('pig').value.trim();
+  if(!n){sh('pn');return;}
+  if(!e||!e.includes('@')){sh('pe');return;}
+  sessionStorage.setItem('opc','1');
+
+  // Daten an Make.com senden
+  if(WEBHOOK_URL && WEBHOOK_URL !== 'DEINE_MAKE_WEBHOOK_URL_HIER'){
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type':'text/plain'},
+      body: JSON.stringify({
+        vorname:   n,
+        email:     e,
+        instagram: ig || '–',
+        datum:     new Date().toLocaleString('de-DE', {timeZone:'Europe/Berlin'}),
+        quelle:    document.referrer || 'Direkt'
+      })
+    }).catch(()=>{});
   }
 
   document.getElementById('pop').classList.remove('on');

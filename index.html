@@ -901,35 +901,30 @@ function trigPop(){
   if(sessionStorage.getItem('opc')==='1'){showV();return;}
   document.getElementById('pop').classList.add('on');
 }
-// ── DEINE MAKE.COM WEBHOOK URL HIER EINTRAGEN ──
-// Anleitung: make.com → Neues Szenario → Webhooks → Custom Webhook → URL kopieren
-const WEBHOOK_URL = 'https://hook.eu1.make.com/3xdgchkks6m62o1arg1y8ch0c7o03dfc';
+const NOTION_DS_ID = "6769ade6-5cf7-4a41-b910-1048004afa1f";
 
 function unlock(){
-  const n  = document.getElementById('pn').value.trim();
-  const e  = document.getElementById('pe').value.trim();
-  const ig = document.getElementById('pig').value.trim();
-  if(!n){sh('pn');return;}
-  if(!e||!e.includes('@')){sh('pe');return;}
-  sessionStorage.setItem('opc','1');
+  const n  = document.getElementById("pn").value.trim();
+  const e  = document.getElementById("pe").value.trim();
+  const ig = document.getElementById("pig").value.trim();
+  if(!n){sh("pn");return;}
+  if(!e||!e.includes("@")){sh("pe");return;}
+  sessionStorage.setItem("opc","1");
 
-  // Daten an Make.com senden
-  if(WEBHOOK_URL && WEBHOOK_URL !== 'DEINE_MAKE_WEBHOOK_URL_HIER'){
-    fetch(WEBHOOK_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {'Content-Type':'text/plain'},
-      body: JSON.stringify({
-        vorname:   n,
-        email:     e,
-        instagram: ig || '–',
-        datum:     new Date().toLocaleString('de-DE', {timeZone:'Europe/Berlin'}),
-        quelle:    document.referrer || 'Direkt'
-      })
-    }).catch(()=>{});
-  }
+  // Make.com Webhook (no-cors, kein preflight)
+  fetch("https://hook.eu1.make.com/3xdgchkks6m62o1arg1y8ch0c7o03dfc", {
+    method: "POST",
+    mode: "no-cors",
+    body: new URLSearchParams({
+      vorname:   n,
+      email:     e,
+      instagram: ig || "-",
+      datum:     new Date().toLocaleString("de-DE", {timeZone:"Europe/Berlin"}),
+      quelle:    document.referrer || "Direkt"
+    })
+  }).catch(()=>{});
 
-  document.getElementById('pop').classList.remove('on');
+  document.getElementById("pop").classList.remove("on");
   showV();
 }
 function showV(){

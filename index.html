@@ -7,339 +7,339 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
---gold: #fbd061;
---gold-dark: #c8920a;
---dark: #0a0a0a;
---dark-2: #0e0e0e;
---dark-3: #151515;
---dark-4: #1c1c1c;
---dark-5: #242424;
---white: #fff;
---muted: #5a5a5a;
---muted-l: #8a8a8a;
---r: 16px;
---r-sm: 10px;
+  --gold: #fbd061;
+  --gold-dark: #c8920a;
+  --dark: #0a0a0a;
+  --dark-2: #0e0e0e;
+  --dark-3: #151515;
+  --dark-4: #1c1c1c;
+  --dark-5: #242424;
+  --white: #fff;
+  --muted: #5a5a5a;
+  --muted-l: #8a8a8a;
+  --r: 16px;
+  --r-sm: 10px;
 }
 
-- {margin:0;padding:0;box-sizing:border-box;}
+*{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
-background:var(--dark);
-color:var(--white);
-font-family:'Inter',sans-serif;
-font-size:16px;
-line-height:1.6;
-letter-spacing:-0.03em;
-overflow-x:hidden;
+  background:var(--dark);
+  color:var(--white);
+  font-family:'Inter',sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  letter-spacing:-0.03em;
+  overflow-x:hidden;
 }
 img{display:block;}
 
 /* ═══════════════════════════════
-PROGRESS BAR
+   PROGRESS BAR
 ═══════════════════════════════ */
 #pgbar{
-position:fixed;top:0;left:0;height:3px;
-background:linear-gradient(90deg,var(--gold),var(--gold-dark));
-width:0%;z-index:9999;
-border-radius:0 2px 2px 0;
-transition:width .1s linear;
+  position:fixed;top:0;left:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-dark));
+  width:0%;z-index:9999;
+  border-radius:0 2px 2px 0;
+  transition:width .1s linear;
 }
 
 /* ═══════════════════════════════
-POPUP
+   POPUP
 ═══════════════════════════════ */
 #pop{
-position:fixed;inset:0;
-background:rgba(0,0,0,.9);
-z-index:9000;
-display:none;align-items:center;justify-content:center;
-padding:20px;
-backdrop-filter:blur(14px);
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.9);
+  z-index:9000;
+  display:none;align-items:center;justify-content:center;
+  padding:20px;
+  backdrop-filter:blur(14px);
 }
 #pop.on{display:flex;animation:fadeOv .3s ease;}
 @keyframes fadeOv{from{opacity:0;}to{opacity:1;}}
 
 .pbox{
-background:var(--dark-3);
-border:1px solid rgba(251,208,97,.22);
-border-radius:var(--r);
-max-width:460px;width:100%;
-padding:48px 40px;
-position:relative;overflow:hidden;
-animation:pUp .4s cubic-bezier(.34,1.56,.64,1);
+  background:var(--dark-3);
+  border:1px solid rgba(251,208,97,.22);
+  border-radius:var(--r);
+  max-width:460px;width:100%;
+  padding:48px 40px;
+  position:relative;overflow:hidden;
+  animation:pUp .4s cubic-bezier(.34,1.56,.64,1);
 }
 @keyframes pUp{from{opacity:0;transform:translateY(40px) scale(.94);}to{opacity:1;transform:translateY(0) scale(1);}}
 .pbox::before{
-content:'';position:absolute;top:0;left:0;right:0;height:3px;
-background:linear-gradient(90deg,var(--gold),var(--gold-dark));
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-dark));
 }
 .pbox::after{
-content:'';position:absolute;inset:0;pointer-events:none;
-background:radial-gradient(ellipse 80% 50% at 50% -5%,rgba(251,208,97,.06) 0%,transparent 70%);
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 80% 50% at 50% -5%,rgba(251,208,97,.06) 0%,transparent 70%);
 }
 
 .plock{font-size:2.4rem;display:block;margin-bottom:14px;animation:lp 2s ease infinite;position:relative;z-index:1;}
 @keyframes lp{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
 
 .peye{
-font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;
-color:var(--gold);font-weight:700;margin-bottom:10px;
-display:block;position:relative;z-index:1;
+  font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;margin-bottom:10px;
+  display:block;position:relative;z-index:1;
 }
 .ptitle{
-font-size:1.5rem;font-weight:800;line-height:1.2;
-letter-spacing:-.04em;margin-bottom:10px;
-position:relative;z-index:1;
+  font-size:1.5rem;font-weight:800;line-height:1.2;
+  letter-spacing:-.04em;margin-bottom:10px;
+  position:relative;z-index:1;
 }
 .ptitle em{color:var(--gold);font-style:normal;}
 .psub{
-font-size:.85rem;color:var(--muted-l);
-margin-bottom:26px;line-height:1.55;
-position:relative;z-index:1;
+  font-size:.85rem;color:var(--muted-l);
+  margin-bottom:26px;line-height:1.55;
+  position:relative;z-index:1;
 }
 
 .pfield{
-width:100%;background:var(--dark-5);
-border:1px solid #2a2a2a;border-radius:var(--r-sm);
-color:var(--white);padding:14px 16px;
-font-family:'Inter',sans-serif;font-size:.88rem;letter-spacing:-.02em;
-margin-bottom:10px;outline:none;transition:border-color .2s;
-position:relative;z-index:1;
+  width:100%;background:var(--dark-5);
+  border:1px solid #2a2a2a;border-radius:var(--r-sm);
+  color:var(--white);padding:14px 16px;
+  font-family:'Inter',sans-serif;font-size:.88rem;letter-spacing:-.02em;
+  margin-bottom:10px;outline:none;transition:border-color .2s;
+  position:relative;z-index:1;
 }
 .pfield:focus{border-color:var(--gold);}
 .pfield::placeholder{color:#2e2e2e;}
 
 .punlock{
-width:100%;background:var(--gold);color:#000;
-font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;
-letter-spacing:-.02em;padding:17px;border:none;border-radius:var(--r-sm);
-cursor:pointer;position:relative;overflow:hidden;
-transition:background .2s,transform .1s;z-index:1;
+  width:100%;background:var(--gold);color:#000;
+  font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;
+  letter-spacing:-.02em;padding:17px;border:none;border-radius:var(--r-sm);
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:background .2s,transform .1s;z-index:1;
 }
 .punlock::before{
-content:'';position:absolute;inset:0;
-background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);
-transform:translateX(-100%);
-animation:shim 1.8s ease infinite;
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);
+  transform:translateX(-100%);
+  animation:shim 1.8s ease infinite;
 }
 @keyframes shim{0%{transform:translateX(-100%);}60%,100%{transform:translateX(100%);}}
 .punlock:hover{background:#f0c040;transform:translateY(-1px);}
 .pfine{font-size:.7rem;color:#222;text-align:center;margin-top:10px;position:relative;z-index:1;}
 
 /* ═══════════════════════════════
-NAV
+   NAV
 ═══════════════════════════════ */
 nav{
-position:fixed;top:0;left:0;right:0;z-index:200;
-height:68px;padding:0 48px;
-display:flex;align-items:center;justify-content:space-between;
-background:rgba(10,10,10,.96);
-backdrop-filter:blur(20px);
-border-bottom:1px solid rgba(255,255,255,.06);
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:68px;padding:0 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(10,10,10,.96);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
 .nav-l{display:flex;align-items:center;gap:14px;}
 .nav-logo{
-width:42px;height:42px;object-fit:contain;border-radius:8px;
-flex-shrink:0;
+  width:42px;height:42px;object-fit:contain;border-radius:8px;
+  flex-shrink:0;
 }
 .nav-txt{display:flex;flex-direction:column;line-height:1.2;}
 .nav-name{
-font-size:1.05rem;font-weight:800;color:var(--white);
-letter-spacing:-.035em;
+  font-size:1.05rem;font-weight:800;color:var(--white);
+  letter-spacing:-.035em;
 }
 .nav-sub{
-font-size:.58rem;color:var(--gold);font-weight:700;
-letter-spacing:.1em;text-transform:uppercase;
+  font-size:.58rem;color:var(--gold);font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
 }
 .nav-cta{
-background:var(--gold);color:#000;
-font-family:'Inter',sans-serif;font-weight:700;font-size:.8rem;
-padding:11px 24px;border:none;border-radius:100px;cursor:pointer;
-text-decoration:none;transition:background .2s,transform .1s;
-white-space:nowrap;
+  background:var(--gold);color:#000;
+  font-family:'Inter',sans-serif;font-weight:700;font-size:.8rem;
+  padding:11px 24px;border:none;border-radius:100px;cursor:pointer;
+  text-decoration:none;transition:background .2s,transform .1s;
+  white-space:nowrap;
 }
 .nav-cta:hover{background:#f0c040;transform:translateY(-1px);}
 
 @media(max-width:640px){
-nav{padding:0 18px;}
-.nav-name{font-size:.9rem;}
-.nav-sub{display:none;}
+  nav{padding:0 18px;}
+  .nav-name{font-size:.9rem;}
+  .nav-sub{display:none;}
 }
 
 /* ═══════════════════════════════
-HERO – FULL BLEED like Fabian
+   HERO – FULL BLEED like Fabian
 ═══════════════════════════════ */
 .hero{
-position:relative;
-min-height:100vh;
-padding-top:68px; /* nav height */
-overflow:hidden;
-display:flex;align-items:center;
+  position:relative;
+  min-height:100vh;
+  padding-top:68px; /* nav height */
+  overflow:hidden;
+  display:flex;align-items:center;
 }
 
 /* Full-bleed bg image */
 .hero-bg{
-position:absolute;inset:0;z-index:0;
+  position:absolute;inset:0;z-index:0;
 }
 .hero-bg img{
-width:100%;height:100%;
-object-fit:cover;
-/* Wider image: Leon with laptop sits right-center, show him clearly */
-object-position:right center;
-display:block;
+  width:100%;height:100%;
+  object-fit:cover;
+  /* Wider image: Leon with laptop sits right-center, show him clearly */
+  object-position:right center;
+  display:block;
 }
 /* Gradient: left side fully dark for text, right fades out to show Leon */
 .hero-bg::after{
-content:'';
-position:absolute;inset:0;
-background:
-linear-gradient(to right, rgba(10,10,10,1) 0%, rgba(10,10,10,.95) 30%, rgba(10,10,10,.6) 50%, rgba(10,10,10,.1) 75%, rgba(10,10,10,0) 100%),
-linear-gradient(to top, rgba(10,10,10,.6) 0%, transparent 40%);
+  content:'';
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to right, rgba(10,10,10,1) 0%, rgba(10,10,10,.95) 30%, rgba(10,10,10,.6) 50%, rgba(10,10,10,.1) 75%, rgba(10,10,10,0) 100%),
+    linear-gradient(to top, rgba(10,10,10,.6) 0%, transparent 40%);
 }
 
 /* Warm ambient glow behind image area */
 .hero-glow{
-position:absolute;
-right:-100px;top:50%;transform:translateY(-50%);
-width:700px;height:700px;
-background:radial-gradient(circle, rgba(140,80,20,.25) 0%, transparent 70%);
-z-index:1;pointer-events:none;
+  position:absolute;
+  right:-100px;top:50%;transform:translateY(-50%);
+  width:700px;height:700px;
+  background:radial-gradient(circle, rgba(140,80,20,.25) 0%, transparent 70%);
+  z-index:1;pointer-events:none;
 }
 
 .hero-content{
-position:relative;z-index:2;
-max-width:1140px;margin:0 auto;
-padding:80px 48px 100px;
-width:100%;
+  position:relative;z-index:2;
+  max-width:1140px;margin:0 auto;
+  padding:80px 48px 100px;
+  width:100%;
 }
 
 .hero-eye{
-display:inline-flex;align-items:center;gap:8px;
-font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;
-color:var(--gold);font-weight:700;
-border:1px solid rgba(251,208,97,.28);
-padding:7px 16px;border-radius:100px;
-margin-bottom:28px;
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;
+  border:1px solid rgba(251,208,97,.28);
+  padding:7px 16px;border-radius:100px;
+  margin-bottom:28px;
 }
 
 .hero h1{
-font-size:clamp(2.8rem,6vw,5rem);
-font-weight:900;
-line-height:1.04;
-letter-spacing:-.05em;
-max-width:680px;
-margin-bottom:24px;
+  font-size:clamp(2.8rem,6vw,5rem);
+  font-weight:900;
+  line-height:1.04;
+  letter-spacing:-.05em;
+  max-width:680px;
+  margin-bottom:24px;
 }
 .hero h1 em{color:var(--gold);font-style:normal;}
 
 .hero-sub{
-font-size:1.08rem;color:rgba(255,255,255,.55);
-line-height:1.65;max-width:500px;margin-bottom:36px;
-font-weight:400;
+  font-size:1.08rem;color:rgba(255,255,255,.55);
+  line-height:1.65;max-width:500px;margin-bottom:36px;
+  font-weight:400;
 }
 
 /* Checkmark list like Fabian */
 .hero-checks{
-display:flex;flex-direction:column;gap:12px;
-margin-bottom:40px;
+  display:flex;flex-direction:column;gap:12px;
+  margin-bottom:40px;
 }
 .hero-check{
-display:flex;align-items:center;gap:12px;
-font-size:.95rem;color:rgba(255,255,255,.8);
-font-weight:500;
+  display:flex;align-items:center;gap:12px;
+  font-size:.95rem;color:rgba(255,255,255,.8);
+  font-weight:500;
 }
 .hck{
-width:22px;height:22px;
-background:var(--gold);border-radius:50%;
-display:flex;align-items:center;justify-content:center;
-flex-shrink:0;
-font-size:.65rem;font-weight:900;color:#000;
+  width:22px;height:22px;
+  background:var(--gold);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  font-size:.65rem;font-weight:900;color:#000;
 }
 
 .hero-cta-row{
-display:flex;align-items:center;gap:16px;flex-wrap:wrap;
-margin-bottom:20px;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  margin-bottom:20px;
 }
 
 .btn-hero{
-background:var(--gold);color:#000;
-font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;
-padding:17px 40px;border:none;border-radius:100px;
-cursor:pointer;text-decoration:none;
-transition:background .2s,transform .1s;
-display:inline-block;letter-spacing:-.02em;
-position:relative;overflow:hidden;
+  background:var(--gold);color:#000;
+  font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;
+  padding:17px 40px;border:none;border-radius:100px;
+  cursor:pointer;text-decoration:none;
+  transition:background .2s,transform .1s;
+  display:inline-block;letter-spacing:-.02em;
+  position:relative;overflow:hidden;
 }
 .btn-hero::before{
-content:'';position:absolute;inset:0;
-background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
-transform:translateX(-100%);animation:shim 2.2s ease infinite;
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+  transform:translateX(-100%);animation:shim 2.2s ease infinite;
 }
 .btn-hero:hover{background:#f0c040;transform:translateY(-2px);}
 
 .hero-note{
-font-size:.75rem;color:var(--muted);
-letter-spacing:.01em;
+  font-size:.75rem;color:var(--muted);
+  letter-spacing:.01em;
 }
 
 @media(max-width:768px){
-.hero-content{padding:60px 20px 80px;}
-.hero h1{font-size:clamp(2.2rem,8vw,3.2rem);}
+  .hero-content{padding:60px 20px 80px;}
+  .hero h1{font-size:clamp(2.2rem,8vw,3.2rem);}
 }
 
 /* ═══════════════════════════════
-VIDEO SECTION
+   VIDEO SECTION
 ═══════════════════════════════ */
 .vid-wrap{
-background:var(--dark-2);
-border-top:1px solid rgba(255,255,255,.05);
-padding:72px 20px;
+  background:var(--dark-2);
+  border-top:1px solid rgba(255,255,255,.05);
+  padding:72px 20px;
 }
 .ctr{max-width:960px;margin:0 auto;}
 .ctr-sm{max-width:720px;margin:0 auto;}
 
 .vgate{
-width:100%;aspect-ratio:16/9;
-background:#000;
-border:2px solid rgba(251,208,97,.2);
-border-radius:var(--r);
-position:relative;cursor:pointer;overflow:hidden;
-transition:border-color .25s,box-shadow .25s;
+  width:100%;aspect-ratio:16/9;
+  background:#000;
+  border:2px solid rgba(251,208,97,.2);
+  border-radius:var(--r);
+  position:relative;cursor:pointer;overflow:hidden;
+  transition:border-color .25s,box-shadow .25s;
 }
 .vgate:hover{
-border-color:rgba(251,208,97,.5);
-box-shadow:0 0 40px rgba(251,208,97,.08);
+  border-color:rgba(251,208,97,.5);
+  box-shadow:0 0 40px rgba(251,208,97,.08);
 }
 .vgate-ov{
-position:absolute;inset:0;
-display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
-background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.55) 100%);
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.55) 100%);
 }
 .play{
-width:84px;height:84px;background:var(--gold);border-radius:50%;
-display:flex;align-items:center;justify-content:center;
-transition:transform .2s,background .2s;
-animation:playP 2.8s ease infinite;
+  width:84px;height:84px;background:var(--gold);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .2s,background .2s;
+  animation:playP 2.8s ease infinite;
 }
 @keyframes playP{
-0%,100%{box-shadow:0 0 0 0 rgba(251,208,97,.35);}
-50%{box-shadow:0 0 0 24px rgba(251,208,97,0);}
+  0%,100%{box-shadow:0 0 0 0 rgba(251,208,97,.35);}
+  50%{box-shadow:0 0 0 24px rgba(251,208,97,0);}
 }
 .vgate:hover .play{transform:scale(1.1);background:#f0c040;}
 .play svg{margin-left:6px;}
 .vgate-lbl{
-font-size:.86rem;font-weight:600;
-color:rgba(255,255,255,.85);
-background:rgba(0,0,0,.55);
-padding:9px 22px;border-radius:100px;
-letter-spacing:-.01em;
+  font-size:.86rem;font-weight:600;
+  color:rgba(255,255,255,.85);
+  background:rgba(0,0,0,.55);
+  padding:9px 22px;border-radius:100px;
+  letter-spacing:-.01em;
 }
 
 .vreal{
-display:none;width:100%;aspect-ratio:16/9;
-background:#000;
-border:2px solid rgba(251,208,97,.2);
-border-radius:var(--r);overflow:hidden;position:relative;
+  display:none;width:100%;aspect-ratio:16/9;
+  background:#000;
+  border:2px solid rgba(251,208,97,.2);
+  border-radius:var(--r);overflow:hidden;position:relative;
 }
 .vreal iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
 
@@ -347,42 +347,42 @@ border-radius:var(--r);overflow:hidden;position:relative;
 .vcap strong{color:var(--white);font-weight:600;}
 
 /* ═══════════════════════════════
-SECTION BASE
+   SECTION BASE
 ═══════════════════════════════ */
 .slbl{
-font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
-color:var(--gold);font-weight:700;margin-bottom:10px;display:block;
+  font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;margin-bottom:10px;display:block;
 }
 .stitle{
-font-size:clamp(1.7rem,3.5vw,2.5rem);
-font-weight:800;line-height:1.1;letter-spacing:-.04em;
-margin-bottom:16px;
+  font-size:clamp(1.7rem,3.5vw,2.5rem);
+  font-weight:800;line-height:1.1;letter-spacing:-.04em;
+  margin-bottom:16px;
 }
 .stitle em{color:var(--gold);font-style:normal;}
 .ssub{
-font-size:.95rem;color:var(--muted-l);
-max-width:540px;line-height:1.65;margin-bottom:48px;
+  font-size:.95rem;color:var(--muted-l);
+  max-width:540px;line-height:1.65;margin-bottom:48px;
 }
 
 /* ═══════════════════════════════
-WHY CARDS (under video)
+   WHY CARDS (under video)
 ═══════════════════════════════ */
 .why-wrap{
-padding:72px 20px;
-background:var(--dark);
-border-top:1px solid rgba(255,255,255,.04);
+  padding:72px 20px;
+  background:var(--dark);
+  border-top:1px solid rgba(255,255,255,.04);
 }
 .why-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-gap:12px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:12px;
 }
 .wcard{
-background:var(--dark-3);padding:28px 24px;
-border-radius:var(--r);
-border:1px solid rgba(255,255,255,.05);
-border-top:2px solid var(--gold);
-transition:border-color .2s,transform .2s;
+  background:var(--dark-3);padding:28px 24px;
+  border-radius:var(--r);
+  border:1px solid rgba(255,255,255,.05);
+  border-top:2px solid var(--gold);
+  transition:border-color .2s,transform .2s;
 }
 .wcard:hover{border-color:rgba(251,208,97,.7);transform:translateY(-3px);}
 .wnum{font-size:.6rem;font-weight:700;color:var(--gold);letter-spacing:.1em;margin-bottom:12px;display:block;}
@@ -390,98 +390,98 @@ transition:border-color .2s,transform .2s;
 .wcard p{font-size:.8rem;color:var(--muted);line-height:1.55;}
 
 /* ═══════════════════════════════
-VIDEO CTA BOX
+   VIDEO CTA BOX
 ═══════════════════════════════ */
 .vcta{
-margin-top:40px;padding:36px 40px;
-background:var(--dark-3);
-border:1px solid rgba(255,255,255,.05);
-border-radius:var(--r);border-top:2px solid var(--gold);
-text-align:center;
+  margin-top:40px;padding:36px 40px;
+  background:var(--dark-3);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:var(--r);border-top:2px solid var(--gold);
+  text-align:center;
 }
 .vcta h3{font-size:1.3rem;font-weight:800;letter-spacing:-.04em;margin-bottom:8px;}
 .vcta p{font-size:.87rem;color:var(--muted);margin-bottom:22px;}
 
 /* ═══════════════════════════════
-STATS BAR
+   STATS BAR
 ═══════════════════════════════ */
 .sbar{background:var(--gold);padding:28px 20px;}
 .sbar-in{
-max-width:960px;margin:0 auto;
-display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;
+  max-width:960px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;
 }
 @media(max-width:600px){.sbar-in{grid-template-columns:repeat(2,1fr);}}
 .sn{font-size:2.3rem;font-weight:900;color:#000;letter-spacing:-.05em;display:block;line-height:1;margin-bottom:3px;}
 .sl{font-size:.7rem;font-weight:600;color:rgba(0,0,0,.5);}
 
 /* ═══════════════════════════════
-TRANSFORMATION
+   TRANSFORMATION
 ═══════════════════════════════ */
 .tfm-wrap{padding:80px 20px;background:var(--dark-2);border-top:1px solid rgba(255,255,255,.04);}
 .tfm-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:680px;}
 @media(max-width:600px){.tfm-grid{grid-template-columns:1fr;}}
 
 .tcard{
-border-radius:var(--r);overflow:hidden;position:relative;
-border:2px solid rgba(251,208,97,.12);
-transition:border-color .25s,transform .25s;
+  border-radius:var(--r);overflow:hidden;position:relative;
+  border:2px solid rgba(251,208,97,.12);
+  transition:border-color .25s,transform .25s;
 }
 .tcard:hover{border-color:rgba(251,208,97,.45);transform:translateY(-3px);}
 .tcard img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top center;}
 .tcard.after{border-color:rgba(251,208,97,.4);}
 .tbadge{
-position:absolute;bottom:0;left:0;right:0;
-background:linear-gradient(to top,rgba(0,0,0,.92) 0%,transparent 100%);
-padding:24px 16px 16px;
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(0,0,0,.92) 0%,transparent 100%);
+  padding:24px 16px 16px;
 }
 .tlbl{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-l);display:block;margin-bottom:3px;}
 .tval{font-size:.88rem;font-weight:700;color:var(--white);}
 .tcard.after .tval{color:var(--gold);}
 
 /* ═══════════════════════════════
-CTA BAND
+   CTA BAND
 ═══════════════════════════════ */
 .ctaband{
-background:var(--dark-3);
-border-top:1px solid rgba(255,255,255,.05);
-border-bottom:1px solid rgba(255,255,255,.05);
-padding:68px 20px;text-align:center;
+  background:var(--dark-3);
+  border-top:1px solid rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  padding:68px 20px;text-align:center;
 }
 .ctaband h2{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:800;letter-spacing:-.04em;margin-bottom:10px;}
 .ctaband h2 em{color:var(--gold);font-style:normal;}
 .ctaband p{font-size:.9rem;color:var(--muted);margin-bottom:28px;line-height:1.6;}
 
 /* ═══════════════════════════════
-BUTTONS
+   BUTTONS
 ═══════════════════════════════ */
 .blg{
-display:inline-block;background:var(--gold);color:#000;
-font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;
-letter-spacing:-.02em;padding:17px 44px;border-radius:100px;
-text-decoration:none;transition:background .2s,transform .1s;
+  display:inline-block;background:var(--gold);color:#000;
+  font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;
+  letter-spacing:-.02em;padding:17px 44px;border-radius:100px;
+  text-decoration:none;transition:background .2s,transform .1s;
 }
 .blg:hover{background:#f0c040;transform:translateY(-2px);}
 .bsm{
-display:inline-block;background:var(--gold);color:#000;
-font-family:'Inter',sans-serif;font-weight:700;font-size:.83rem;
-padding:13px 30px;border-radius:100px;text-decoration:none;
-transition:background .2s;
+  display:inline-block;background:var(--gold);color:#000;
+  font-family:'Inter',sans-serif;font-weight:700;font-size:.83rem;
+  padding:13px 30px;border-radius:100px;text-decoration:none;
+  transition:background .2s;
 }
 .bsm:hover{background:#f0c040;}
 
 /* ═══════════════════════════════
-TESTIMONIALS
+   TESTIMONIALS
 ═══════════════════════════════ */
 .tsti-wrap{padding:80px 20px;background:var(--dark);}
 .vtgrid{
-display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:16px;margin-top:48px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:16px;margin-top:48px;
 }
 .vtcard{
-background:var(--dark-3);
-border:2px solid rgba(251,208,97,.18);
-border-radius:var(--r);overflow:hidden;
-transition:border-color .25s,transform .25s;
+  background:var(--dark-3);
+  border:2px solid rgba(251,208,97,.18);
+  border-radius:var(--r);overflow:hidden;
+  transition:border-color .25s,transform .25s;
 }
 .vtcard:hover{border-color:rgba(251,208,97,.5);transform:translateY(-3px);}
 .vtframe{width:100%;aspect-ratio:16/9;background:#000;position:relative;}
@@ -491,52 +491,52 @@ transition:border-color .25s,transform .25s;
 .vtrole{font-size:.73rem;color:var(--muted);}
 
 .rev-grid{
-display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:12px;margin-top:28px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:12px;margin-top:28px;
 }
 .rimg{
-width:100%;display:block;
-border:2px solid rgba(251,208,97,.18);
-border-radius:var(--r);
-transition:border-color .2s,transform .2s;
+  width:100%;display:block;
+  border:2px solid rgba(251,208,97,.18);
+  border-radius:var(--r);
+  transition:border-color .2s,transform .2s;
 }
 .rimg:hover{border-color:rgba(251,208,97,.5);transform:translateY(-2px);}
 .rstack{display:flex;flex-direction:column;gap:12px;}
 
 /* ═══════════════════════════════
-OFFER
+   OFFER
 ═══════════════════════════════ */
 .offer-wrap{padding:80px 20px;background:var(--dark-2);border-top:1px solid rgba(255,255,255,.04);}
 .ogrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:40px;}
 @media(max-width:600px){.ogrid{grid-template-columns:1fr;}}
 .oitem{
-display:flex;align-items:flex-start;gap:14px;
-padding:20px;background:var(--dark-3);
-border-radius:var(--r-sm);
-border:1px solid rgba(255,255,255,.05);
-transition:border-color .2s;
+  display:flex;align-items:flex-start;gap:14px;
+  padding:20px;background:var(--dark-3);
+  border-radius:var(--r-sm);
+  border:1px solid rgba(255,255,255,.05);
+  transition:border-color .2s;
 }
 .oitem:hover{border-color:rgba(251,208,97,.18);}
 .och{
-flex-shrink:0;width:24px;height:24px;background:var(--gold);
-border-radius:50%;display:flex;align-items:center;justify-content:center;
-font-size:.7rem;font-weight:900;color:#000;margin-top:1px;
+  flex-shrink:0;width:24px;height:24px;background:var(--gold);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:900;color:#000;margin-top:1px;
 }
 .oitem h4{font-size:.88rem;font-weight:700;margin-bottom:4px;letter-spacing:-.02em;}
 .oitem p{font-size:.8rem;color:var(--muted);line-height:1.5;}
 
 /* ═══════════════════════════════
-FAQ
+   FAQ
 ═══════════════════════════════ */
 .faq-wrap{background:var(--dark);border-top:1px solid rgba(255,255,255,.04);padding:80px 20px;}
 .flist{margin-top:44px;}
 .fitem{border-bottom:1px solid rgba(255,255,255,.06);}
 .fbtn{
-width:100%;background:none;border:none;color:var(--white);
-font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;
-letter-spacing:-.03em;text-align:left;padding:20px 0;cursor:pointer;
-display:flex;align-items:center;justify-content:space-between;gap:16px;
-transition:color .2s;
+  width:100%;background:none;border:none;color:var(--white);
+  font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;
+  letter-spacing:-.03em;text-align:left;padding:20px 0;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  transition:color .2s;
 }
 .fbtn:hover{color:var(--gold);}
 .farr{flex-shrink:0;color:var(--gold);transition:transform .3s;font-size:.9rem;}
@@ -547,37 +547,37 @@ transition:color .2s;
 .fbody p strong{color:var(--white);font-weight:600;}
 
 /* ═══════════════════════════════
-FINAL CTA
+   FINAL CTA
 ═══════════════════════════════ */
 .fcta{
-padding:100px 20px;text-align:center;
-background:var(--dark);position:relative;overflow:hidden;
+  padding:100px 20px;text-align:center;
+  background:var(--dark);position:relative;overflow:hidden;
 }
 .fcta::before{
-content:'';position:absolute;inset:0;
-background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(251,208,97,.05) 0%,transparent 70%);
-pointer-events:none;
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(251,208,97,.05) 0%,transparent 70%);
+  pointer-events:none;
 }
 .fcta h2{
-font-size:clamp(2rem,4.5vw,3.1rem);font-weight:900;
-letter-spacing:-.05em;line-height:1.07;
-max-width:640px;margin:0 auto 18px;
+  font-size:clamp(2rem,4.5vw,3.1rem);font-weight:900;
+  letter-spacing:-.05em;line-height:1.07;
+  max-width:640px;margin:0 auto 18px;
 }
 .fcta h2 em{color:var(--gold);font-style:normal;}
 .fcta p{font-size:.92rem;color:var(--muted-l);max-width:480px;margin:0 auto 36px;line-height:1.65;}
 .ctasub{
-margin-top:20px;font-size:.76rem;color:#282828;
-display:flex;align-items:center;justify-content:center;
-gap:16px;flex-wrap:wrap;
+  margin-top:20px;font-size:.76rem;color:#282828;
+  display:flex;align-items:center;justify-content:center;
+  gap:16px;flex-wrap:wrap;
 }
 .ctasub span{color:var(--gold);}
 
 /* ═══════════════════════════════
-FOOTER
+   FOOTER
 ═══════════════════════════════ */
 footer{
-background:#060606;border-top:1px solid rgba(255,255,255,.04);
-padding:44px 20px;text-align:center;
+  background:#060606;border-top:1px solid rgba(255,255,255,.04);
+  padding:44px 20px;text-align:center;
 }
 .frow{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px;}
 .flogo{width:34px;height:34px;object-fit:contain;border-radius:6px;}
@@ -589,16 +589,16 @@ footer a:hover{color:var(--gold);}
 .flinks{display:flex;gap:20px;justify-content:center;margin-top:14px;flex-wrap:wrap;}
 
 /* ═══════════════════════════════
-SCROLL REVEAL
+   SCROLL REVEAL
 ═══════════════════════════════ */
 .rev{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
 .rev.on{opacity:1;transform:translateY(0);}
 
 /* Mobile tweaks */
 @media(max-width:640px){
-.pbox{padding:32px 22px;}
-.vcta{padding:28px 20px;}
-.hero-content{padding:60px 20px 80px;}
+  .pbox{padding:32px 22px;}
+  .vcta{padding:28px 20px;}
+  .hero-content{padding:60px 20px 80px;}
 }
 </style>
 </head>
@@ -609,369 +609,354 @@ SCROLL REVEAL
 
 <!-- ═══ POPUP ═══ -->
 <div id="pop">
-<div class="pbox">
-<span class="plock">🔒</span>
-<span class="peye">Kostenloses Video freischalten</span>
-<h2 class="ptitle">Trag dich ein –<br><em>schau das Video kostenlos</em></h2>
-<p class="psub">In Sekunden hast du Zugang. Der 6-Schritte-Prozess der Unternehmer in 20 Wochen transformiert.</p>
-<input class="pfield" type="text" id="pn" placeholder="Dein Vorname" autocomplete="given-name">
-<input class="pfield" type="email" id="pe" placeholder="Deine E-Mail-Adresse" autocomplete="email">
-<input class="pfield" type="text" id="pig" placeholder="Dein Instagram Handle (@...)">
-<button class="punlock" onclick="unlock()">🔓 Jetzt freischalten →</button>
-<p class="pfine">Kein Spam. Keine Verpflichtung. Jederzeit abmeldbar.</p>
-</div>
+  <div class="pbox">
+    <span class="plock">🔒</span>
+    <span class="peye">Kostenloses Video freischalten</span>
+    <h2 class="ptitle">Trag dich ein –<br><em>schau das Video kostenlos</em></h2>
+    <p class="psub">In Sekunden hast du Zugang. Der 6-Schritte-Prozess der Unternehmer in 20 Wochen transformiert.</p>
+    <input class="pfield" type="text" id="pn" placeholder="Dein Vorname" autocomplete="given-name">
+    <input class="pfield" type="email" id="pe" placeholder="Deine E-Mail-Adresse" autocomplete="email">
+    <input class="pfield" type="text" id="pig" placeholder="Dein Instagram Handle (@...)">
+    <button class="punlock" onclick="unlock()">🔓 Jetzt freischalten →</button>
+    <p class="pfine">Kein Spam. Keine Verpflichtung. Jederzeit abmeldbar.</p>
+  </div>
 </div>
 
 <!-- ═══ NAV ═══ -->
 <nav>
-<div class="nav-l">
-<img class="nav-logo" src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/81a15c265628433e8aa47040c314dcd6/original/IMG_7558.jpg" alt="OPC Logo">
-<div class="nav-txt">
-<span class="nav-name">Leon Herzog</span>
-<span class="nav-sub">Olympus Performance Coaching</span>
-</div>
-</div>
-<a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="nav-cta">Kostenloses Gespräch →</a>
+  <div class="nav-l">
+    <img class="nav-logo" src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/81a15c265628433e8aa47040c314dcd6/original/IMG_7558.jpg" alt="OPC Logo">
+    <div class="nav-txt">
+      <span class="nav-name">Leon Herzog</span>
+      <span class="nav-sub">Olympus Performance Coaching</span>
+    </div>
+  </div>
+  <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="nav-cta">Kostenloses Gespräch →</a>
 </nav>
 
 <!-- ═══ HERO – FULL BLEED ═══ -->
 <section class="hero">
-<!-- BG IMAGE -->
-<div class="hero-bg">
-<img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/9060258a06a744319fb49a377f64454b/original/JPEG-Bild-476B-8FAC-F6-0.jpeg" alt="Leon Herzog">
-</div>
-<!-- Warm glow -->
-<div class="hero-glow"></div>
+  <!-- BG IMAGE -->
+  <div class="hero-bg">
+    <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/9060258a06a744319fb49a377f64454b/original/JPEG-Bild-476B-8FAC-F6-0.jpeg" alt="Leon Herzog">
+  </div>
+  <!-- Warm glow -->
+  <div class="hero-glow"></div>
 
-<!-- CONTENT -->
-<div class="hero-content">
-<div class="hero-eye">🏛️ Olympus Performance Coaching</div>
+  <!-- CONTENT -->
+  <div class="hero-content">
+    <div class="hero-eye">🏛️ Olympus Performance Coaching</div>
 
-```
-<h1>So wirst du in<br>20 Wochen zum<br><em>griechischen Gott</em></h1>
+    <h1>So wirst du in<br>20 Wochen zum<br><em>griechischen Gott</em></h1>
 
-<p class="hero-sub">
-  In den nächsten Minuten zeige ich dir genau wie vielbeschäftigte Unternehmer
-  und Selbstständige in 5 Monaten Muskeln aufbauen und definieren.
-</p>
+    <p class="hero-sub">
+      In den nächsten Minuten zeige ich dir genau wie vielbeschäftigte Unternehmer
+      und Selbstständige in 5 Monaten Muskeln aufbauen und definieren.
+    </p>
 
-<div class="hero-checks">
-  <div class="hero-check"><div class="hck">✓</div><span>Ohne Zeit zu verlieren</span></div>
-  <div class="hero-check"><div class="hck">✓</div><span>Mehr Fokus im Business</span></div>
-  <div class="hero-check"><div class="hck">✓</div><span>Ohne Extremdiäten</span></div>
-</div>
-```
-
-</div>
+    <div class="hero-checks">
+      <div class="hero-check"><div class="hck">✓</div><span>Ohne Zeit zu verlieren</span></div>
+      <div class="hero-check"><div class="hck">✓</div><span>Mehr Fokus im Business</span></div>
+      <div class="hero-check"><div class="hck">✓</div><span>Ohne Extremdiäten</span></div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══ VIDEO ═══ -->
 <div class="vid-wrap">
-<div class="ctr rev">
+  <div class="ctr rev">
 
-```
-<!-- GATE -->
-<div class="vgate" id="vgate" onclick="trigPop()">
-  <!-- Thumbnail -->
-  <img src="<https://cdn.gamma.app/fzdmd3fmbxhw3xx/00b9be8329cb4b8e9f73db06aa70a79c/original/IMG_8272.jpg>"
-       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7;display:block;" alt="VSL Thumbnail">
-  <div class="vgate-ov">
-    <div class="play">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="#000"><polygon points="6,4 20,12 6,20"/></svg>
+    <!-- GATE -->
+    <div class="vgate" id="vgate" onclick="trigPop()">
+      <!-- Thumbnail -->
+      <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/00b9be8329cb4b8e9f73db06aa70a79c/original/IMG_8272.jpg"
+           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7;display:block;" alt="VSL Thumbnail">
+      <div class="vgate-ov">
+        <div class="play">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#000"><polygon points="6,4 20,12 6,20"/></svg>
+        </div>
+        <div class="vgate-lbl">Klick zum Freischalten – 100% kostenlos</div>
+      </div>
     </div>
-    <div class="vgate-lbl">Klick zum Freischalten – 100% kostenlos</div>
+
+    <!-- REAL VIDEO -->
+    <div class="vreal" id="vreal">
+      <!-- DEIN VSL ID HIER EINTRAGEN -->
+      <iframe src="https://www.youtube.com/embed/02nBwqE5i3M?rel=0&modestbranding=1" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <p class="vcap">Schau das Video vollständig – am Ende weißt du genau wie du <strong>shredded wirst.</strong></p>
+
+    <!-- WHY CARDS directly under video -->
+    <div style="margin-top:52px">
+      <span class="slbl">Was du bekommst</span>
+      <h2 class="stitle">Das steckt in <em>diesem Video</em></h2>
+      <div class="why-grid">
+        <div class="wcard"><span class="wnum">01</span><h3>Der exakte Prozess</h3><p>Step-by-Step wie du als Unternehmer deinen Körper in 5 Monaten transformierst – ohne Zeitverlust.</p></div>
+        <div class="wcard"><span class="wnum">02</span><h3>Das bewährte System</h3><p>Derselbe Prozess den ich selbst und meine Kunden täglich nutzen. Keine Theorie – erprobte Mathematik.</p></div>
+        <div class="wcard"><span class="wnum">03</span><h3>Neue Perspektive</h3><p>Warum dein Körper kein Hindernis für dein Business ist – sondern sein wichtigstes Tool.</p></div>
+        <div class="wcard"><span class="wnum">04</span><h3>Dein nächster Schritt</h3><p>Am Ende weißt du exakt was du morgen tun musst. Kein Overthinking. Kein Rumprobieren.</p></div>
+      </div>
+    </div>
+
+    <!-- CTA box -->
+    <div class="vcta">
+      <h3>Bereit für deinen ersten Schritt?</h3>
+      <p>Buch dir jetzt dein kostenloses Analysegespräch – kein Druck, kein Pitch, nur Klarheit.</p>
+      <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="blg">Kostenloses Analysegespräch buchen →</a>
+      <p style="font-size:.73rem;color:#1e1e1e;margin-top:10px">Kostenlos & unverbindlich · Begrenzte Plätze</p>
+    </div>
   </div>
-</div>
-
-<!-- REAL VIDEO -->
-<div class="vreal" id="vreal">
-  <!-- DEIN VSL ID HIER EINTRAGEN -->
-  <iframe src="<https://www.youtube.com/embed/02nBwqE5i3M?rel=0&modestbranding=1>" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
-</div>
-
-<p class="vcap">Schau das Video vollständig – am Ende weißt du genau wie du <strong>shredded wirst.</strong></p>
-
-<!-- WHY CARDS directly under video -->
-<div style="margin-top:52px">
-  <span class="slbl">Was du bekommst</span>
-  <h2 class="stitle">Das steckt in <em>diesem Video</em></h2>
-  <div class="why-grid">
-    <div class="wcard"><span class="wnum">01</span><h3>Der exakte Prozess</h3><p>Step-by-Step wie du als Unternehmer deinen Körper in 5 Monaten transformierst – ohne Zeitverlust.</p></div>
-    <div class="wcard"><span class="wnum">02</span><h3>Das bewährte System</h3><p>Derselbe Prozess den ich selbst und meine Kunden täglich nutzen. Keine Theorie – erprobte Mathematik.</p></div>
-    <div class="wcard"><span class="wnum">03</span><h3>Neue Perspektive</h3><p>Warum dein Körper kein Hindernis für dein Business ist – sondern sein wichtigstes Tool.</p></div>
-    <div class="wcard"><span class="wnum">04</span><h3>Dein nächster Schritt</h3><p>Am Ende weißt du exakt was du morgen tun musst. Kein Overthinking. Kein Rumprobieren.</p></div>
-  </div>
-</div>
-
-<!-- CTA box -->
-<div class="vcta">
-  <h3>Bereit für deinen ersten Schritt?</h3>
-  <p>Buch dir jetzt dein kostenloses Analysegespräch – kein Druck, kein Pitch, nur Klarheit.</p>
-  <a href="<https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon>" target="_blank" class="blg">Kostenloses Analysegespräch buchen →</a>
-  <p style="font-size:.73rem;color:#1e1e1e;margin-top:10px">Kostenlos & unverbindlich · Begrenzte Plätze</p>
-</div>
-```
-
-</div>
 </div>
 
 <!-- ═══ STATS ═══ -->
 <div class="sbar rev">
-<div class="sbar-in">
-<div><span class="sn">5</span><span class="sl">Monate Transformation</span></div>
-<div><span class="sn">1:1</span><span class="sl">Persönliche Betreuung</span></div>
-<div><span class="sn">20</span><span class="sl">Wochen zum Traumkörper</span></div>
-<div><span class="sn">100%</span><span class="sl">Ergebnis-Garantie</span></div>
-</div>
+  <div class="sbar-in">
+    <div><span class="sn">5</span><span class="sl">Monate Transformation</span></div>
+    <div><span class="sn">1:1</span><span class="sl">Persönliche Betreuung</span></div>
+    <div><span class="sn">20</span><span class="sl">Wochen zum Traumkörper</span></div>
+    <div><span class="sn">100%</span><span class="sl">Ergebnis-Garantie</span></div>
+  </div>
 </div>
 
 <!-- ═══ TRANSFORMATION ═══ -->
 <div class="tfm-wrap">
-<div class="ctr rev">
-<span class="slbl">Meine Transformation</span>
-<h2 class="stitle">Von hier – <em>nach hier.</em></h2>
-<p class="ssub">4 Jahre Home Workouts als Ausgangspunkt. Heute coache ich Unternehmer zur Topform. Das System funktioniert – weil ich es selbst durchlaufen habe.</p>
-<div class="tfm-grid">
-<div class="tcard before">
-<img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/2d1d38a72d364f909a2fbac31b042cbc/original/IMG_7859.jpg" alt="Leon vorher">
-<div class="tbadge">
-<span class="tlbl">Vorher · 4 Jahre Home Workouts</span>
-<span class="tval">Vor dem System</span>
-</div>
-</div>
-<div class="tcard after">
-<img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/8d6f68762b9e4eaea5ba8b45f1a2cd78/original/IMG_5717-2.jpg" alt="Leon jetzt">
-<div class="tbadge">
-<span class="tlbl">Jetzt · Olympus System</span>
-<span class="tval">Nach dem System ✓</span>
-</div>
-</div>
-</div>
-</div>
+  <div class="ctr rev">
+    <span class="slbl">Meine Transformation</span>
+    <h2 class="stitle">Von hier – <em>nach hier.</em></h2>
+    <p class="ssub">4 Jahre Home Workouts als Ausgangspunkt. Heute coache ich Unternehmer zur Topform. Das System funktioniert – weil ich es selbst durchlaufen habe.</p>
+    <div class="tfm-grid">
+      <div class="tcard before">
+        <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/2d1d38a72d364f909a2fbac31b042cbc/original/IMG_7859.jpg" alt="Leon vorher">
+        <div class="tbadge">
+          <span class="tlbl">Vorher · 4 Jahre Home Workouts</span>
+          <span class="tval">Vor dem System</span>
+        </div>
+      </div>
+      <div class="tcard after">
+        <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/8d6f68762b9e4eaea5ba8b45f1a2cd78/original/IMG_5717-2.jpg" alt="Leon jetzt">
+        <div class="tbadge">
+          <span class="tlbl">Jetzt · Olympus System</span>
+          <span class="tval">Nach dem System ✓</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══ CTA BAND ═══ -->
 <div class="ctaband rev">
-<h2>Bereit deinen Körper auf das Level<br><em>deines Erfolgs zu bringen?</em></h2>
-<p>Das Gespräch ist kostenlos, unverbindlich und dauert 20–30 Minuten.<br>Du gehst mit klaren Antworten raus – egal ob wir zusammenarbeiten oder nicht.</p>
-<a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="blg">Kostenloses Analysegespräch buchen →</a>
+  <h2>Bereit deinen Körper auf das Level<br><em>deines Erfolgs zu bringen?</em></h2>
+  <p>Das Gespräch ist kostenlos, unverbindlich und dauert 20–30 Minuten.<br>Du gehst mit klaren Antworten raus – egal ob wir zusammenarbeiten oder nicht.</p>
+  <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="blg">Kostenloses Analysegespräch buchen →</a>
 </div>
 
 <!-- ═══ TESTIMONIALS ═══ -->
 <div class="tsti-wrap">
-<div class="ctr rev">
-<span class="slbl">Kunden Ergebnisse</span>
-<h2 class="stitle">Was meine Kunden <em>sagen & erreichen</em></h2>
+  <div class="ctr rev">
+    <span class="slbl">Kunden Ergebnisse</span>
+    <h2 class="stitle">Was meine Kunden <em>sagen & erreichen</em></h2>
 
-```
-<div class="vtgrid">
-  <div class="vtcard">
-    <div class="vtframe">
-      <iframe src="<https://www.youtube.com/embed/LNn2aQe1fpE?rel=0&modestbranding=1>" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+    <div class="vtgrid">
+      <div class="vtcard">
+        <div class="vtframe">
+          <iframe src="https://www.youtube.com/embed/LNn2aQe1fpE?rel=0&modestbranding=1" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="vtinfo"><p class="vtname">Kunden-Testimonial #1</p><p class="vtrole">Transformation & Ergebnis</p></div>
+      </div>
+      <div class="vtcard">
+        <div class="vtframe">
+          <iframe src="https://www.youtube.com/embed/mX118bB1HzU?rel=0&modestbranding=1" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="vtinfo"><p class="vtname">Kunden-Testimonial #2</p><p class="vtrole">Ergebnis nach 5 Monaten</p></div>
+      </div>
     </div>
-    <div class="vtinfo"><p class="vtname">Kunden-Testimonial #1</p><p class="vtrole">Transformation & Ergebnis</p></div>
-  </div>
-  <div class="vtcard">
-    <div class="vtframe">
-      <iframe src="<https://www.youtube.com/embed/mX118bB1HzU?rel=0&modestbranding=1>" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+
+    <div class="rev-grid">
+      <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/cace214a509246efbb4ace72771a6891/original/IMG_8071.jpg" class="rimg" alt="Bewertung">
+      <div class="rstack">
+        <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/7794211dec4841da8cd8a5bbe08c3d5e/original/IMG_8072.jpg" class="rimg" alt="Bewertung">
+        <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/26d4c87831ce4ff8a5532e02eb1b3ee3/original/IMG_8073.jpg" class="rimg" alt="Bewertung">
+      </div>
+      <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/b8ca5c795ea84fe8897a367150992127/original/IMG_8074.jpg" class="rimg" alt="Bewertung">
     </div>
-    <div class="vtinfo"><p class="vtname">Kunden-Testimonial #2</p><p class="vtrole">Ergebnis nach 5 Monaten</p></div>
+
+    <div style="text-align:center;margin-top:40px" class="rev">
+      <p style="font-size:.83rem;color:var(--muted);margin-bottom:14px">Diese Ergebnisse sind das System. Keine Ausnahmen.</p>
+      <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="bsm">Kostenloses Gespräch buchen →</a>
+    </div>
   </div>
-</div>
-
-<div class="rev-grid">
-  <img src="<https://cdn.gamma.app/fzdmd3fmbxhw3xx/cace214a509246efbb4ace72771a6891/original/IMG_8071.jpg>" class="rimg" alt="Bewertung">
-  <div class="rstack">
-    <img src="<https://cdn.gamma.app/fzdmd3fmbxhw3xx/7794211dec4841da8cd8a5bbe08c3d5e/original/IMG_8072.jpg>" class="rimg" alt="Bewertung">
-    <img src="<https://cdn.gamma.app/fzdmd3fmbxhw3xx/26d4c87831ce4ff8a5532e02eb1b3ee3/original/IMG_8073.jpg>" class="rimg" alt="Bewertung">
-  </div>
-  <img src="<https://cdn.gamma.app/fzdmd3fmbxhw3xx/b8ca5c795ea84fe8897a367150992127/original/IMG_8074.jpg>" class="rimg" alt="Bewertung">
-</div>
-
-<div style="text-align:center;margin-top:40px" class="rev">
-  <p style="font-size:.83rem;color:var(--muted);margin-bottom:14px">Diese Ergebnisse sind das System. Keine Ausnahmen.</p>
-  <a href="<https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon>" target="_blank" class="bsm">Kostenloses Gespräch buchen →</a>
-</div>
-```
-
-</div>
 </div>
 
 <!-- ═══ ANGEBOT ═══ -->
 <div class="offer-wrap">
-<div class="ctr rev">
-<span class="slbl">Das Angebot</span>
-<h2 class="stitle">Wenn wir zusammenarbeiten,<br><em>bekommst du:</em></h2>
-<div class="ogrid">
-<div class="oitem"><div class="och">✓</div><div><h4>Täglicher 1:1 WhatsApp-Zugang</h4><p>Du schreibst mir direkt – kein Team, kein Bot. Ich bin da und antworte so schnell es geht.</p></div></div>
-<div class="oitem"><div class="och">✓</div><div><h4>Wöchentliche 1:1 Coaching Calls</h4><p>Progress Check, klare Aufgaben, Anpassungen. Du weißt immer wo du stehst.</p></div></div>
-<div class="oitem"><div class="och">✓</div><div><h4>Individuelles System für deinen Alltag</h4><p>Exakt auf deinen Kalender und dein Ziel abgestimmt. Kein generischer Plan.</p></div></div>
-<div class="oitem"><div class="och">✓</div><div><h4>Executive Nutrition Playbook</h4><p>Restaurant, Reisen, stressige Tage – du weißt immer was du bestellst.</p></div></div>
-<div class="oitem"><div class="och">✓</div><div><h4>Tracking Sheets & Dashboards</h4><p>Alles messbar. Fortschritt schwarz auf weiß. Jeder Schritt sichtbar.</p></div></div>
-<div class="oitem"><div class="och">✓</div><div><h4>5-Monats-Ergebnis-Garantie</h4><p>Keine sichtbare Transformation? Wir arbeiten kostenlos weiter bis du sie erreichst.</p></div></div>
-</div>
-</div>
+  <div class="ctr rev">
+    <span class="slbl">Das Angebot</span>
+    <h2 class="stitle">Wenn wir zusammenarbeiten,<br><em>bekommst du:</em></h2>
+    <div class="ogrid">
+      <div class="oitem"><div class="och">✓</div><div><h4>Täglicher 1:1 WhatsApp-Zugang</h4><p>Du schreibst mir direkt – kein Team, kein Bot. Ich bin da und antworte so schnell es geht.</p></div></div>
+      <div class="oitem"><div class="och">✓</div><div><h4>Wöchentliche 1:1 Coaching Calls</h4><p>Progress Check, klare Aufgaben, Anpassungen. Du weißt immer wo du stehst.</p></div></div>
+      <div class="oitem"><div class="och">✓</div><div><h4>Individuelles System für deinen Alltag</h4><p>Exakt auf deinen Kalender und dein Ziel abgestimmt. Kein generischer Plan.</p></div></div>
+      <div class="oitem"><div class="och">✓</div><div><h4>Executive Nutrition Playbook</h4><p>Restaurant, Reisen, stressige Tage – du weißt immer was du bestellst.</p></div></div>
+      <div class="oitem"><div class="och">✓</div><div><h4>Tracking Sheets & Dashboards</h4><p>Alles messbar. Fortschritt schwarz auf weiß. Jeder Schritt sichtbar.</p></div></div>
+      <div class="oitem"><div class="och">✓</div><div><h4>5-Monats-Ergebnis-Garantie</h4><p>Keine sichtbare Transformation? Wir arbeiten kostenlos weiter bis du sie erreichst.</p></div></div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══ FAQ ═══ -->
 <div class="faq-wrap">
-<div class="ctr-sm rev">
-<span class="slbl">Häufige Fragen</span>
-<h2 class="stitle">Deine <em>Fragen</em> – beantwortet</h2>
+  <div class="ctr-sm rev">
+    <span class="slbl">Häufige Fragen</span>
+    <h2 class="stitle">Deine <em>Fragen</em> – beantwortet</h2>
 
-```
-<div class="flist">
+    <div class="flist">
 
-  <div class="fitem">
-    <button class="fbtn" onclick="fq(this)">Schaffe ich das wirklich neben meinem Business?<span class="farr">↓</span></button>
-    <div class="fbody"><p><strong>Speziell für Unternehmer und Vielbeschäftigte mit 8–16 Stunden Workload gebaut.</strong> Ernährung die sich in deinen Alltag einfügt. Wer das System befolgt spart Zeit – weil er aufhört herumzuprobieren.</p></div>
+      <div class="fitem">
+        <button class="fbtn" onclick="fq(this)">Schaffe ich das wirklich neben meinem Business?<span class="farr">↓</span></button>
+        <div class="fbody"><p><strong>Speziell für Unternehmer und Vielbeschäftigte mit 8–16 Stunden Workload gebaut.</strong> Ernährung die sich in deinen Alltag einfügt. Wer das System befolgt spart Zeit – weil er aufhört herumzuprobieren.</p></div>
+      </div>
+
+      <div class="fitem">
+        <button class="fbtn" onclick="fq(this)">Ist das wieder nur ein Plan wie alle anderen?<span class="farr">↓</span></button>
+        <div class="fbody"><p>Nein. Dieses System wird <strong>exakt auf deinen Kalender, dein Ziel und deinen Körpertyp abgestimmt</strong>. Täglicher 1:1 Support direkt von mir – kein Team, kein Bot, keine Automation.</p></div>
+      </div>
+
+      <div class="fitem">
+        <button class="fbtn" onclick="fq(this)">Wie schnell sehe ich Ergebnisse?<span class="farr">↓</span></button>
+        <div class="fbody"><p>Meine Kunden berichten bereits <strong>nach 2 Wochen von deutlich mehr Fokus und Energie</strong>. Erste sichtbare Körperveränderungen nach 4–6 Wochen. Nach 5 Monaten wirst du dich nicht mehr wiedererkennen. Mathematik = messbares Ergebnis.</p></div>
+      </div>
+
+      <div class="fitem">
+        <button class="fbtn" onclick="fq(this)">Was kostet das Coaching?<span class="farr">↓</span></button>
+        <div class="fbody"><p>Die Investition besprechen wir im kostenlosen Analysegespräch. <strong>Das Gespräch ist komplett kostenlos und unverbindlich.</strong></p></div>
+      </div>
+
+      <div class="fitem">
+        <button class="fbtn" onclick="fq(this)">Gibt es eine Garantie?<span class="farr">↓</span></button>
+        <div class="fbody"><p>Ja. Wenn du nach 5 Monaten keine klar sichtbare Transformation erreicht hast, <strong>arbeiten wir kostenlos weiter</strong> bis du sie erreichst. Voraussetzung: Du setzt das System um.</p></div>
+      </div>
+
+      <div class="fitem">
+        <button class="fbtn" onclick="fq(this)">Brauche ich ein Gym oder Equipment?<span class="farr">↓</span></button>
+        <div class="fbody"><p>Nein. Ich baue dir ein System das zu deiner Situation passt – Gym, zuhause, Hotel oder Park. <strong>Keine Ausreden mehr.</strong></p></div>
+      </div>
+
+      <div class="fitem">
+        <button class="fbtn" onclick="fq(this)">Was passiert im kostenlosen Erstgespräch?<span class="farr">↓</span></button>
+        <div class="fbody"><p>Wir schauen wo du stehst, was dich bisher aufgehalten hat und was dein schnellster Weg zum Ziel ist. Ich sage dir dann konkret wie mein Fahrplan für dich aussehen würde. <strong>Du gehst mit klaren Antworten raus – egal ob wir zusammenarbeiten oder nicht.</strong></p></div>
+      </div>
+
+      <div class="fitem">
+        <button class="fbtn" onclick="fq(this)">Warum Leon und nicht ein anderer Coach?<span class="farr">↓</span></button>
+        <div class="fbody"><p>Weil 99,9% der Coaches nicht das bieten können was ich dir biete. Meine Plätze sind bewusst begrenzt – das gibt mir die Möglichkeit, dir echte Rund-um-Betreuung zu geben.<br><br><strong>Wenn du mit mir schreibst, schreibst du mit mir – nicht mit einem Bot.</strong> Ich automatisiere nichts in der Kundenbetreuung. Mein Ziel: du lernst das System so gut, dass du langfristig eigenständig in Topform bleibst.<br><br>Ich weiß was es bedeutet, 16 Stunden am Tag zu arbeiten. Ich lebe was ich lehre – dauerhaft, nicht nur im Sommer. <strong>Genau darauf bin ich spezialisiert.</strong></p></div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:44px">
+      <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="blg">Kostenloses Analysegespräch buchen →</a>
+    </div>
   </div>
-
-  <div class="fitem">
-    <button class="fbtn" onclick="fq(this)">Ist das wieder nur ein Plan wie alle anderen?<span class="farr">↓</span></button>
-    <div class="fbody"><p>Nein. Dieses System wird <strong>exakt auf deinen Kalender, dein Ziel und deinen Körpertyp abgestimmt</strong>. Täglicher 1:1 Support direkt von mir – kein Team, kein Bot, keine Automation.</p></div>
-  </div>
-
-  <div class="fitem">
-    <button class="fbtn" onclick="fq(this)">Wie schnell sehe ich Ergebnisse?<span class="farr">↓</span></button>
-    <div class="fbody"><p>Meine Kunden berichten bereits <strong>nach 2 Wochen von deutlich mehr Fokus und Energie</strong>. Erste sichtbare Körperveränderungen nach 4–6 Wochen. Nach 5 Monaten wirst du dich nicht mehr wiedererkennen. Mathematik = messbares Ergebnis.</p></div>
-  </div>
-
-  <div class="fitem">
-    <button class="fbtn" onclick="fq(this)">Was kostet das Coaching?<span class="farr">↓</span></button>
-    <div class="fbody"><p>Die Investition besprechen wir im kostenlosen Analysegespräch. <strong>Das Gespräch ist komplett kostenlos und unverbindlich.</strong></p></div>
-  </div>
-
-  <div class="fitem">
-    <button class="fbtn" onclick="fq(this)">Gibt es eine Garantie?<span class="farr">↓</span></button>
-    <div class="fbody"><p>Ja. Wenn du nach 5 Monaten keine klar sichtbare Transformation erreicht hast, <strong>arbeiten wir kostenlos weiter</strong> bis du sie erreichst. Voraussetzung: Du setzt das System um.</p></div>
-  </div>
-
-  <div class="fitem">
-    <button class="fbtn" onclick="fq(this)">Brauche ich ein Gym oder Equipment?<span class="farr">↓</span></button>
-    <div class="fbody"><p>Nein. Ich baue dir ein System das zu deiner Situation passt – Gym, zuhause, Hotel oder Park. <strong>Keine Ausreden mehr.</strong></p></div>
-  </div>
-
-  <div class="fitem">
-    <button class="fbtn" onclick="fq(this)">Was passiert im kostenlosen Erstgespräch?<span class="farr">↓</span></button>
-    <div class="fbody"><p>Wir schauen wo du stehst, was dich bisher aufgehalten hat und was dein schnellster Weg zum Ziel ist. Ich sage dir dann konkret wie mein Fahrplan für dich aussehen würde. <strong>Du gehst mit klaren Antworten raus – egal ob wir zusammenarbeiten oder nicht.</strong></p></div>
-  </div>
-
-  <div class="fitem">
-    <button class="fbtn" onclick="fq(this)">Warum Leon und nicht ein anderer Coach?<span class="farr">↓</span></button>
-    <div class="fbody"><p>Weil 99,9% der Coaches nicht das bieten können was ich dir biete. Meine Plätze sind bewusst begrenzt – das gibt mir die Möglichkeit, dir echte Rund-um-Betreuung zu geben.<br><br><strong>Wenn du mit mir schreibst, schreibst du mit mir – nicht mit einem Bot.</strong> Ich automatisiere nichts in der Kundenbetreuung. Mein Ziel: du lernst das System so gut, dass du langfristig eigenständig in Topform bleibst.<br><br>Ich weiß was es bedeutet, 16 Stunden am Tag zu arbeiten. Ich lebe was ich lehre – dauerhaft, nicht nur im Sommer. <strong>Genau darauf bin ich spezialisiert.</strong></p></div>
-  </div>
-
-</div>
-
-<div style="text-align:center;margin-top:44px">
-  <a href="<https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon>" target="_blank" class="blg">Kostenloses Analysegespräch buchen →</a>
-</div>
-```
-
-</div>
 </div>
 
 <!-- ═══ FINAL CTA ═══ -->
 <div class="fcta rev">
-<h2>Du hast dir das letztes Jahr<br><em>schon vorgenommen.</em></h2>
-<p>Jedes Jahr dasselbe Spiel. Januar Motivation. Februar aufgehört. Mai Panik wegen Sommer. Winter gewartet. Du stehst noch am gleichen Punkt.<br><br>Jetzt ist der richtige Zeitpunkt. Nicht nächsten Montag.</p>
-<a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="blg">Kostenloses Analysegespräch buchen →</a>
-<div class="ctasub">
-<span>✓</span> Kostenlos & unverbindlich  
-<span>✓</span> 5-Monats-Ergebnis-Garantie  
-<span>✓</span> Begrenzte Plätze
-</div>
+  <h2>Du hast dir das letztes Jahr<br><em>schon vorgenommen.</em></h2>
+  <p>Jedes Jahr dasselbe Spiel. Januar Motivation. Februar aufgehört. Mai Panik wegen Sommer. Winter gewartet. Du stehst noch am gleichen Punkt.<br><br>Jetzt ist der richtige Zeitpunkt. Nicht nächsten Montag.</p>
+  <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="blg">Kostenloses Analysegespräch buchen →</a>
+  <div class="ctasub">
+    <span>✓</span> Kostenlos & unverbindlich &nbsp;
+    <span>✓</span> 5-Monats-Ergebnis-Garantie &nbsp;
+    <span>✓</span> Begrenzte Plätze
+  </div>
 </div>
 
 <!-- ═══ FOOTER ═══ -->
 <footer>
-<div class="frow">
-<img class="flogo" src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/81a15c265628433e8aa47040c314dcd6/original/IMG_7558.jpg" alt="OPC">
-<div>
-<div class="fn">Leon Herzog</div>
-<div class="fb">Olympus Performance Coaching</div>
-</div>
-</div>
-<p><a href="https://instagram.com/leonherzog.de" target="_blank">@leonherzog.de</a></p>
-<div class="flinks">
-<a href="https://versteckmich.de/elite_coaching/impressum" target="_blank">Impressum</a>
-<a href="https://versteckmich.de/elite_coaching/datenschutz" target="_blank">Datenschutz</a>
-</div>
-<p style="margin-top:14px">© 2025 Leon Herzog · Alle Rechte vorbehalten</p>
+  <div class="frow">
+    <img class="flogo" src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/81a15c265628433e8aa47040c314dcd6/original/IMG_7558.jpg" alt="OPC">
+    <div>
+      <div class="fn">Leon Herzog</div>
+      <div class="fb">Olympus Performance Coaching</div>
+    </div>
+  </div>
+  <p><a href="https://instagram.com/leonherzog.de" target="_blank">@leonherzog.de</a></p>
+  <div class="flinks">
+    <a href="https://versteckmich.de/elite_coaching/impressum" target="_blank">Impressum</a>
+    <a href="https://versteckmich.de/elite_coaching/datenschutz" target="_blank">Datenschutz</a>
+  </div>
+  <p style="margin-top:14px">© 2025 Leon Herzog · Alle Rechte vorbehalten</p>
 </footer>
 
 <script>
 /* PROGRESS */
 window.addEventListener('scroll',()=>{
-const s=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight;
-document.getElementById('pgbar').style.width=(h>0?s/h*100:0)+'%';
+  const s=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('pgbar').style.width=(h>0?s/h*100:0)+'%';
 });
 
 /* POPUP */
 function trigPop(){
-if(sessionStorage.getItem('opc')==='1'){showV();return;}
-document.getElementById('pop').classList.add('on');
+  if(sessionStorage.getItem('opc')==='1'){showV();return;}
+  document.getElementById('pop').classList.add('on');
 }
-// ── DEINE [MAKE.COM](http://make.com/) WEBHOOK URL HIER EINTRAGEN ──
-// Anleitung: [make.com](http://make.com/) → Neues Szenario → Webhooks → Custom Webhook → URL kopieren
-const WEBHOOK_URL = 'https://hook.eu1.make.com/3xdgchkks6m62o1arg1y8ch0c7o03dfc';
+function unlock(){
+  const n  = document.getElementById('pn').value.trim();
+  const e  = document.getElementById('pe').value.trim();
+  const ig = document.getElementById('pig').value.trim();
+  if(!n){sh('pn');return;}
+  if(!e||!e.includes('@')){sh('pe');return;}
+  sessionStorage.setItem('opc','1');
 
-etch(WEBHOOK_URL, {
-method: 'POST',
-headers: {
-'Content-Type': 'application/json'
-},
-body: JSON.stringify({
-vorname: n,
-email: e,
-instagram: ig || '',
-datum: new Date().toLocaleString('de-DE'),
-quelle: document.referrer || 'Direkt'
-})
-})
-.then(response => {
-console.log('Erfolgreich gesendet');
-})
-.catch(error => {
-console.error('Fehler:', error);
-});
-}
+  fetch('https://hook.eu1.make.com/3xdgchkks6m62o1arg1y8ch0c7o03dfc', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      vorname:   n,
+      email:     e,
+      instagram: ig || '',
+      datum:     new Date().toLocaleString('de-DE'),
+      quelle:    document.referrer || 'Direkt'
+    })
+  })
+  .then(()=>{ console.log('Gesendet'); })
+  .catch(err=>{ console.error('Fehler:', err); });
 
-document.getElementById('pop').classList.remove('on');
-showV();
+  document.getElementById('pop').classList.remove('on');
+  showV();
 }
 function showV(){
-document.getElementById('vgate').style.display='none';
-const vr=document.getElementById('vreal');
-vr.style.display='block';
-vr.scrollIntoView({behavior:'smooth',block:'center'});
+  document.getElementById('vgate').style.display='none';
+  const vr=document.getElementById('vreal');
+  vr.style.display='block';
+  vr.scrollIntoView({behavior:'smooth',block:'center'});
 }
 function sh(id){
-const el=document.getElementById(id);
-el.style.borderColor='#ff4444';
-el.style.animation='shake .3s ease';
-setTimeout(()=>{el.style.borderColor='#2a2a2a';el.style.animation='';},1500);
+  const el=document.getElementById(id);
+  el.style.borderColor='#ff4444';
+  el.style.animation='shake .3s ease';
+  setTimeout(()=>{el.style.borderColor='#2a2a2a';el.style.animation='';},1500);
 }
 window.addEventListener('DOMContentLoaded',()=>{
-// Popup zeigen wenn noch nicht eingetragen in dieser Session
-// Wir nutzen sessionStorage statt localStorage – Popup kommt bei jedem neuen Tab/Fenster
-if(sessionStorage.getItem('opc')==='1'){
-document.getElementById('vgate').style.display='none';
-document.getElementById('vreal').style.display='block';
-}
+  // Popup zeigen wenn noch nicht eingetragen in dieser Session
+  // Wir nutzen sessionStorage statt localStorage – Popup kommt bei jedem neuen Tab/Fenster
+  if(sessionStorage.getItem('opc')==='1'){
+    document.getElementById('vgate').style.display='none';
+    document.getElementById('vreal').style.display='block';
+  }
 });
 
 /* FAQ */
 function fq(btn){
-const it=btn.closest('.fitem'),op=it.classList.contains('open');
-document.querySelectorAll('.fitem').forEach(i=>i.classList.remove('open'));
-if(!op)it.classList.add('open');
+  const it=btn.closest('.fitem'),op=it.classList.contains('open');
+  document.querySelectorAll('.fitem').forEach(i=>i.classList.remove('open'));
+  if(!op)it.classList.add('open');
 }
 
 /* REVEAL */
 const ro=new IntersectionObserver(e=>{
-e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');ro.unobserve(x.target);}});
+  e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');ro.unobserve(x.target);}});
 },{threshold:.07});
 document.querySelectorAll('.rev').forEach(el=>ro.observe(el));
 </script>

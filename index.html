@@ -20,7 +20,6 @@
   --r: 16px;
   --r-sm: 10px;
 }
-
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
@@ -33,7 +32,6 @@ body{
   overflow-x:hidden;
 }
 img{display:block;}
-
 /* ═══════════════════════════════
    PROGRESS BAR
 ═══════════════════════════════ */
@@ -44,7 +42,6 @@ img{display:block;}
   border-radius:0 2px 2px 0;
   transition:width .1s linear;
 }
-
 /* ═══════════════════════════════
    POPUP
 ═══════════════════════════════ */
@@ -58,7 +55,6 @@ img{display:block;}
 }
 #pop.on{display:flex;animation:fadeOv .3s ease;}
 @keyframes fadeOv{from{opacity:0;}to{opacity:1;}}
-
 .pbox{
   background:var(--dark-3);
   border:1px solid rgba(251,208,97,.22);
@@ -77,10 +73,8 @@ img{display:block;}
   content:'';position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(ellipse 80% 50% at 50% -5%,rgba(251,208,97,.06) 0%,transparent 70%);
 }
-
 .plock{font-size:2.4rem;display:block;margin-bottom:14px;animation:lp 2s ease infinite;position:relative;z-index:1;}
 @keyframes lp{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
-
 .peye{
   font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;
   color:var(--gold);font-weight:700;margin-bottom:10px;
@@ -97,7 +91,6 @@ img{display:block;}
   margin-bottom:26px;line-height:1.55;
   position:relative;z-index:1;
 }
-
 .pfield{
   width:100%;background:var(--dark-5);
   border:1px solid #2a2a2a;border-radius:var(--r-sm);
@@ -108,7 +101,6 @@ img{display:block;}
 }
 .pfield:focus{border-color:var(--gold);}
 .pfield::placeholder{color:#2e2e2e;}
-
 .punlock{
   width:100%;background:var(--gold);color:#000;
   font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;
@@ -125,7 +117,6 @@ img{display:block;}
 @keyframes shim{0%{transform:translateX(-100%);}60%,100%{transform:translateX(100%);}}
 .punlock:hover{background:#f0c040;transform:translateY(-1px);}
 .pfine{font-size:.7rem;color:#222;text-align:center;margin-top:10px;position:relative;z-index:1;}
-
 /* ═══════════════════════════════
    NAV
 ═══════════════════════════════ */
@@ -159,13 +150,11 @@ nav{
   white-space:nowrap;
 }
 .nav-cta:hover{background:#f0c040;transform:translateY(-1px);}
-
 @media(max-width:640px){
   nav{padding:0 18px;}
   .nav-name{font-size:.9rem;}
   .nav-sub{display:none;}
 }
-
 /* ═══════════════════════════════
    HERO – FULL BLEED like Fabian
 ═══════════════════════════════ */
@@ -176,7 +165,6 @@ nav{
   overflow:hidden;
   display:flex;align-items:center;
 }
-
 /* Full-bleed bg image */
 .hero-bg{
   position:absolute;inset:0;z-index:0;
@@ -196,7 +184,6 @@ nav{
     linear-gradient(to right, rgba(10,10,10,1) 0%, rgba(10,10,10,.95) 30%, rgba(10,10,10,.6) 50%, rgba(10,10,10,.1) 75%, rgba(10,10,10,0) 100%),
     linear-gradient(to top, rgba(10,10,10,.6) 0%, transparent 40%);
 }
-
 /* Warm ambient glow behind image area */
 .hero-glow{
   position:absolute;
@@ -205,14 +192,12 @@ nav{
   background:radial-gradient(circle, rgba(140,80,20,.25) 0%, transparent 70%);
   z-index:1;pointer-events:none;
 }
-
 .hero-content{
   position:relative;z-index:2;
   max-width:1140px;margin:0 auto;
   padding:80px 48px 100px;
   width:100%;
 }
-
 .hero-eye{
   display:inline-flex;align-items:center;gap:8px;
   font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;
@@ -221,7 +206,6 @@ nav{
   padding:7px 16px;border-radius:100px;
   margin-bottom:28px;
 }
-
 .hero h1{
   font-size:clamp(2.8rem,6vw,5rem);
   font-weight:900;
@@ -231,13 +215,11 @@ nav{
   margin-bottom:24px;
 }
 .hero h1 em{color:var(--gold);font-style:normal;}
-
 .hero-sub{
   font-size:1.08rem;color:rgba(255,255,255,.55);
   line-height:1.65;max-width:500px;margin-bottom:36px;
   font-weight:400;
 }
-
 /* Checkmark list like Fabian */
 .hero-checks{
   display:flex;flex-direction:column;gap:12px;
@@ -255,12 +237,10 @@ nav{
   flex-shrink:0;
   font-size:.65rem;font-weight:900;color:#000;
 }
-
 .hero-cta-row{
   display:flex;align-items:center;gap:16px;flex-wrap:wrap;
   margin-bottom:20px;
 }
-
 .btn-hero{
   background:var(--gold);color:#000;
   font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;
@@ -276,17 +256,14 @@ nav{
   transform:translateX(-100%);animation:shim 2.2s ease infinite;
 }
 .btn-hero:hover{background:#f0c040;transform:translateY(-2px);}
-
 .hero-note{
   font-size:.75rem;color:var(--muted);
   letter-spacing:.01em;
 }
-
 @media(max-width:768px){
   .hero-content{padding:60px 20px 80px;}
   .hero h1{font-size:clamp(2.2rem,8vw,3.2rem);}
 }
-
 /* ═══════════════════════════════
    VIDEO SECTION
 ═══════════════════════════════ */
@@ -297,7 +274,6 @@ nav{
 }
 .ctr{max-width:960px;margin:0 auto;}
 .ctr-sm{max-width:720px;margin:0 auto;}
-
 .vgate{
   width:100%;aspect-ratio:16/9;
   background:#000;
@@ -334,7 +310,6 @@ nav{
   padding:9px 22px;border-radius:100px;
   letter-spacing:-.01em;
 }
-
 .vreal{
   display:none;width:100%;aspect-ratio:16/9;
   background:#000;
@@ -342,10 +317,8 @@ nav{
   border-radius:var(--r);overflow:hidden;position:relative;
 }
 .vreal iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
-
 .vcap{text-align:center;margin-top:16px;font-size:.85rem;color:var(--muted);}
 .vcap strong{color:var(--white);font-weight:600;}
-
 /* ═══════════════════════════════
    SECTION BASE
 ═══════════════════════════════ */
@@ -363,7 +336,6 @@ nav{
   font-size:.95rem;color:var(--muted-l);
   max-width:540px;line-height:1.65;margin-bottom:48px;
 }
-
 /* ═══════════════════════════════
    WHY CARDS (under video)
 ═══════════════════════════════ */
@@ -388,7 +360,6 @@ nav{
 .wnum{font-size:.6rem;font-weight:700;color:var(--gold);letter-spacing:.1em;margin-bottom:12px;display:block;}
 .wcard h3{font-size:.92rem;font-weight:700;margin-bottom:8px;letter-spacing:-.03em;}
 .wcard p{font-size:.8rem;color:var(--muted);line-height:1.55;}
-
 /* ═══════════════════════════════
    VIDEO CTA BOX
 ═══════════════════════════════ */
@@ -401,7 +372,6 @@ nav{
 }
 .vcta h3{font-size:1.3rem;font-weight:800;letter-spacing:-.04em;margin-bottom:8px;}
 .vcta p{font-size:.87rem;color:var(--muted);margin-bottom:22px;}
-
 /* ═══════════════════════════════
    STATS BAR
 ═══════════════════════════════ */
@@ -413,14 +383,12 @@ nav{
 @media(max-width:600px){.sbar-in{grid-template-columns:repeat(2,1fr);}}
 .sn{font-size:2.3rem;font-weight:900;color:#000;letter-spacing:-.05em;display:block;line-height:1;margin-bottom:3px;}
 .sl{font-size:.7rem;font-weight:600;color:rgba(0,0,0,.5);}
-
 /* ═══════════════════════════════
    TRANSFORMATION
 ═══════════════════════════════ */
 .tfm-wrap{padding:80px 20px;background:var(--dark-2);border-top:1px solid rgba(255,255,255,.04);}
 .tfm-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:680px;}
 @media(max-width:600px){.tfm-grid{grid-template-columns:1fr;}}
-
 .tcard{
   border-radius:var(--r);overflow:hidden;position:relative;
   border:2px solid rgba(251,208,97,.12);
@@ -437,7 +405,6 @@ nav{
 .tlbl{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-l);display:block;margin-bottom:3px;}
 .tval{font-size:.88rem;font-weight:700;color:var(--white);}
 .tcard.after .tval{color:var(--gold);}
-
 /* ═══════════════════════════════
    CTA BAND
 ═══════════════════════════════ */
@@ -450,7 +417,6 @@ nav{
 .ctaband h2{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:800;letter-spacing:-.04em;margin-bottom:10px;}
 .ctaband h2 em{color:var(--gold);font-style:normal;}
 .ctaband p{font-size:.9rem;color:var(--muted);margin-bottom:28px;line-height:1.6;}
-
 /* ═══════════════════════════════
    BUTTONS
 ═══════════════════════════════ */
@@ -468,7 +434,6 @@ nav{
   transition:background .2s;
 }
 .bsm:hover{background:#f0c040;}
-
 /* ═══════════════════════════════
    TESTIMONIALS
 ═══════════════════════════════ */
@@ -489,7 +454,6 @@ nav{
 .vtinfo{padding:14px 18px;}
 .vtname{font-size:.82rem;font-weight:700;color:var(--gold);margin-bottom:3px;}
 .vtrole{font-size:.73rem;color:var(--muted);}
-
 .rev-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:12px;margin-top:28px;
@@ -502,7 +466,6 @@ nav{
 }
 .rimg:hover{border-color:rgba(251,208,97,.5);transform:translateY(-2px);}
 .rstack{display:flex;flex-direction:column;gap:12px;}
-
 /* ═══════════════════════════════
    OFFER
 ═══════════════════════════════ */
@@ -524,7 +487,6 @@ nav{
 }
 .oitem h4{font-size:.88rem;font-weight:700;margin-bottom:4px;letter-spacing:-.02em;}
 .oitem p{font-size:.8rem;color:var(--muted);line-height:1.5;}
-
 /* ═══════════════════════════════
    FAQ
 ═══════════════════════════════ */
@@ -545,7 +507,6 @@ nav{
 .fitem.open .fbody{max-height:600px;}
 .fbody p{font-size:.88rem;color:var(--muted-l);line-height:1.7;padding-bottom:22px;}
 .fbody p strong{color:var(--white);font-weight:600;}
-
 /* ═══════════════════════════════
    FINAL CTA
 ═══════════════════════════════ */
@@ -571,7 +532,6 @@ nav{
   gap:16px;flex-wrap:wrap;
 }
 .ctasub span{color:var(--gold);}
-
 /* ═══════════════════════════════
    FOOTER
 ═══════════════════════════════ */
@@ -587,13 +547,11 @@ footer p{font-size:.72rem;color:#242424;margin-top:4px;}
 footer a{color:#383838;text-decoration:none;transition:color .2s;}
 footer a:hover{color:var(--gold);}
 .flinks{display:flex;gap:20px;justify-content:center;margin-top:14px;flex-wrap:wrap;}
-
 /* ═══════════════════════════════
    SCROLL REVEAL
 ═══════════════════════════════ */
 .rev{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
 .rev.on{opacity:1;transform:translateY(0);}
-
 /* Mobile tweaks */
 @media(max-width:640px){
   .pbox{padding:32px 22px;}
@@ -603,10 +561,8 @@ footer a:hover{color:var(--gold);}
 </style>
 </head>
 <body>
-
 <!-- PROGRESS BAR -->
 <div id="pgbar"></div>
-
 <!-- ═══ POPUP ═══ -->
 <div id="pop">
   <div class="pbox">
@@ -621,7 +577,6 @@ footer a:hover{color:var(--gold);}
     <p class="pfine">Kein Spam. Keine Verpflichtung. Jederzeit abmeldbar.</p>
   </div>
 </div>
-
 <!-- ═══ NAV ═══ -->
 <nav>
   <div class="nav-l">
@@ -633,7 +588,6 @@ footer a:hover{color:var(--gold);}
   </div>
   <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="nav-cta">Kostenloses Gespräch →</a>
 </nav>
-
 <!-- ═══ HERO – FULL BLEED ═══ -->
 <section class="hero">
   <!-- BG IMAGE -->
@@ -642,18 +596,14 @@ footer a:hover{color:var(--gold);}
   </div>
   <!-- Warm glow -->
   <div class="hero-glow"></div>
-
   <!-- CONTENT -->
   <div class="hero-content">
     <div class="hero-eye">🏛️ Olympus Performance Coaching</div>
-
     <h1>So wirst du in<br>20 Wochen zum<br><em>griechischen Gott</em></h1>
-
     <p class="hero-sub">
       In den nächsten Minuten zeige ich dir genau wie vielbeschäftigte Unternehmer
       und Selbstständige in 5 Monaten Muskeln aufbauen und definieren.
     </p>
-
     <div class="hero-checks">
       <div class="hero-check"><div class="hck">✓</div><span>Ohne Zeit zu verlieren</span></div>
       <div class="hero-check"><div class="hck">✓</div><span>Mehr Fokus im Business</span></div>
@@ -661,11 +611,9 @@ footer a:hover{color:var(--gold);}
     </div>
   </div>
 </section>
-
 <!-- ═══ VIDEO ═══ -->
 <div class="vid-wrap">
   <div class="ctr rev">
-
     <!-- GATE -->
     <div class="vgate" id="vgate" onclick="trigPop()">
       <!-- Thumbnail -->
@@ -678,15 +626,12 @@ footer a:hover{color:var(--gold);}
         <div class="vgate-lbl">Klick zum Freischalten – 100% kostenlos</div>
       </div>
     </div>
-
     <!-- REAL VIDEO -->
     <div class="vreal" id="vreal">
       <!-- DEIN VSL ID HIER EINTRAGEN -->
       <iframe src="https://www.youtube.com/embed/02nBwqE5i3M?rel=0&modestbranding=1" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
     </div>
-
     <p class="vcap">Schau das Video vollständig – am Ende weißt du genau wie du <strong>shredded wirst.</strong></p>
-
     <!-- WHY CARDS directly under video -->
     <div style="margin-top:52px">
       <span class="slbl">Was du bekommst</span>
@@ -698,7 +643,6 @@ footer a:hover{color:var(--gold);}
         <div class="wcard"><span class="wnum">04</span><h3>Dein nächster Schritt</h3><p>Am Ende weißt du exakt was du morgen tun musst. Kein Overthinking. Kein Rumprobieren.</p></div>
       </div>
     </div>
-
     <!-- CTA box -->
     <div class="vcta">
       <h3>Bereit für deinen ersten Schritt?</h3>
@@ -708,7 +652,6 @@ footer a:hover{color:var(--gold);}
     </div>
   </div>
 </div>
-
 <!-- ═══ STATS ═══ -->
 <div class="sbar rev">
   <div class="sbar-in">
@@ -718,7 +661,6 @@ footer a:hover{color:var(--gold);}
     <div><span class="sn">100%</span><span class="sl">Ergebnis-Garantie</span></div>
   </div>
 </div>
-
 <!-- ═══ TRANSFORMATION ═══ -->
 <div class="tfm-wrap">
   <div class="ctr rev">
@@ -743,20 +685,17 @@ footer a:hover{color:var(--gold);}
     </div>
   </div>
 </div>
-
 <!-- ═══ CTA BAND ═══ -->
 <div class="ctaband rev">
   <h2>Bereit deinen Körper auf das Level<br><em>deines Erfolgs zu bringen?</em></h2>
   <p>Das Gespräch ist kostenlos, unverbindlich und dauert 20–30 Minuten.<br>Du gehst mit klaren Antworten raus – egal ob wir zusammenarbeiten oder nicht.</p>
   <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="blg">Kostenloses Analysegespräch buchen →</a>
 </div>
-
 <!-- ═══ TESTIMONIALS ═══ -->
 <div class="tsti-wrap">
   <div class="ctr rev">
     <span class="slbl">Kunden Ergebnisse</span>
     <h2 class="stitle">Was meine Kunden <em>sagen & erreichen</em></h2>
-
     <div class="vtgrid">
       <div class="vtcard">
         <div class="vtframe">
@@ -771,7 +710,6 @@ footer a:hover{color:var(--gold);}
         <div class="vtinfo"><p class="vtname">Kunden-Testimonial #2</p><p class="vtrole">Ergebnis nach 5 Monaten</p></div>
       </div>
     </div>
-
     <div class="rev-grid">
       <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/cace214a509246efbb4ace72771a6891/original/IMG_8071.jpg" class="rimg" alt="Bewertung">
       <div class="rstack">
@@ -780,14 +718,12 @@ footer a:hover{color:var(--gold);}
       </div>
       <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/b8ca5c795ea84fe8897a367150992127/original/IMG_8074.jpg" class="rimg" alt="Bewertung">
     </div>
-
     <div style="text-align:center;margin-top:40px" class="rev">
       <p style="font-size:.83rem;color:var(--muted);margin-bottom:14px">Diese Ergebnisse sind das System. Keine Ausnahmen.</p>
       <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="bsm">Kostenloses Gespräch buchen →</a>
     </div>
   </div>
 </div>
-
 <!-- ═══ ANGEBOT ═══ -->
 <div class="offer-wrap">
   <div class="ctr rev">
@@ -803,63 +739,50 @@ footer a:hover{color:var(--gold);}
     </div>
   </div>
 </div>
-
 <!-- ═══ FAQ ═══ -->
 <div class="faq-wrap">
   <div class="ctr-sm rev">
     <span class="slbl">Häufige Fragen</span>
     <h2 class="stitle">Deine <em>Fragen</em> – beantwortet</h2>
-
     <div class="flist">
-
       <div class="fitem">
         <button class="fbtn" onclick="fq(this)">Schaffe ich das wirklich neben meinem Business?<span class="farr">↓</span></button>
         <div class="fbody"><p><strong>Speziell für Unternehmer und Vielbeschäftigte mit 8–16 Stunden Workload gebaut.</strong> Ernährung die sich in deinen Alltag einfügt. Wer das System befolgt spart Zeit – weil er aufhört herumzuprobieren.</p></div>
       </div>
-
       <div class="fitem">
         <button class="fbtn" onclick="fq(this)">Ist das wieder nur ein Plan wie alle anderen?<span class="farr">↓</span></button>
         <div class="fbody"><p>Nein. Dieses System wird <strong>exakt auf deinen Kalender, dein Ziel und deinen Körpertyp abgestimmt</strong>. Täglicher 1:1 Support direkt von mir – kein Team, kein Bot, keine Automation.</p></div>
       </div>
-
       <div class="fitem">
         <button class="fbtn" onclick="fq(this)">Wie schnell sehe ich Ergebnisse?<span class="farr">↓</span></button>
         <div class="fbody"><p>Meine Kunden berichten bereits <strong>nach 2 Wochen von deutlich mehr Fokus und Energie</strong>. Erste sichtbare Körperveränderungen nach 4–6 Wochen. Nach 5 Monaten wirst du dich nicht mehr wiedererkennen. Mathematik = messbares Ergebnis.</p></div>
       </div>
-
       <div class="fitem">
         <button class="fbtn" onclick="fq(this)">Was kostet das Coaching?<span class="farr">↓</span></button>
         <div class="fbody"><p>Die Investition besprechen wir im kostenlosen Analysegespräch. <strong>Das Gespräch ist komplett kostenlos und unverbindlich.</strong></p></div>
       </div>
-
       <div class="fitem">
         <button class="fbtn" onclick="fq(this)">Gibt es eine Garantie?<span class="farr">↓</span></button>
         <div class="fbody"><p>Ja. Wenn du nach 5 Monaten keine klar sichtbare Transformation erreicht hast, <strong>arbeiten wir kostenlos weiter</strong> bis du sie erreichst. Voraussetzung: Du setzt das System um.</p></div>
       </div>
-
       <div class="fitem">
         <button class="fbtn" onclick="fq(this)">Brauche ich ein Gym oder Equipment?<span class="farr">↓</span></button>
         <div class="fbody"><p>Nein. Ich baue dir ein System das zu deiner Situation passt – Gym, zuhause, Hotel oder Park. <strong>Keine Ausreden mehr.</strong></p></div>
       </div>
-
       <div class="fitem">
         <button class="fbtn" onclick="fq(this)">Was passiert im kostenlosen Erstgespräch?<span class="farr">↓</span></button>
         <div class="fbody"><p>Wir schauen wo du stehst, was dich bisher aufgehalten hat und was dein schnellster Weg zum Ziel ist. Ich sage dir dann konkret wie mein Fahrplan für dich aussehen würde. <strong>Du gehst mit klaren Antworten raus – egal ob wir zusammenarbeiten oder nicht.</strong></p></div>
       </div>
-
       <div class="fitem">
         <button class="fbtn" onclick="fq(this)">Warum Leon und nicht ein anderer Coach?<span class="farr">↓</span></button>
         <div class="fbody"><p>Weil 99,9% der Coaches nicht das bieten können was ich dir biete. Meine Plätze sind bewusst begrenzt – das gibt mir die Möglichkeit, dir echte Rund-um-Betreuung zu geben.<br><br><strong>Wenn du mit mir schreibst, schreibst du mit mir – nicht mit einem Bot.</strong> Ich automatisiere nichts in der Kundenbetreuung. Mein Ziel: du lernst das System so gut, dass du langfristig eigenständig in Topform bleibst.<br><br>Ich weiß was es bedeutet, 16 Stunden am Tag zu arbeiten. Ich lebe was ich lehre – dauerhaft, nicht nur im Sommer. <strong>Genau darauf bin ich spezialisiert.</strong></p></div>
       </div>
-
     </div>
-
     <div style="text-align:center;margin-top:44px">
       <a href="https://calendly.com/elite-coaching089/kostenloses-erstgesprach-starte-deine-transfor-klon" target="_blank" class="blg">Kostenloses Analysegespräch buchen →</a>
     </div>
   </div>
 </div>
-
 <!-- ═══ FINAL CTA ═══ -->
 <div class="fcta rev">
   <h2>Du hast dir das letztes Jahr<br><em>schon vorgenommen.</em></h2>
@@ -871,7 +794,6 @@ footer a:hover{color:var(--gold);}
     <span>✓</span> Begrenzte Plätze
   </div>
 </div>
-
 <!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="frow">
@@ -888,14 +810,12 @@ footer a:hover{color:var(--gold);}
   </div>
   <p style="margin-top:14px">© 2025 Leon Herzog · Alle Rechte vorbehalten</p>
 </footer>
-
 <script>
 /* PROGRESS */
 window.addEventListener('scroll',()=>{
   const s=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight;
   document.getElementById('pgbar').style.width=(h>0?s/h*100:0)+'%';
 });
-
 /* POPUP */
 function trigPop(){
   if(sessionStorage.getItem('opc')==='1'){showV();return;}
@@ -908,8 +828,7 @@ function unlock(){
   if(!n){sh('pn');return;}
   if(!e||!e.includes('@')){sh('pe');return;}
   sessionStorage.setItem('opc','1');
-
-  fetch('https://hook.eu1.make.com/3xdgchkks6m62o1arg1y8ch0c7o03dfc', {
+  fetch('https://hook.eu1.make.com/jwqfed7svv7ls9hrdlsui3ys218cxony', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
@@ -922,7 +841,6 @@ function unlock(){
   })
   .then(()=>{ console.log('Gesendet'); })
   .catch(err=>{ console.error('Fehler:', err); });
-
   document.getElementById('pop').classList.remove('on');
   showV();
 }
@@ -946,21 +864,18 @@ window.addEventListener('DOMContentLoaded',()=>{
     document.getElementById('vreal').style.display='block';
   }
 });
-
 /* FAQ */
 function fq(btn){
   const it=btn.closest('.fitem'),op=it.classList.contains('open');
   document.querySelectorAll('.fitem').forEach(i=>i.classList.remove('open'));
   if(!op)it.classList.add('open');
 }
-
 /* REVEAL */
 const ro=new IntersectionObserver(e=>{
   e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');ro.unobserve(x.target);}});
 },{threshold:.07});
 document.querySelectorAll('.rev').forEach(el=>ro.observe(el));
 </script>
-
 <style>
 @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
 </style>

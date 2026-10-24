@@ -93,7 +93,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 48px;d
 #pop{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:9000;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(14px);}
 #pop.on{display:flex;animation:fadeOv .3s ease;}
 @keyframes fadeOv{from{opacity:0;}to{opacity:1;}}
-.pbox{background:var(--dark-3);border:1px solid rgba(251,208,97,.22);border-radius:var(--r);max-width:440px;width:100%;padding:44px 36px;position:relative;overflow:hidden;animation:pUp .4s cubic-bezier(.34,1.56,.64,1);}
+.pbox{background:var(--dark-3);border:1px solid rgba(251,208,97,.22);border-radius:var(--r);max-width:440px;width:100%;padding:44px 36px;position:relative;overflow-x:hidden;overflow-y:auto;max-height:calc(100vh - 40px);max-height:calc(100dvh - 40px);animation:pUp .4s cubic-bezier(.34,1.56,.64,1);}
 @keyframes pUp{from{opacity:0;transform:translateY(40px) scale(.94);}to{opacity:1;transform:translateY(0) scale(1);}}
 .pbox::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-dark));}
 .pclose{position:absolute;top:16px;right:18px;color:var(--muted);font-size:1.1rem;cursor:pointer;background:none;border:none;z-index:2;}
@@ -111,6 +111,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 48px;d
 .pconsent input{flex:0 0 auto;width:18px;height:18px;margin-top:2px;accent-color:var(--gold);cursor:pointer;}
 .pconsent span{font-size:.72rem;line-height:1.5;color:var(--muted-l);}
 .pconsent a{color:var(--gold);text-decoration:underline;}
+.pconsent.err{outline:1px solid #ff4444;outline-offset:6px;border-radius:6px;animation:shake .3s ease;}
+.perr{display:none;color:#ff6b6b;font-size:.76rem;line-height:1.4;text-align:left;margin:-6px 0 12px;}
+.perr.on{display:block;}
 @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
 .vid-wrap{background:var(--dark-2);border-top:1px solid rgba(255,255,255,.05);padding:130px 20px 72px;}
 .ctr{max-width:960px;margin:0 auto;}
@@ -261,11 +264,13 @@ footer a:hover{color:var(--gold);}
     <p class="psub">In Sekunden hast du Zugang zum kompletten System.</p>
     <input class="pfield" type="text" id="pn" placeholder="Dein Vorname">
     <input class="pfield" type="email" id="pe" placeholder="Deine E-Mail-Adresse">
-    <input class="pfield" type="tel" id="pt" placeholder="Deine Telefonnummer">
+    <input class="pfield" type="tel" id="pt" placeholder="Handynummer, z. B. 0170 1234567">
+    <input class="pfield" type="text" id="pi" placeholder="Dein Instagram @name (optional)" autocapitalize="none" autocorrect="off" spellcheck="false">
     <label class="pconsent" for="pc">
       <input type="checkbox" id="pc">
-      <span>Ich bin einverstanden, dass Leon Herzog mich per E-Mail und Telefon/WhatsApp zu meinem Guide und zum kostenlosen Analysegespräch kontaktiert. Jederzeit widerrufbar. <a href="https://versteckmich.de/elite_coaching/datenschutz" target="_blank" rel="noopener">Datenschutz</a></span>
+      <span>Ich bin einverstanden, dass Leon Herzog mich per E-Mail, Telefon/WhatsApp und Instagram zu meinem Guide und zum kostenlosen Analysegespräch kontaktiert. Jederzeit widerrufbar. <a href="https://versteckmich.de/elite_coaching/datenschutz" target="_blank" rel="noopener">Datenschutz</a></span>
     </label>
+    <p class="perr" id="perr" role="alert"></p>
     <button class="punlock" onclick="unlock()">🔓 Jetzt freischalten →</button>
     <p class="pfine">Kein Spam. Keine Verpflichtung.</p>
   </div>
@@ -561,21 +566,34 @@ function openPopup(){ document.getElementById('pop').classList.add('on'); }
 function closePopup(){ document.getElementById('pop').classList.remove('on'); }
 
 /* LEAD CAPTURE — Make.com-Webhook (Szenario "Integration Webhooks, Google Sheets").
-   Sendet vorname/email/telefon/datum/quelle/einwilligung; Make schreibt alles in das Sheet "Lead landing"
-   (Spalten: Name, Email, Telefon, Datum, Quelle, Einwilligung). einwilligung = "Ja" nur, wenn das Häkchen gesetzt ist. */
+   Sendet vorname/email/telefon/instagram/datum/quelle/einwilligung; Make schreibt alles in das Sheet "Lead landing"
+   (Spalten: Name, Email, Telefon, Datum, Quelle, Einwilligung, Instagram). Das Häkchen ist Pflicht: ohne Häkchen
+   wird nichts abgeschickt, einwilligung ist daher immer "Ja". Die Handynummer muss mit 0 oder + beginnen. */
 function unlock(){
   const n = document.getElementById('pn').value.trim();
   const e = document.getElementById('pe').value.trim();
   const t = document.getElementById('pt').value.trim();
+  const ig = document.getElementById('pi').value.trim();
   const c = document.getElementById('pc').checked;
   if(!n){return sh('pn');}
   if(!e||!e.includes('@')){return sh('pe');}
-  if(!t){return sh('pt');}
+  if(!/^(\+|0)\d{8,15}$/.test(t.replace(/[\s().\/-]/g,''))){
+    showErr('Bitte gib deine Handynummer mit 0 am Anfang oder mit +49 ein, z. B. 0170 1234567.');
+    return sh('pt');
+  }
+  if(!c){
+    showErr('Bitte setz das Häkchen. Ohne dein Okay kann ich dir den Guide nicht schicken und dich nicht erreichen.');
+    const l = document.querySelector('.pconsent');
+    l.classList.add('err');
+    setTimeout(()=>l.classList.remove('err'),2500);
+    return;
+  }
+  document.getElementById('perr').classList.remove('on');
 
   fetch('https://hook.eu1.make.com/2w6hch84a5zd4rleblkjkyhjot6y4uvi', {
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ vorname:n, email:e, telefon:t, datum:new Date().toLocaleString('de-DE'), quelle:document.referrer||'Direkt', einwilligung:c?'Ja':'Nein' })
+    body: JSON.stringify({ vorname:n, email:e, telefon:t, instagram:ig, datum:new Date().toLocaleString('de-DE'), quelle:document.referrer||'Direkt', einwilligung:'Ja' })
   }).catch(err=>console.error('Webhook-Fehler:', err));
 
   closePopup();
@@ -589,6 +607,11 @@ function unmuteVideo(){
   iframe.contentWindow.postMessage(JSON.stringify({event:'command',func:'unMute',args:[]}), '*');
   iframe.contentWindow.postMessage(JSON.stringify({event:'command',func:'playVideo',args:[]}), '*');
   document.getElementById('unmuteBtn').style.display = 'none';
+}
+function showErr(msg){
+  const p = document.getElementById('perr');
+  p.textContent = msg;
+  p.classList.add('on');
 }
 function sh(id){
   const el=document.getElementById(id);

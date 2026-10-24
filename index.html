@@ -107,6 +107,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 48px;d
 .pfield{width:100%;background:var(--dark-5);border:1px solid #2a2a2a;border-radius:var(--r-sm);color:var(--white);padding:14px 16px;font-family:'Inter',sans-serif;font-size:.88rem;letter-spacing:-.02em;margin-bottom:10px;outline:none;transition:border-color .2s;}
 .pfield:focus{border-color:var(--gold);}
 .pfield::placeholder{color:#3a3a3a;}
+.pconsent{display:flex;align-items:flex-start;gap:10px;text-align:left;margin:6px 0 16px;cursor:pointer;}
+.pconsent input{flex:0 0 auto;width:18px;height:18px;margin-top:2px;accent-color:var(--gold);cursor:pointer;}
+.pconsent span{font-size:.72rem;line-height:1.5;color:var(--muted-l);}
+.pconsent a{color:var(--gold);text-decoration:underline;}
 @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
 .vid-wrap{background:var(--dark-2);border-top:1px solid rgba(255,255,255,.05);padding:130px 20px 72px;}
 .ctr{max-width:960px;margin:0 auto;}
@@ -258,6 +262,10 @@ footer a:hover{color:var(--gold);}
     <input class="pfield" type="text" id="pn" placeholder="Dein Vorname">
     <input class="pfield" type="email" id="pe" placeholder="Deine E-Mail-Adresse">
     <input class="pfield" type="tel" id="pt" placeholder="Deine Telefonnummer">
+    <label class="pconsent" for="pc">
+      <input type="checkbox" id="pc">
+      <span>Ich bin einverstanden, dass Leon Herzog mich per E-Mail und Telefon/WhatsApp zu meinem Guide und zum kostenlosen Analysegespräch kontaktiert. Jederzeit widerrufbar. <a href="https://versteckmich.de/elite_coaching/datenschutz" target="_blank" rel="noopener">Datenschutz</a></span>
+    </label>
     <button class="punlock" onclick="unlock()">🔓 Jetzt freischalten →</button>
     <p class="pfine">Kein Spam. Keine Verpflichtung.</p>
   </div>
@@ -552,14 +560,14 @@ function showStep(id, dotIndex){
 function openPopup(){ document.getElementById('pop').classList.add('on'); }
 function closePopup(){ document.getElementById('pop').classList.remove('on'); }
 
-/* LEAD CAPTURE — gleicher Webhook wie auf der Live-Seite (hook.eu1.make.com/2w6hch84a5zd4rleblkjkyhjot6y4uvi).
-   ACHTUNG: sendet vorname/email/telefon/datum/quelle. Dein bestehendes Make.com-Szenario mappt
-   aktuell vorname/email/instagram — "instagram" im Szenario auf "telefon" umstellen, sonst
-   kommt das Feld dort leer an. */
+/* LEAD CAPTURE — Make.com-Webhook (Szenario "Integration Webhooks, Google Sheets").
+   Sendet vorname/email/telefon/datum/quelle/einwilligung; Make schreibt alles in das Sheet "Lead landing"
+   (Spalten: Name, Email, Telefon, Datum, Quelle, Einwilligung). einwilligung = "Ja" nur, wenn das Häkchen gesetzt ist. */
 function unlock(){
   const n = document.getElementById('pn').value.trim();
   const e = document.getElementById('pe').value.trim();
   const t = document.getElementById('pt').value.trim();
+  const c = document.getElementById('pc').checked;
   if(!n){return sh('pn');}
   if(!e||!e.includes('@')){return sh('pe');}
   if(!t){return sh('pt');}
@@ -567,7 +575,7 @@ function unlock(){
   fetch('https://hook.eu1.make.com/2w6hch84a5zd4rleblkjkyhjot6y4uvi', {
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ vorname:n, email:e, telefon:t, datum:new Date().toLocaleString('de-DE'), quelle:document.referrer||'Direkt' })
+    body: JSON.stringify({ vorname:n, email:e, telefon:t, datum:new Date().toLocaleString('de-DE'), quelle:document.referrer||'Direkt', einwilligung:c?'Ja':'Nein' })
   }).catch(err=>console.error('Webhook-Fehler:', err));
 
   closePopup();

@@ -234,9 +234,9 @@ footer a:hover{color:var(--gold);}
 <div id="pgbar"></div>
 
 <div class="legal-bar">
-  <a href="https://versteckmich.de/elite_coaching/impressum" target="_blank" rel="noopener">Impressum</a>
+  <a href="https://exquisite-alfajores-300159.netlify.app/#impressum" target="_blank" rel="noopener">Impressum</a>
   <span>·</span>
-  <a href="https://versteckmich.de/elite_coaching/datenschutz" target="_blank" rel="noopener">Datenschutz</a>
+  <a href="https://exquisite-alfajores-300159.netlify.app/#datenschutz" target="_blank" rel="noopener">Datenschutz</a>
 </div>
 
 <nav>
@@ -263,12 +263,12 @@ footer a:hover{color:var(--gold);}
     <h2 class="ptitle">Trag dich ein –<br><em>Guide startet sofort</em></h2>
     <p class="psub">In Sekunden hast du Zugang zum kompletten System.</p>
     <input class="pfield" type="text" id="pn" placeholder="Dein Vorname">
-    <input class="pfield" type="email" id="pe" placeholder="Deine E-Mail-Adresse">
+    <input class="pfield" type="text" id="pi" placeholder="Dein Instagram-Name, z. B. @leonherzog.de" autocapitalize="none" autocorrect="off" spellcheck="false">
     <input class="pfield" type="tel" id="pt" placeholder="Handynummer, z. B. 0170 1234567">
-    <input class="pfield" type="text" id="pi" placeholder="Dein Instagram @name (optional)" autocapitalize="none" autocorrect="off" spellcheck="false">
+    <input class="pfield" type="email" id="pe" placeholder="Deine E-Mail-Adresse (optional)">
     <label class="pconsent" for="pc">
       <input type="checkbox" id="pc">
-      <span>Ich bin einverstanden, dass Leon Herzog mich per E-Mail, Telefon/WhatsApp und Instagram zu meinem Guide und zum kostenlosen Analysegespräch kontaktiert. Jederzeit widerrufbar. <a href="https://versteckmich.de/elite_coaching/datenschutz" target="_blank" rel="noopener">Datenschutz</a></span>
+      <span>Ich bin einverstanden, dass Leon Herzog mich per E-Mail, Telefon/WhatsApp und Instagram zu meinem Guide und zum kostenlosen Analysegespräch kontaktiert. Jederzeit widerrufbar. <a href="https://exquisite-alfajores-300159.netlify.app/#datenschutz" target="_blank" rel="noopener">Datenschutz</a></span>
     </label>
     <p class="perr" id="perr" role="alert"></p>
     <button class="punlock" onclick="unlock()">🔓 Jetzt freischalten →</button>
@@ -522,8 +522,8 @@ footer a:hover{color:var(--gold);}
     </div>
     <p><a href="https://instagram.com/leonherzog.de" target="_blank">@leonherzog.de</a></p>
     <div class="flinks">
-      <a href="https://versteckmich.de/elite_coaching/impressum" target="_blank">Impressum</a>
-      <a href="https://versteckmich.de/elite_coaching/datenschutz" target="_blank">Datenschutz</a>
+      <a href="https://exquisite-alfajores-300159.netlify.app/#impressum" target="_blank">Impressum</a>
+      <a href="https://exquisite-alfajores-300159.netlify.app/#datenschutz" target="_blank">Datenschutz</a>
     </div>
     <p style="margin-top:14px">© 2025 Leon Herzog · Alle Rechte vorbehalten</p>
   </footer>
@@ -566,20 +566,32 @@ function openPopup(){ document.getElementById('pop').classList.add('on'); }
 function closePopup(){ document.getElementById('pop').classList.remove('on'); }
 
 /* LEAD CAPTURE — Make.com-Webhook (Szenario "Integration Webhooks, Google Sheets").
-   Sendet vorname/email/telefon/instagram/datum/quelle/einwilligung; Make schreibt alles in das Sheet "Lead landing"
-   (Spalten: Name, Email, Telefon, Datum, Quelle, Einwilligung, Instagram). Das Häkchen ist Pflicht: ohne Häkchen
-   wird nichts abgeschickt, einwilligung ist daher immer "Ja". Die Handynummer muss mit 0 oder + beginnen. */
+   Sendet vorname/instagram/telefon/email/datum/quelle/einwilligung; Make schreibt alles in das Sheet "Lead landing"
+   (Spalten: Name, Email, Telefon, Datum, Quelle, Einwilligung, Instagram). Pflicht: Vorname, Instagram-Name, Handynummer
+   (muss mit 0 oder + beginnen) und das Häkchen. Die E-Mail ist optional. Der Instagram-Name wird zu "@name" normalisiert. */
+function normIg(v){
+  v = (v||'').trim().replace(/^(https?:\/\/)?(www\.)?instagram\.com\//i,'').replace(/[?#\/].*$/,'').replace(/^@+/,'');
+  return /^[A-Za-z0-9._]{1,30}$/.test(v) ? '@'+v : '';
+}
 function unlock(){
+  document.getElementById('perr').classList.remove('on');
   const n = document.getElementById('pn').value.trim();
+  const ig = normIg(document.getElementById('pi').value);
   const e = document.getElementById('pe').value.trim();
   const t = document.getElementById('pt').value.trim();
-  const ig = document.getElementById('pi').value.trim();
   const c = document.getElementById('pc').checked;
   if(!n){return sh('pn');}
-  if(!e||!e.includes('@')){return sh('pe');}
+  if(!ig){
+    showErr('Bitte gib deinen Instagram-Namen an, z. B. @leonherzog.de (nur Buchstaben, Zahlen, Punkt und Unterstrich).');
+    return sh('pi');
+  }
   if(!/^(\+|0)\d{8,15}$/.test(t.replace(/[\s().\/-]/g,''))){
     showErr('Bitte gib deine Handynummer mit 0 am Anfang oder mit +49 ein, z. B. 0170 1234567.');
     return sh('pt');
+  }
+  if(e && !/^\S+@\S+\.\S+$/.test(e)){
+    showErr('Bitte prüf deine E-Mail-Adresse oder lass das Feld leer.');
+    return sh('pe');
   }
   if(!c){
     showErr('Bitte setz das Häkchen. Ohne dein Okay kann ich dir den Guide nicht schicken und dich nicht erreichen.');

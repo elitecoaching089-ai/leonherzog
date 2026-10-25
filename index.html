@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Olympus Performance Coaching – Leon Herzog</title>
 <link rel="preload" href="fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="img/hero-m.jpg" media="(max-width:980px)">
+<link rel="preload" as="image" href="img/hero-d.jpg" media="(min-width:981px)">
 <style>
 @font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/inter-latin-wght-normal.woff2) format('woff2-variations'),url(fonts/inter-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
 :root {
@@ -41,12 +43,30 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 48px;d
 @media(max-width:640px){nav{padding:0 18px;}.nav-name{font-size:.9rem;}.nav-sub{display:none;}}
 .step-wrap{min-height:100vh;padding:130px 20px 100px;display:flex;align-items:flex-start;justify-content:center;position:relative;z-index:1;}
 .step-box{max-width:600px;width:100%;}
-#step1{position:relative;}
-.step1-bg{position:absolute;inset:0;z-index:0;overflow:hidden;}
-.step1-bg img{width:100%;height:100%;object-fit:cover;object-position:75% 25%;}
+#step1{position:relative;overflow:hidden;}
+.step1-bg{position:absolute;top:68px;right:0;bottom:0;width:62%;z-index:0;overflow:hidden;background:#0a0a0a;}
+.step1-bg picture{display:block;width:100%;height:100%;}
+.step1-bg img{width:100%;height:100%;object-fit:cover;object-position:60% 0;filter:brightness(.8) contrast(1.04);}
 .step1-bg::after{content:'';position:absolute;inset:0;background:
-    linear-gradient(to right, rgba(10,10,10,1) 0%, rgba(10,10,10,.97) 32%, rgba(10,10,10,.75) 55%, rgba(10,10,10,.3) 78%, rgba(10,10,10,.05) 100%),
-    linear-gradient(to top, rgba(10,10,10,.75) 0%, transparent 40%);}
+    linear-gradient(to right,#0a0a0a 0%,rgba(10,10,10,.9) 10%,rgba(10,10,10,.5) 34%,rgba(10,10,10,.08) 66%,rgba(10,10,10,0) 100%),
+    linear-gradient(to top,#0a0a0a 0%,rgba(10,10,10,0) 26%);}
+#step1 .step-wrap{max-width:1280px;margin:0 auto;padding-left:48px;padding-right:48px;justify-content:flex-start;}
+#step1 .step-box{max-width:580px;}
+.tag{display:block;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:800;line-height:1.5;margin-bottom:18px;text-shadow:0 1px 10px rgba(0,0,0,.9);}
+.h1-hero{font-size:clamp(1.75rem,3.6vw,2.55rem);font-weight:900;line-height:1.1;letter-spacing:-.045em;margin-bottom:16px;text-shadow:0 2px 22px rgba(0,0,0,.85),0 1px 3px rgba(0,0,0,.6);}
+.h1-hero em{color:var(--gold);font-style:normal;}
+.sub-hero{font-size:1rem;color:#d4d4d4;line-height:1.6;margin-bottom:30px;max-width:520px;text-shadow:0 1px 14px rgba(0,0,0,.9);}
+.sub-hero strong{color:#fff;}
+@media(max-width:980px){
+  #step1{padding-top:68px;}
+  .step1-bg{position:relative;top:auto;right:auto;bottom:auto;width:100%;height:clamp(250px,72vw,400px);}
+  .step1-bg img{object-position:50% 0;filter:brightness(.88) contrast(1.04);}
+  .step1-bg::after{background:linear-gradient(to top,#0a0a0a 0%,rgba(10,10,10,.82) 18%,rgba(10,10,10,0) 58%);}
+  #step1 .step-wrap{min-height:0;padding:0 20px 96px;margin-top:-58px;justify-content:center;}
+  .tag{font-size:.66rem;margin-bottom:14px;}
+  .h1-hero{font-size:clamp(1.65rem,7.4vw,2.1rem);}
+  .sub-hero{font-size:.95rem;margin-bottom:24px;}
+}
 .step-question{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:20px;letter-spacing:-.02em;}
 .back-link{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:var(--muted);cursor:pointer;margin-bottom:26px;transition:color .2s;}
 .back-link:hover{color:var(--gold);}
@@ -54,12 +74,31 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 48px;d
 .step-h1{font-size:clamp(1.9rem,4.5vw,2.7rem);font-weight:900;line-height:1.1;letter-spacing:-.045em;margin-bottom:16px;}
 .step-h1 em{color:var(--gold);font-style:normal;}
 .step-sub{font-size:.95rem;color:var(--muted-l);line-height:1.65;margin-bottom:36px;max-width:520px;}
-.opt-card{display:flex;align-items:center;gap:16px;background:var(--dark-3);border:1px solid rgba(255,255,255,.06);border-left:3px solid transparent;border-radius:var(--r-sm);padding:20px 22px;margin-bottom:12px;cursor:pointer;transition:.2s;}
-.opt-card:hover{border-color:rgba(251,208,97,.5);border-left-color:var(--gold);transform:translateX(3px);}
-.opt-ico{width:44px;height:44px;border-radius:12px;background:var(--dark-5);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.opt-title{font-weight:700;font-size:.95rem;margin-bottom:3px;letter-spacing:-.02em;}
-.opt-desc{font-size:.78rem;color:var(--muted);}
-.opt-arrow{margin-left:auto;color:var(--gold);font-size:1.1rem;flex-shrink:0;}
+.shape-q{font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:14px;letter-spacing:-.02em;line-height:1.45;text-shadow:0 1px 12px rgba(0,0,0,.9);}
+.shape-list{display:grid;gap:12px;}
+.shape-card{display:flex;align-items:center;gap:16px;width:100%;text-align:left;font:inherit;letter-spacing:inherit;color:inherit;background:rgba(21,21,21,.94);border:1px solid rgba(255,255,255,.09);border-radius:var(--r-sm);padding:10px 16px 10px 10px;cursor:pointer;transition:border-color .2s,transform .2s,background .2s;-webkit-tap-highlight-color:transparent;}
+.shape-card:hover,.shape-card:active{border-color:rgba(251,208,97,.6);background:rgba(28,28,28,.96);transform:translateX(3px);}
+.shape-card:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+.shape-fig{flex-shrink:0;width:84px;height:98px;display:flex;align-items:center;justify-content:center;background:#0e0e0e;border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:6px;}
+.shape-svg{width:100%;height:100%;display:block;overflow:visible;}
+.shape-body{stroke:rgba(251,208,97,.6);stroke-width:1.5;transition:stroke .2s;}
+.shape-card:hover .shape-body,.shape-card:focus-visible .shape-body{stroke:var(--gold);}
+.shape-text{display:block;min-width:0;}
+.shape-title{display:block;font-weight:800;font-size:1rem;margin-bottom:4px;letter-spacing:-.025em;line-height:1.3;}
+.shape-desc{display:block;font-size:.82rem;color:#b8b8b8;line-height:1.5;}
+.shape-arrow{margin-left:auto;padding-left:6px;color:var(--gold);font-size:1.15rem;flex-shrink:0;}
+.shape-fine{font-size:.7rem;color:#8a8a8a;margin-top:14px;text-shadow:0 1px 8px rgba(0,0,0,.9);}
+@media(min-width:981px){
+  #step1 .step-wrap{padding-top:104px;}
+  #step1 .step-box{max-width:640px;}
+  .shape-list{grid-template-columns:repeat(3,1fr);}
+  .shape-card{flex-direction:column;align-items:stretch;gap:12px;padding:10px 10px 16px;}
+  .shape-card:hover,.shape-card:active{transform:translateY(-3px);}
+  .shape-fig{width:100%;height:150px;padding:8px;}
+  .shape-arrow{display:none;}
+  .shape-text{padding:0 4px;}
+}
+@media(max-width:380px){.shape-fig{width:70px;height:82px;}.shape-card{gap:12px;}.shape-title{font-size:.92rem;}.shape-desc{font-size:.78rem;}}
 .step-checks{display:flex;flex-wrap:wrap;gap:10px 22px;margin-bottom:34px;}
 .step-check{display:flex;align-items:center;gap:9px;font-size:.85rem;color:rgba(255,255,255,.7);font-weight:500;}
 .hck{width:18px;height:18px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.56rem;font-weight:900;color:#000;}
@@ -280,69 +319,38 @@ footer a:hover{color:var(--gold);}
   </div>
 </div>
 
-<!-- ═══════════════════════════════ STEP 1 — Segmentierung ═══════════════════════════════ -->
+<!-- ═══════════════════════════════ STEP 1 — Körperform-Auswahl ═══════════════════════════════ -->
 <section class="stepscreen visible" id="step1">
   <div class="step1-bg">
-    <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/a55225331ac040f7b09bb10985ae0433/original/E9EAD49F-20AB-4C3F-8826-2C40BF1459E5.png" alt="Leon Herzog">
+    <picture>
+      <source media="(max-width:980px)" srcset="img/hero-m.jpg">
+      <img src="img/hero-d.jpg" width="1600" height="900" alt="Leon Herzog am Strand" fetchpriority="high">
+    </picture>
   </div>
   <div class="step-wrap">
     <div class="step-box">
-      <span class="badge">★ Kostenloser Guide</span>
-      <h1 class="step-h1">In 20 Wochen aussehen wie ein <em>griechischer Gott</em></h1>
-      <p class="step-sub">Der kostenlose Guide für vielbeschäftigte Unternehmer: Muskeln aufbauen und definieren, gleichzeitig Performance steigern — ohne Zeit zu verschwenden.</p>
-      <p class="step-question">Damit du den passenden Guide bekommst: Was trifft am besten auf dich zu?</p>
-
-      <div class="opt-card" onclick="selectPath('zeit')">
-        <div class="opt-ico">⏱️</div>
-        <div><div class="opt-title">Ich hab keine Zeit</div><div class="opt-desc">Business läuft, für ein kompliziertes System bleibt keine Kapazität</div></div>
-        <div class="opt-arrow">→</div>
+      <span class="tag">Kostenloser Guide für Unternehmer, Selbstständige &amp; Vertriebler</span>
+      <h1 class="h1-hero">Wie vielbeschäftigte Unternehmer trotz kaum Zeit in 5 Monaten zu ihrem <em>Traumkörper</em> kommen</h1>
+      <p class="sub-hero">So weißt du immer genau, was zu tun ist – und hast am Ende <strong>mehr Zeit statt weniger.</strong></p>
+      <p class="shape-q">Dein Guide wird auf deinen Körper zugeschnitten. Wähle, was am ehesten auf dich zutrifft:</p>
+      <div class="shape-list">
+      <button type="button" class="shape-card" onclick="selectShape('duenn')">
+        <span class="shape-fig"><svg class="shape-svg" viewBox="0 0 160 190" aria-hidden="true" focusable="false"><defs><linearGradient id="gdu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3a3a"/><stop offset="1" stop-color="#1a1a1a"/></linearGradient></defs><path class="shape-body" d="M71.0,0.0C71.0,2.2 72.8,9.8 71.0,13.0C69.2,16.2 64.0,17.3 60.0,19.0C56.0,20.7 50.7,21.5 47.0,23.0C43.3,24.5 40.2,25.2 38.0,28.0C35.8,30.8 35.2,33.3 34.0,40.0C32.8,46.7 32.2,57.2 31.0,68.0C29.8,78.8 28.3,91.3 27.0,105.0C25.7,118.7 23.8,135.8 23.0,150.0C22.2,164.2 22.2,183.3 22.0,190.0L32.0,190.0C32.3,183.3 33.0,163.7 34.0,150.0C35.0,136.3 36.5,119.7 38.0,108.0C39.5,96.3 41.5,87.5 43.0,80.0C44.5,72.5 45.8,67.2 47.0,63.0C48.2,58.8 49.5,56.3 50.0,55.0C50.1,59.2 50.2,71.7 50.5,80.0C50.8,88.3 51.6,96.7 52.0,105.0C52.4,113.3 52.8,120.8 53.0,130.0C53.2,139.2 53.3,150.0 53.5,160.0C53.7,170.0 53.9,185.0 54.0,190.0L106.0,190.0C106.1,185.0 106.3,170.0 106.5,160.0C106.7,150.0 106.8,139.2 107.0,130.0C107.2,120.8 107.6,113.3 108.0,105.0C108.4,96.7 109.2,88.3 109.5,80.0C109.8,71.7 109.9,59.2 110.0,55.0C110.5,56.3 111.8,58.8 113.0,63.0C114.2,67.2 115.5,72.5 117.0,80.0C118.5,87.5 120.5,96.3 122.0,108.0C123.5,119.7 125.0,136.3 126.0,150.0C127.0,163.7 127.7,183.3 128.0,190.0L138.0,190.0C137.8,183.3 137.8,164.2 137.0,150.0C136.2,135.8 134.3,118.7 133.0,105.0C131.7,91.3 130.2,78.8 129.0,68.0C127.8,57.2 127.2,46.7 126.0,40.0C124.8,33.3 124.2,30.8 122.0,28.0C119.8,25.2 116.7,24.5 113.0,23.0C109.3,21.5 104.0,20.7 100.0,19.0C96.0,17.3 90.8,16.2 89.0,13.0C87.2,9.8 89.0,2.2 89.0,0.0Z" fill="url(#gdu)"/><path d="M78.0,25.0C76.0,25.2 69.8,25.0 66.0,26.0C62.2,27.0 56.8,30.2 55.0,31.0M82.0,25.0C84.0,25.2 90.2,25.0 94.0,26.0C97.8,27.0 103.2,30.2 105.0,31.0M54.0,64.0C55.5,65.2 59.2,69.0 63.0,71.0C66.8,73.0 74.7,75.2 77.0,76.0M106.0,64.0C104.5,65.2 100.8,69.0 97.0,71.0C93.2,73.0 85.3,75.2 83.0,76.0M54.0,76.0C55.5,77.2 59.2,81.0 63.0,83.0C66.8,85.0 74.7,87.2 77.0,88.0M106.0,76.0C104.5,77.2 100.8,81.0 97.0,83.0C93.2,85.0 85.3,87.2 83.0,88.0M54.0,88.0C55.5,89.2 59.2,93.0 63.0,95.0C66.8,97.0 74.7,99.2 77.0,100.0M106.0,88.0C104.5,89.2 100.8,93.0 97.0,95.0C93.2,97.0 85.3,99.2 83.0,100.0M60.0,172.0C61.3,170.5 65.2,162.7 68.0,163.0C70.8,163.3 75.5,172.2 77.0,174.0M100.0,172.0C98.7,170.5 94.8,162.7 92.0,163.0C89.2,163.3 84.5,172.2 83.0,174.0" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.6" stroke-linecap="round"/><path d="M80,138 q0,3 0,5" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        <span class="shape-text"><span class="shape-title">Ich bin dünn</span><span class="shape-desc">Nicht viel Muskelmasse, aber auch nicht viel Körperfett.</span></span>
+        <span class="shape-arrow" aria-hidden="true">→</span>
+      </button>
+      <button type="button" class="shape-card" onclick="selectShape('skinnyfat')">
+        <span class="shape-fig"><svg class="shape-svg" viewBox="0 0 160 190" aria-hidden="true" focusable="false"><defs><linearGradient id="gsk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3a3a"/><stop offset="1" stop-color="#1a1a1a"/></linearGradient></defs><path class="shape-body" d="M71.0,0.0C71.0,2.2 72.8,9.8 71.0,13.0C69.2,16.2 64.0,17.3 60.0,19.0C56.0,20.7 50.7,21.5 47.0,23.0C43.3,24.5 40.2,25.2 38.0,28.0C35.8,30.8 35.2,33.3 34.0,40.0C32.8,46.7 32.2,57.2 31.0,68.0C29.8,78.8 28.3,91.3 27.0,105.0C25.7,118.7 23.8,135.8 23.0,150.0C22.2,164.2 22.2,183.3 22.0,190.0L32.0,190.0C32.3,183.3 33.0,163.7 34.0,150.0C35.0,136.3 36.5,119.7 38.0,108.0C39.5,96.3 41.5,87.5 43.0,80.0C44.5,72.5 45.8,67.2 47.0,63.0C48.2,58.8 49.5,56.3 50.0,55.0C49.8,59.2 49.3,71.5 48.5,80.0C47.7,88.5 46.2,98.0 45.0,106.0C43.8,114.0 41.9,121.0 41.0,128.0C40.1,135.0 39.5,141.3 39.5,148.0C39.5,154.7 39.9,161.0 41.0,168.0C42.1,175.0 45.2,186.3 46.0,190.0L114.0,190.0C114.8,186.3 117.9,175.0 119.0,168.0C120.1,161.0 120.5,154.7 120.5,148.0C120.5,141.3 119.9,135.0 119.0,128.0C118.1,121.0 116.2,114.0 115.0,106.0C113.8,98.0 112.3,88.5 111.5,80.0C110.7,71.5 110.2,59.2 110.0,55.0C110.5,56.3 111.8,58.8 113.0,63.0C114.2,67.2 115.5,72.5 117.0,80.0C118.5,87.5 120.5,96.3 122.0,108.0C123.5,119.7 125.0,136.3 126.0,150.0C127.0,163.7 127.7,183.3 128.0,190.0L138.0,190.0C137.8,183.3 137.8,164.2 137.0,150.0C136.2,135.8 134.3,118.7 133.0,105.0C131.7,91.3 130.2,78.8 129.0,68.0C127.8,57.2 127.2,46.7 126.0,40.0C124.8,33.3 124.2,30.8 122.0,28.0C119.8,25.2 116.7,24.5 113.0,23.0C109.3,21.5 104.0,20.7 100.0,19.0C96.0,17.3 90.8,16.2 89.0,13.0C87.2,9.8 89.0,2.2 89.0,0.0Z" fill="url(#gsk)"/><path d="M78.0,25.0C76.0,25.2 69.8,25.0 66.0,26.0C62.2,27.0 56.8,30.2 55.0,31.0M82.0,25.0C84.0,25.2 90.2,25.0 94.0,26.0C97.8,27.0 103.2,30.2 105.0,31.0M52.0,78.0C53.3,80.8 55.8,93.2 60.0,95.0C64.2,96.8 74.2,90.0 77.0,89.0M108.0,78.0C106.7,80.8 104.2,93.2 100.0,95.0C95.8,96.8 85.8,90.0 83.0,89.0M52.0,132.0C54.0,136.7 59.3,155.7 64.0,160.0C68.7,164.3 77.3,158.3 80.0,158.0M108.0,132.0C106.0,136.7 100.7,155.7 96.0,160.0C91.3,164.3 82.7,158.3 80.0,158.0M41.0,166.0C41.8,167.7 44.5,172.3 46.0,176.0C47.5,179.7 49.3,186.0 50.0,188.0M119.0,166.0C118.2,167.7 115.5,172.3 114.0,176.0C112.5,179.7 110.7,186.0 110.0,188.0" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.6" stroke-linecap="round"/><path d="M80,138 q-1.5,4 0,8" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        <span class="shape-text"><span class="shape-title">Arme und Beine sind eher dünn</span><span class="shape-desc">Das Fett sammelt sich vor allem an Bauch, Brust und unterem Rücken.</span></span>
+        <span class="shape-arrow" aria-hidden="true">→</span>
+      </button>
+      <button type="button" class="shape-card" onclick="selectShape('uebergewicht')">
+        <span class="shape-fig"><svg class="shape-svg" viewBox="0 0 160 190" aria-hidden="true" focusable="false"><defs><linearGradient id="gue" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3a3a"/><stop offset="1" stop-color="#1a1a1a"/></linearGradient></defs><path class="shape-body" d="M71.0,0.0C71.0,2.2 73.2,10.0 71.0,13.0C68.8,16.0 62.7,16.5 58.0,18.0C53.3,19.5 47.3,20.3 43.0,22.0C38.7,23.7 34.8,24.7 32.0,28.0C29.2,31.3 28.0,35.0 26.0,42.0C24.0,49.0 22.0,59.5 20.0,70.0C18.0,80.5 15.8,91.7 14.0,105.0C12.2,118.3 10.0,135.8 9.0,150.0C8.0,164.2 8.2,183.3 8.0,190.0L25.0,190.0C25.3,183.3 26.2,162.5 27.0,150.0C27.8,137.5 28.5,125.0 30.0,115.0C31.5,105.0 34.0,97.5 36.0,90.0C38.0,82.5 40.3,75.3 42.0,70.0C43.7,64.7 45.3,60.0 46.0,58.0C45.2,62.3 42.5,75.3 41.0,84.0C39.5,92.7 38.2,102.0 37.0,110.0C35.8,118.0 34.7,125.3 34.0,132.0C33.3,138.7 32.8,144.0 33.0,150.0C33.2,156.0 33.8,161.3 35.0,168.0C36.2,174.7 39.2,186.3 40.0,190.0L120.0,190.0C120.8,186.3 123.8,174.7 125.0,168.0C126.2,161.3 126.8,156.0 127.0,150.0C127.2,144.0 126.7,138.7 126.0,132.0C125.3,125.3 124.2,118.0 123.0,110.0C121.8,102.0 120.5,92.7 119.0,84.0C117.5,75.3 114.8,62.3 114.0,58.0C114.7,60.0 116.3,64.7 118.0,70.0C119.7,75.3 122.0,82.5 124.0,90.0C126.0,97.5 128.5,105.0 130.0,115.0C131.5,125.0 132.2,137.5 133.0,150.0C133.8,162.5 134.7,183.3 135.0,190.0L152.0,190.0C151.8,183.3 152.0,164.2 151.0,150.0C150.0,135.8 147.8,118.3 146.0,105.0C144.2,91.7 142.0,80.5 140.0,70.0C138.0,59.5 136.0,49.0 134.0,42.0C132.0,35.0 130.8,31.3 128.0,28.0C125.2,24.7 121.3,23.7 117.0,22.0C112.7,20.3 106.7,19.5 102.0,18.0C97.3,16.5 91.2,16.0 89.0,13.0C86.8,10.0 89.0,2.2 89.0,0.0Z" fill="url(#gue)"/><path d="M78.0,25.0C75.7,25.2 68.3,25.0 64.0,26.0C59.7,27.0 54.0,30.2 52.0,31.0M82.0,25.0C84.3,25.2 91.7,25.0 96.0,26.0C100.3,27.0 106.0,30.2 108.0,31.0M47.0,80.0C48.8,84.0 53.0,102.0 58.0,104.0C63.0,106.0 73.8,94.0 77.0,92.0M113.0,80.0C111.2,84.0 107.0,102.0 102.0,104.0C97.0,106.0 86.2,94.0 83.0,92.0M38.0,128.0C40.7,133.7 47.0,155.0 54.0,162.0C61.0,169.0 75.7,168.7 80.0,170.0M122.0,128.0C119.3,133.7 113.0,155.0 106.0,162.0C99.0,169.0 84.3,168.7 80.0,170.0M35.0,172.0C36.2,173.3 40.0,177.0 42.0,180.0C44.0,183.0 46.2,188.3 47.0,190.0M125.0,172.0C123.8,173.3 120.0,177.0 118.0,180.0C116.0,183.0 113.8,188.3 113.0,190.0" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.6" stroke-linecap="round"/><path d="M80,150 q-2,4 0,9" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        <span class="shape-text"><span class="shape-title">Ich habe deutlich mehr Körperfett</span><span class="shape-desc">Mein Hauptziel ist erst einmal, Körperfett zu verlieren.</span></span>
+        <span class="shape-arrow" aria-hidden="true">→</span>
+      </button>
       </div>
-      <div class="opt-card" onclick="selectPath('frust')">
-        <div class="opt-ico">🔁</div>
-        <div><div class="opt-title">Ich hab schon vieles probiert und kaum Fortschritt gemacht</div><div class="opt-desc">Diäten, Pläne, Programme angefangen – nie das gewünschte Ergebnis gesehen</div></div>
-        <div class="opt-arrow">→</div>
-      </div>
-      <div class="opt-card" onclick="selectPath('start')">
-        <div class="opt-ico">🧭</div>
-        <div><div class="opt-title">Ich weiß nicht, wo ich anfangen soll</div><div class="opt-desc">Zu viele Meinungen, kein klarer Plan, keine Führung</div></div>
-        <div class="opt-arrow">→</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════ STEP 1b-ZEIT ═══════════════════════════════ -->
-<section class="stepscreen" id="step1b-zeit">
-  <div class="step-wrap">
-    <div class="step-box">
-      <span class="back-link" onclick="showStep('step1',1)">← zurück</span>
-      <span class="badge">Bevor du weitermachst</span>
-      <h1 class="step-h1">Du brauchst <em>weniger Zeit</em>, als du denkst</h1>
-      <ul class="bridge-list">
-        <li><div class="bnum">1</div><p><strong>2x Krafttraining pro Woche</strong> reicht, um in Topform zu kommen – nicht 5x im Gym.</p></li>
-        <li><div class="bnum">2</div><p>Auch die Ernährungsumstellung <strong>kostet dich keine zusätzliche Zeit</strong> – keine stundenlange Meal-Prep, nur ein paar angepasste Entscheidungen bei dem, was du eh schon isst.</p></li>
-        <li><div class="bnum">3</div><p>Aber: <strong>Je weniger Zeit du hast, desto genauer muss dein Plan auf dich zugeschnitten sein.</strong> Ein 08/15-Plan von der Stange kostet dich mehr Zeit, weil er nicht funktioniert.</p></li>
-      </ul>
-      <div class="bridge-key">Das Video zeigt dir gleich die Grundlagen. <strong>Nutze danach genau die kostenlose Option, um die es am Ende geht</strong> — für die wirklich individuelle Zuschneidung auf deinen Kalender.</div>
-      <button class="punlock" onclick="proceedToGuide('zeit')">Weiter zum Guide →</button>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════ STEP 1b-FRUST ═══════════════════════════════ -->
-<section class="stepscreen" id="step1b-frust">
-  <div class="step-wrap">
-    <div class="step-box">
-      <span class="back-link" onclick="showStep('step1',1)">← zurück</span>
-      <span class="badge">Bevor du weitermachst</span>
-      <h1 class="step-h1">Warum es <em>diesmal anders</em> läuft</h1>
-      <ul class="bridge-list">
-        <li><div class="bnum">1</div><p>Die meisten Pläne scheitern nicht, weil sie falsch sind — <strong>sondern weil sie nicht zu dir passen.</strong></p></li>
-        <li><div class="bnum">2</div><p>Das Video zeigt dir gleich, <strong>warum das so ist</strong> — und was stattdessen zählt.</p></li>
-        <li><div class="bnum">3</div><p>Eine Bitte: <strong>Schau es dir komplett bis zum Ende an</strong> — bevor du wie beim letzten Mal wieder abbrichst.</p></li>
-      </ul>
-      <div class="bridge-key">Genau deshalb: <strong>Nutze am Ende des Videos die kostenlose Option, um die es dort geht</strong> — dort wird's wirklich auf dich zugeschnitten, nicht nur im Video.</div>
-      <button class="punlock" onclick="proceedToGuide('frust')">Weiter zum Guide →</button>
+      <p class="shape-fine">Kostenlos &amp; unverbindlich</p>
     </div>
   </div>
 </section>
@@ -540,19 +548,16 @@ window.addEventListener('scroll',()=>{
 });
 
 const content = {
-  zeit: { headline: 'Muskeln aufbauen, <em>ohne dein Business zu vernachlässigen</em>', sub: 'Das Video zeigt dir das Grundsystem. Wie es exakt in deinen Kalender passt, klärst du über die kostenlose Option am Ende.' },
-  frust: { headline: 'Warum die meisten Pläne bei Unternehmern <em>scheitern</em> – und was wirklich funktioniert', sub: 'Das Video zeigt dir warum. Die individuelle Umsetzung für dich klärst du über die kostenlose Option am Ende.' },
-  start: { headline: 'Der exakte Fahrplan zum <em>athletischen Unternehmer-Körper</em>', sub: 'Kein Rätselraten mehr. Schritt für Schritt genau das, was du tun musst — und danach über die kostenlose Option deinen persönlichen Fahrplan.' }
+  duenn: { koerpertyp: 'Dünn', headline: 'Muskeln aufbauen, <em>ohne dein Business zu vernachlässigen</em>', sub: 'Du bringst kaum Körperfett mit. Das Video zeigt dir die Grundlagen für den Aufbau. Wie es exakt in deinen Kalender passt, klärst du über die kostenlose Option am Ende.' },
+  skinnyfat: { koerpertyp: 'Skinny Fat', headline: 'Bauch weg, Muskeln drauf – <em>mit einem System</em>', sub: 'Dünne Arme und Beine, Fett an Bauch, Brust und unterem Rücken: Das Video zeigt dir, wie du beides gleichzeitig angehst. Die individuelle Umsetzung klärst du über die kostenlose Option am Ende.' },
+  uebergewicht: { koerpertyp: 'Körperfett verlieren', headline: 'Körperfett verlieren, <em>ohne Extremdiät</em> und ohne Zeitfresser', sub: 'Das Video zeigt dir, wie du Körperfett abbaust und dabei deine Muskeln behältst. Die individuelle Umsetzung klärst du über die kostenlose Option am Ende.' }
 };
+let koerpertyp = '';
 
-function selectPath(key){
-  if(key === 'zeit'){ showStep('step1b-zeit', 2); return; }
-  if(key === 'frust'){ showStep('step1b-frust', 2); return; }
-  proceedToGuide('start');
-}
-
-function proceedToGuide(key){
+function selectShape(key){
   const c = content[key];
+  if(!c) return;
+  koerpertyp = c.koerpertyp;
   document.getElementById('s2-headline').innerHTML = c.headline;
   document.getElementById('s2-sub').innerText = c.sub;
   showStep('step2', 2);
@@ -609,7 +614,7 @@ function unlock(){
   fetch('https://hook.eu1.make.com/2w6hch84a5zd4rleblkjkyhjot6y4uvi', {
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ vorname:n, email:e, telefon:t, instagram:ig, datum:new Date().toLocaleString('de-DE'), quelle:document.referrer||'Direkt', einwilligung:'Ja' })
+    body: JSON.stringify({ vorname:n, email:e, telefon:t, instagram:ig, datum:new Date().toLocaleString('de-DE'), quelle:document.referrer||'Direkt', einwilligung:'Ja', koerpertyp:koerpertyp })
   }).catch(err=>console.error('Webhook-Fehler:', err));
 
   closePopup();

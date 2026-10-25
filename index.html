@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Olympus Performance Coaching – Leon Herzog</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/inter-latin-wght-normal.woff2) format('woff2-variations'),url(fonts/inter-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
 :root {
   --gold: #fbd061;
   --gold-dark: #c8920a;
@@ -90,6 +91,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 48px;d
 @keyframes shim{0%{transform:translateX(-100%);}60%,100%{transform:translateX(100%);}}
 .punlock:hover{background:#f0c040;transform:translateY(-1px);}
 .pfine{font-size:.7rem;color:var(--muted);text-align:center;margin-top:12px;}
+.pfine-yt{margin-top:6px;line-height:1.5;}
+.pfine a{color:var(--muted-l);text-decoration:underline;}
 #pop{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:9000;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(14px);}
 #pop.on{display:flex;animation:fadeOv .3s ease;}
 @keyframes fadeOv{from{opacity:0;}to{opacity:1;}}
@@ -216,14 +219,14 @@ footer{background:#060606;border-top:1px solid rgba(255,255,255,.04);padding:44p
 .flogo{width:34px;height:34px;object-fit:contain;border-radius:6px;}
 .fn{font-size:.92rem;font-weight:800;color:var(--white);letter-spacing:-.02em;}
 .fb{font-size:.6rem;color:var(--gold);font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
-footer p{font-size:.72rem;color:#242424;margin-top:4px;}
-footer a{color:#383838;text-decoration:none;transition:color .2s;}
+footer p{font-size:.72rem;color:#6a6a6a;margin-top:4px;}
+footer a{color:#9a9a9a;text-decoration:none;transition:color .2s;}
 footer a:hover{color:var(--gold);}
 .flinks{display:flex;gap:20px;justify-content:center;margin-top:14px;flex-wrap:wrap;}
 .rev{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
 .rev.on{opacity:1;transform:translateY(0);}
 .legal-bar{position:fixed;bottom:10px;left:10px;z-index:150;display:flex;gap:6px;align-items:center;font-size:.65rem;color:#444;background:rgba(10,10,10,.65);padding:5px 10px;border-radius:20px;backdrop-filter:blur(4px);}
-.legal-bar a{color:#777;text-decoration:none;}
+.legal-bar a{color:#a8a8a8;text-decoration:none;}
 .legal-bar a:hover{color:var(--gold);}
 .legal-bar span{color:#333;}
 @media(max-width:640px){.legal-bar{font-size:.6rem;padding:4px 8px;bottom:6px;left:6px;}}
@@ -234,9 +237,9 @@ footer a:hover{color:var(--gold);}
 <div id="pgbar"></div>
 
 <div class="legal-bar">
-  <a href="https://exquisite-alfajores-300159.netlify.app/#impressum" target="_blank" rel="noopener">Impressum</a>
+  <a href="impressum.html" target="_blank" rel="noopener">Impressum</a>
   <span>·</span>
-  <a href="https://exquisite-alfajores-300159.netlify.app/#datenschutz" target="_blank" rel="noopener">Datenschutz</a>
+  <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>
 </div>
 
 <nav>
@@ -268,11 +271,12 @@ footer a:hover{color:var(--gold);}
     <input class="pfield" type="email" id="pe" placeholder="Deine E-Mail-Adresse (optional)">
     <label class="pconsent" for="pc">
       <input type="checkbox" id="pc">
-      <span>Ich bin einverstanden, dass Leon Herzog mich per E-Mail, Telefon/WhatsApp und Instagram zu meinem Guide und zum kostenlosen Analysegespräch kontaktiert. Jederzeit widerrufbar. <a href="https://exquisite-alfajores-300159.netlify.app/#datenschutz" target="_blank" rel="noopener">Datenschutz</a></span>
+      <span>Ich bin einverstanden, dass Leon Herzog mich per E-Mail, Telefon/WhatsApp und Instagram zu meinem Guide und zum kostenlosen Analysegespräch kontaktiert. Jederzeit widerrufbar. <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutz</a></span>
     </label>
     <p class="perr" id="perr" role="alert"></p>
     <button class="punlock" onclick="unlock()">🔓 Jetzt freischalten →</button>
     <p class="pfine">Kein Spam. Keine Verpflichtung.</p>
+    <p class="pfine pfine-yt">Mit dem Freischalten wird das Video von YouTube geladen. Mehr dazu in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>
   </div>
 </div>
 
@@ -433,11 +437,11 @@ footer a:hover{color:var(--gold);}
       <span class="bonus-mini-lbl">Bonus (optional)</span>
       <div class="bonus-mini-grid">
         <div class="bonus-mini-card">
-          <div class="bonus-mini-frame"><iframe src="https://www.youtube.com/embed/lIZGyJnXM00?rel=0&modestbranding=1" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>
+          <div class="bonus-mini-frame"><iframe data-yt="https://www.youtube-nocookie.com/embed/lIZGyJnXM00?rel=0&modestbranding=1" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>
           <div class="bonus-mini-info"><p>Testosteron-Basics</p></div>
         </div>
         <div class="bonus-mini-card">
-          <div class="bonus-mini-frame"><iframe src="https://www.youtube.com/embed/KjQGB_Umr8k?rel=0&modestbranding=1" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>
+          <div class="bonus-mini-frame"><iframe data-yt="https://www.youtube-nocookie.com/embed/KjQGB_Umr8k?rel=0&modestbranding=1" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>
           <div class="bonus-mini-info"><p>Schlaf-Optimierung</p></div>
         </div>
       </div>
@@ -455,8 +459,8 @@ footer a:hover{color:var(--gold);}
       <span class="slbl">Kunden Ergebnisse</span>
       <h2 class="stitle">Was meine Kunden <em>sagen & erreichen</em></h2>
       <div class="vtgrid">
-        <div class="vtcard"><div class="vtframe"><iframe src="https://www.youtube.com/embed/LNn2aQe1fpE?rel=0&modestbranding=1" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div><div class="vtinfo"><p class="vtname">Kunden-Testimonial #1</p><p class="vtrole">Transformation & Ergebnis</p></div></div>
-        <div class="vtcard"><div class="vtframe"><iframe src="https://www.youtube.com/embed/mX118bB1HzU?rel=0&modestbranding=1" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div><div class="vtinfo"><p class="vtname">Kunden-Testimonial #2</p><p class="vtrole">Ergebnis nach 5 Monaten</p></div></div>
+        <div class="vtcard"><div class="vtframe"><iframe data-yt="https://www.youtube-nocookie.com/embed/LNn2aQe1fpE?rel=0&modestbranding=1" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div><div class="vtinfo"><p class="vtname">Kunden-Testimonial #1</p><p class="vtrole">Transformation & Ergebnis</p></div></div>
+        <div class="vtcard"><div class="vtframe"><iframe data-yt="https://www.youtube-nocookie.com/embed/mX118bB1HzU?rel=0&modestbranding=1" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div><div class="vtinfo"><p class="vtname">Kunden-Testimonial #2</p><p class="vtrole">Ergebnis nach 5 Monaten</p></div></div>
       </div>
       <div class="rev-grid">
         <img src="https://cdn.gamma.app/fzdmd3fmbxhw3xx/cace214a509246efbb4ace72771a6891/original/IMG_8071.jpg" class="rimg" alt="Bewertung">
@@ -522,10 +526,10 @@ footer a:hover{color:var(--gold);}
     </div>
     <p><a href="https://instagram.com/leonherzog.de" target="_blank">@leonherzog.de</a></p>
     <div class="flinks">
-      <a href="https://exquisite-alfajores-300159.netlify.app/#impressum" target="_blank">Impressum</a>
-      <a href="https://exquisite-alfajores-300159.netlify.app/#datenschutz" target="_blank">Datenschutz</a>
+      <a href="impressum.html" target="_blank">Impressum</a>
+      <a href="datenschutz.html" target="_blank">Datenschutz</a>
     </div>
-    <p style="margin-top:14px">© 2025 Leon Herzog · Alle Rechte vorbehalten</p>
+    <p style="margin-top:14px">© 2026 Leon Herzog · Alle Rechte vorbehalten</p>
   </footer>
 </section>
 
@@ -611,7 +615,8 @@ function unlock(){
   closePopup();
   // mute=1 ist notwendig, damit Autoplay in JEDEM Browser garantiert direkt losläuft
   // (unmutedes Autoplay wird von Chrome/Safari sonst oft blockiert). Ton-Button holt den Ton dann per Klick.
-  document.getElementById('vframe').src = 'https://www.youtube.com/embed/02nBwqE5i3M?rel=0&modestbranding=1&autoplay=1&mute=1&enablejsapi=1';
+  document.getElementById('vframe').src = 'https://www.youtube-nocookie.com/embed/02nBwqE5i3M?rel=0&modestbranding=1&autoplay=1&mute=1&enablejsapi=1';
+  document.querySelectorAll('iframe[data-yt]').forEach(f=>{ f.src = f.dataset.yt; });
   showStep('step3', 3);
 }
 function unmuteVideo(){

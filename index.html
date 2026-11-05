@@ -210,6 +210,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 48px;d
 .vtinfo{padding:14px 18px;}
 .vtname{font-size:.82rem;font-weight:700;color:var(--gold);margin-bottom:3px;}
 .vtrole{font-size:.73rem;color:var(--muted);}
+.vtfeat{max-width:720px;margin:36px auto 0;text-align:center;}
+.vtfeat-h{font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-bottom:10px;}
+.vtfeat-h em{color:var(--gold);font-style:normal;}
+.vtfeat-p{font-size:.92rem;color:var(--muted-l);line-height:1.6;margin:0 auto 22px;max-width:560px;}
+.vtfeat .vtcard{text-align:left;border-color:rgba(251,208,97,.4);}
+.vtfeat .vtcard:hover{transform:none;}
 .rev-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:28px;}
 .rimg{width:100%;display:block;border:2px solid rgba(251,208,97,.18);border-radius:var(--r);transition:border-color .2s,transform .2s;}
 .rimg:hover{border-color:rgba(251,208,97,.5);transform:translateY(-2px);}
@@ -457,6 +463,11 @@ footer a:hover{color:var(--gold);}
     <div class="ctr rev on">
       <span class="slbl">Kunden Ergebnisse</span>
       <h2 class="stitle">Was meine Kunden <em>sagen & erreichen</em></h2>
+      <div class="vtfeat">
+        <h3 class="vtfeat-h">Statt 8 Stunden <em>jetzt 2.</em></h3>
+        <p class="vtfeat-p">Elias arbeitet seit 8 Wochen mit mir. Im Video erzählt er in seinen eigenen Worten, was sich bei Fokus, Energie und Körper verändert hat.</p>
+        <div class="vtcard"><div class="vtframe"><iframe data-yt="https://www.youtube-nocookie.com/embed/Ef6yuCAAwxk?rel=0&modestbranding=1" title="Elias nach 8 Wochen Olympus" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div><div class="vtinfo"><p class="vtname">Elias · 8 Wochen im Programm</p><p class="vtrole">Fokus, Energie, Körper</p></div></div>
+      </div>
       <div class="vtgrid">
         <div class="vtcard"><div class="vtframe"><iframe data-yt="https://www.youtube-nocookie.com/embed/LNn2aQe1fpE?rel=0&modestbranding=1" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div><div class="vtinfo"><p class="vtname">Kunden-Testimonial #1</p><p class="vtrole">Transformation & Ergebnis</p></div></div>
         <div class="vtcard"><div class="vtframe"><iframe data-yt="https://www.youtube-nocookie.com/embed/mX118bB1HzU?rel=0&modestbranding=1" allow="accelerometer;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div><div class="vtinfo"><p class="vtname">Kunden-Testimonial #2</p><p class="vtrole">Ergebnis nach 5 Monaten</p></div></div>
